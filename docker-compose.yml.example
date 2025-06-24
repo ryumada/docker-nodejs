@@ -1,0 +1,28 @@
+services:
+  webhub:
+    build: .
+    restart: always
+    command: node ${APP_ENTRYPOINT}
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:3000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "25m"
+        max-file: "3"
+    healthcheck:
+      # example:
+      # test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/${HEALTHCHECK_PATH}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 1m
+    networks:
+      - ${DOCKER_NETWORK}
+
+networks:
+  ${DOCKER_NETWORK}:
+    driver: bridge

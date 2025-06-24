@@ -1,0 +1,9 @@
+app/*
+!app/README.md
+
+.env
+.env.bak
+.env.example.merge
+
+docker-compose.yml
+dockerfile
