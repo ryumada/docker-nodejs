@@ -1,12 +1,30 @@
-FROM node:${DOCKER_NODEJS_TAG}
+# STAGE 1: Build the Next.js application
+FROM node:${DOCKER_NODEJS_TAG} AS builder
+
+USER node
 
 WORKDIR /usr/src/app
 
-COPY app/${APP_NAME}/package*.json ./
-RUN npm ci --only=production
+COPY --chown=node:node app/${APP_NAME}/package.json app/${APP_NAME}/package-lock.json ./
+RUN npm ci
 
-COPY app/${APP_NAME} ./
+COPY --chown=node:node app/${APP_NAME} ./
+
+RUN npm run build
+
+# STAGE 2: Serve the Next.js application with a production-ready environment
+FROM node:${DOCKER_NODEJS_TAG} AS runner
+
+USER node
+
+WORKDIR /usr/src/app
+
+# Copy only necessary files from the builder stage
+COPY --from=builder --chown=node:node /usr/src/app/.next ./.next
+COPY --from=builder --chown=node:node /usr/src/app/node_modules ./node_modules
+COPY --from=builder --chown=node:node /usr/src/app/public ./public
+COPY --from=builder --chown=node:node /usr/src/app/package.json ./package.json
 
 EXPOSE 3000
 
-# CMD ["node", "src/index.js"]
+CMD ["npm", "start"]

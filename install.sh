@@ -31,6 +31,69 @@ if [ -f ".env" ]; then
   set +a # Stop automatically exporting variables
 fi
 
+function update_docker_compose_build_args() {
+  if [[ -z "$LIST_BUILDER_ENV" ]]; then
+    log_warn "LIST_BUILDER_ENV is empty, no environment variables will be added when building docker image."
+    return
+  fi
+
+  log_info "Variables to pass as build args: $LIST_BUILDER_ENV"
+
+  local BUILD_ARGS_YAML_FOR_AWK
+  BUILD_ARGS_YAML_FOR_AWK=$(echo "$LIST_BUILDER_ENV" | tr ',' '\n' | \
+    sed -e 's/.*/        &: ${&}/' | \
+    paste -sd'\n' - | \
+    sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e 's/\n/\\n/g')
+
+  local FULL_BUILD_BLOCK_FOR_AWK
+  FULL_BUILD_BLOCK_FOR_AWK=$(printf "    build:\\n      context: .\\n      args:\\n%s" "${BUILD_ARGS_YAML_FOR_AWK}")
+
+  awk -v block="${FULL_BUILD_BLOCK_FOR_AWK}" '
+    BEGIN { flag=0 }
+    /^[[:space:]]*build: \.$/ && flag == 0 {
+        print block
+        flag=1
+        next
+    }
+    { print }
+  ' ./docker-compose.yml > ./docker-compose.yml.tmp
+
+  filesubstitution "$ENV_FILE_PATH" "./docker-compose.yml.tmp" "./docker-compose.yml"
+  rm ./docker-compose.yml.tmp
+  log_success "Successfully added environment variables to docker-compose file: ./docker-compose.yml"
+}
+
+function update_dockerfile_build_args() {
+  local DOCKERFILE_ARGS_ENV_BLOCK=""
+
+  IFS=',' read -ra VAR_NAMES <<< "$LIST_BUILDER_ENV"
+
+  for VAR_NAME in "${VAR_NAMES[@]}"; do
+    VAR_NAME=$(echo "$VAR_NAME" | xargs)
+    if [[ -n "$VAR_NAME" ]]; then
+      DOCKERFILE_ARGS_ENV_BLOCK+="ARG ${VAR_NAME}\n"
+      DOCKERFILE_ARGS_ENV_BLOCK+="ENV ${VAR_NAME}=\$${VAR_NAME}\n"
+    fi
+  done
+
+  ESCAPED_DOCKERFILE_BLOCK=$(echo -e "$DOCKERFILE_ARGS_ENV_BLOCK" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e 's/\n/\\n/g')
+
+  awk -v block="${ESCAPED_DOCKERFILE_BLOCK}" '
+    BEGIN { flag=0 }
+    /^FROM / && flag == 0 {
+        print # Print the FROM line
+        print block # Print the new ARG/ENV block
+        flag=1 # Set flag to prevent further insertions
+        next # Skip to next line of input
+    }
+    { print } # Print all other lines as is
+  ' ./dockerfile > ./dockerfile.tmp
+
+  rsync -qavzc ./dockerfile.tmp ./dockerfile
+  rm ./dockerfile.tmp
+  log_success "Successfully added environment variables to dockerfile: ./dockerfile"
+}
+
 function filesubstitution() {
   local env_file_path=$1
   local template_file=$2
@@ -106,6 +169,9 @@ function main() {
 
   filesubstitution "$ENV_FILE_PATH" "./dockerfile.example" "./dockerfile"
   filesubstitution "$ENV_FILE_PATH" "./docker-compose.yml.example" "./docker-compose.yml"
+
+  update_docker_compose_build_args
+  update_dockerfile_build_args
 
   echo ""
   log_success "Setup finished."
