@@ -6,6 +6,15 @@ services:
       - .env
     ports:
       - ${PORT}:3000
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: 1
+    # IMPORTANT: Depending on your Docker daemon's security configuration,
+    # you might also need one of these lines if `sysctls` fails:
+    # privileged: true # Grants almost all capabilities - less secure
+    # cap_add:
+    #   - NET_ADMIN  # Grants network administration capabilities
+    #   - SYS_ADMIN  # Grants system administration capabilities (often needed for sysctl)
+    # --- END ADDITION ---
     logging:
       driver: "json-file"
       options:
