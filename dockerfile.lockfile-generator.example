@@ -1,0 +1,28 @@
+# Dockerfile.lockfile-generator
+# This Dockerfile is used ONLY to generate a package-lock.json file.
+# It should NOT be used as the primary Dockerfile for your application.
+
+FROM node:${DOCKER_NODEJS_TAG} AS lockfile_generator
+
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy only package.json and any other relevant package definition files
+# (e.g., npm-shrinkwrap.json if you use it, though package-lock.json is more common)
+# We specifically do NOT copy package-lock.json here because we want to generate it.
+COPY app/${APP_NAME}/package.json ./
+
+# Run npm install to generate (or update) the package-lock.json file.
+# We are intentionally using 'npm install' here because 'npm ci' requires an existing lock file.
+# This command will read package.json and create/update package-lock.json.
+RUN npm install
+
+# This stage doesn't run an application, it just prepares the environment
+# for copying out the generated file. You don't need EXPOSE or CMD here.
+
+# You can run this command to generate your package-lock.json file
+# docker build -f dockerfile.lockfile-generator -t ${APP_NAME}-lockfile-generator . && \
+# docker run --rm \
+#   --name temp-lockfile-gen-container \
+#   ${APP_NAME}-lockfile-generator \
+#   cat /usr/src/app/package-lock.json > app/${APP_NAME}/package-lock.json

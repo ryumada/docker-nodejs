@@ -7,3 +7,6 @@ app/*
 
 docker-compose.yml
 dockerfile
+dockerfile.lockfile-generator
+
+package*.json

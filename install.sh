@@ -169,6 +169,7 @@ function main() {
 
   filesubstitution "$ENV_FILE_PATH" "./dockerfile.example" "./dockerfile"
   filesubstitution "$ENV_FILE_PATH" "./docker-compose.yml.example" "./docker-compose.yml"
+  filesubstitution "$ENV_FILE_PATH" "./dockerfile.lockfile-generator.example" "./dockerfile.lockfile-generator"
 
   update_docker_compose_build_args
   update_dockerfile_build_args
