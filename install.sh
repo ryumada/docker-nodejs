@@ -32,10 +32,16 @@ if [ -f ".env" ]; then
 fi
 
 function update_docker_compose_build_args() {
-  if [[ -z "$LIST_BUILDER_ENV" ]]; then
-    log_warn "LIST_BUILDER_ENV is empty, no environment variables will be added when building docker image."
-    return
-  fi
+
+  # 2. Read the .env file, filter for NEXT_PUBLIC_ variables,
+  #    extract just the variable names, and join them with commas.
+  #
+  #    - `grep -E '^NEXT_PUBLIC_[A-Za-z0-9_]+='`: Filters lines that start with
+  #      "NEXT_PUBLIC_" followed by alphanumeric characters/underscores and an equals sign.
+  #    - `cut -d '=' -f 1`: Splits each line by '=', and takes the first field (the variable name).
+  #    - `paste -sd ',' -`: Joins all the extracted variable names into a single string,
+  #      separated by commas.
+  LIST_BUILDER_ENV=$(grep -E '^NEXT_PUBLIC_[A-Za-z0-9_]+=' "$ENV_FILE_PATH" | cut -d '=' -f 1 | paste -sd ',' -)
 
   log_info "Variables to pass as build args: $LIST_BUILDER_ENV"
 
