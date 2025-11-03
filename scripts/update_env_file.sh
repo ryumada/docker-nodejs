@@ -31,11 +31,11 @@ function main() {
     echo "$(getDate) $PATH_TO_ROOT_REPOSITORY/.env file not found. Backup skipped"
   fi
 
-  if [ -f "$PATH_TO_ROOT_REPOSITORY/$TEMPLATE_ENV_FILE" ]; then
-    echo "$(getDate) Copy $PATH_TO_ROOT_REPOSITORY/$TEMPLATE_ENV_FILE to .env"
-    cp "$PATH_TO_ROOT_REPOSITORY/$TEMPLATE_ENV_FILE" "$PATH_TO_ROOT_REPOSITORY/.env"
+  if [ -f "$TEMPLATE_ENV_FILE" ]; then
+    echo "$(getDate) Copy $TEMPLATE_ENV_FILE to .env"
+    cp "$TEMPLATE_ENV_FILE" "$PATH_TO_ROOT_REPOSITORY/.env"
   else
-    echo "$(getDate) $PATH_TO_ROOT_REPOSITORY/$TEMPLATE_ENV_FILE file not found."
+    echo "$(getDate) $TEMPLATE_ENV_FILE file not found."
     exit 1
   fi
 

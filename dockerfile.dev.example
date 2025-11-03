@@ -1,0 +1,25 @@
+# STAGE 1: Development environment for Next.js
+FROM node:${DOCKER_NODEJS_TAG}
+
+# Add user and group with matching IDs from the host to fix permissions
+ARG HOST_USER_ID
+ARG HOST_GROUP_ID
+RUN groupmod -g ${HOST_GROUP_ID} node
+RUN usermod -u ${HOST_USER_ID} node
+
+USER node
+
+WORKDIR /usr/src/app
+
+# Copy package files first to leverage Docker cache
+COPY --chown=node:node app/${APP_NAME}/package.json app/${APP_NAME}/package-lock.json ./
+RUN npm ci
+
+# Copy application source code
+COPY --chown=node:node app/${APP_NAME} ./
+
+# Expose port for Next.js dev server
+EXPOSE 3000
+
+# Start the development server
+CMD ["npm", "run", "dev"]

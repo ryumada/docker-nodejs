@@ -160,6 +160,7 @@ function main() {
 
   log_info "Update env file."
   "$PATH_TO_ROOT_REPOSITORY/scripts/update_env_file.sh" "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
+  echo "\"$PATH_TO_ROOT_REPOSITORY/scripts/update_env_file.sh\" \"$PATH_TO_ROOT_REPOSITORY/.env.example.merge\""
   log_success "Update env file completed"
 
   log_info "Validate .env file content"
@@ -173,12 +174,41 @@ function main() {
   fi
   log_success "Validate .env file content completed"
 
-  filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile"
-  filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.example" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
-  filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator"
+  if [ "$DEPLOYMENT_MODE" == "development" ]; then
+    log_info "Setting up for DEVELOPMENT mode..."
 
-  update_docker_compose_build_args "$ENV_FILE_PATH"
-  update_dockerfile_build_args
+    log_info "Running user setup script for development. This may ask for your password."
+    sudo bash "$PATH_TO_ROOT_REPOSITORY/scripts/setup_dev_user.sh" "$ENV_FILE_PATH"
+    log_success "Dev user setup complete."
+
+    log_info "Changing ownership of app directory to dev user..."
+    sudo chown -R "${HOST_USER_ID}:${HOST_GROUP_ID}" "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME"
+    log_success "App directory ownership updated."
+
+    filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.dev.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile"
+    filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.example" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+    filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator"
+
+    # Add volume mount for development
+    # The second volume for /usr/src/app/node_modules is an anonymous volume.
+    # It prevents the host's empty node_modules from overwriting the container's node_modules.
+    sed -i '/build:/a \    volumes:\n      - ./app/${APP_NAME}:/usr/src/app\n      - /usr/src/app/node_modules' "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+    sed -i 's/command: npm start/command: npm run dev/' "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+
+    log_success "Development setup: Added volume mount and updated command in docker-compose.yml."
+
+    update_docker_compose_build_args "$ENV_FILE_PATH"
+    update_dockerfile_build_args
+
+  else
+    log_info "Setting up for PRODUCTION mode (standard build)..."
+    filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile"
+    filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.example" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+    filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator"
+
+    update_docker_compose_build_args "$ENV_FILE_PATH"
+    update_dockerfile_build_args
+  fi
 
   echo ""
   log_success "Setup finished."

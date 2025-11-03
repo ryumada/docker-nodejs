@@ -61,12 +61,25 @@ function main() {
     handle_error "Not a git repository: $APP_DIR. Cannot pull updates."
   fi
 
+  if [ "$DEPLOYMENT_MODE" == "development" ]; then
+    log_info "Development mode detected. Updating directory ownership..."
+    sudo chown -R "${REPOSITORY_OWNER}:${REPOSITORY_OWNER}" "$APP_DIR" && {
+      log_success "Application directory ownership updated for development."
+    } || handle_error "Failed to change ownership of $APP_DIR."
+  fi
+
   log_info "Fetching latest changes for $APP_NAME..."
   git -C "$APP_DIR" fetch || handle_error "Failed to fetch from git repository in $APP_DIR."
 
   log_info "Pulling latest changes for $APP_NAME..."
   git -C "$APP_DIR" pull || handle_error "Failed to pull from git repository in $APP_DIR."
   log_success "Application source code is up to date."
+
+  if [ "$DEPLOYMENT_MODE" == "development" ]; then
+    sudo chown -R "${HOST_USER_ID}:${HOST_GROUP_ID}" "$APP_DIR" && {
+      log_success "Application directory ownership updated for development."
+    } || handle_error "Failed to change ownership of $APP_DIR to $deployment_user"
+  fi
 
   log_info "Running setup script (./install.sh)..."
   "$PATH_TO_ROOT_REPOSITORY"/install.sh || handle_error "install.sh script failed."
