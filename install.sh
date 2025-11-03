@@ -22,18 +22,23 @@ log_warn() { log "${COLOR_WARN}" "⚠️" "$1"; }
 log_error() { log "${COLOR_ERROR}" "❌" "$1"; }
 # ------------------------------------
 
-if [ -f ".env" ]; then
+CURRENT_DIR=$(dirname "$(readlink -f "$0")")
+CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
+PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
+REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
+
+if [ -f "$PATH_TO_ROOT_REPOSITORY/.env" ]; then
   # Source .env file to load its variables into the current shell
   # This makes complex variable substitutions possible
   set -a # automatically export all variables
   # shellcheck source=/dev/null
-  source ".env"
+  source "$PATH_TO_ROOT_REPOSITORY/.env"
   set +a # Stop automatically exporting variables
 fi
 
 function update_docker_compose_build_args() {
-
-  # 2. Read the .env file, filter for NEXT_PUBLIC_ variables,
+  # Read the .env file, filter for NEXT_PUBLIC_ variables,
   #    extract just the variable names, and join them with commas.
   #
   #    - `grep -E '^NEXT_PUBLIC_[A-Za-z0-9_]+='`: Filters lines that start with
@@ -42,6 +47,7 @@ function update_docker_compose_build_args() {
   #    - `paste -sd ',' -`: Joins all the extracted variable names into a single string,
   #      separated by commas.
   LIST_BUILDER_ENV=$(grep -E '^NEXT_PUBLIC_[A-Za-z0-9_]+=' "$ENV_FILE_PATH" | cut -d '=' -f 1 | paste -sd ',' -)
+  local ENV_FILE_PATH="$1"
 
   log_info "Variables to pass as build args: $LIST_BUILDER_ENV"
 
@@ -62,11 +68,11 @@ function update_docker_compose_build_args() {
         next
     }
     { print }
-  ' ./docker-compose.yml > ./docker-compose.yml.tmp
+  ' "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml" > "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.tmp"
 
-  filesubstitution "$ENV_FILE_PATH" "./docker-compose.yml.tmp" "./docker-compose.yml"
-  rm ./docker-compose.yml.tmp
-  log_success "Successfully added environment variables to docker-compose file: ./docker-compose.yml"
+  filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.tmp" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+  rm "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.tmp"
+  log_success "Successfully added environment variables to docker-compose file: $PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
 }
 
 function update_dockerfile_build_args() {
@@ -93,11 +99,11 @@ function update_dockerfile_build_args() {
         next # Skip to next line of input
     }
     { print } # Print all other lines as is
-  ' ./dockerfile > ./dockerfile.tmp
+  ' "$PATH_TO_ROOT_REPOSITORY/dockerfile" > "$PATH_TO_ROOT_REPOSITORY/dockerfile.tmp"
 
-  rsync -qavzc ./dockerfile.tmp ./dockerfile
-  rm ./dockerfile.tmp
-  log_success "Successfully added environment variables to dockerfile: ./dockerfile"
+  rsync -qavzc "$PATH_TO_ROOT_REPOSITORY/dockerfile.tmp" "$PATH_TO_ROOT_REPOSITORY/dockerfile"
+  rm "$PATH_TO_ROOT_REPOSITORY/dockerfile.tmp"
+  log_success "Successfully added environment variables to dockerfile: $PATH_TO_ROOT_REPOSITORY/dockerfile"
 }
 
 function filesubstitution() {
@@ -140,26 +146,20 @@ function filesubstitution() {
 }
 
 function main() {
-  CURRENT_DIR=$(dirname "$(readlink -f "$0")")
-  CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
-  PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
-  SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
-  REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
-
-  ENV_FILE_PATH=./.env
+  ENV_FILE_PATH="$PATH_TO_ROOT_REPOSITORY/.env"
 
   # Merge .env.example files from app directory and current directory
-  cat "./.env.example" > .env.example.merge
-  echo "" >> .env.example.merge
+  cat "$PATH_TO_ROOT_REPOSITORY/.env.example" > "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
+  echo "" >> "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
   if [ -n "$APP_NAME" ] && [ "$APP_NAME" != "enter_your_app_name" ]; then
-    cat "./app/$APP_NAME/.env.example" >> .env.example.merge
-    echo "" >> .env.example.merge
+    cat "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME/.env.example" >> "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
+    echo "" >> "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
   else
     log_error "Please setup APP_NAME variable in your .env file. Then, re-run this script."
   fi
 
   log_info "Update env file."
-  "$PATH_TO_ROOT_REPOSITORY/scripts/update_env_file.sh" .env.example.merge
+  "$PATH_TO_ROOT_REPOSITORY/scripts/update_env_file.sh" "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
   log_success "Update env file completed"
 
   log_info "Validate .env file content"
@@ -173,11 +173,11 @@ function main() {
   fi
   log_success "Validate .env file content completed"
 
-  filesubstitution "$ENV_FILE_PATH" "./dockerfile.example" "./dockerfile"
-  filesubstitution "$ENV_FILE_PATH" "./docker-compose.yml.example" "./docker-compose.yml"
-  filesubstitution "$ENV_FILE_PATH" "./dockerfile.lockfile-generator.example" "./dockerfile.lockfile-generator"
+  filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile"
+  filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.example" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+  filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator"
 
-  update_docker_compose_build_args
+  update_docker_compose_build_args "$ENV_FILE_PATH"
   update_dockerfile_build_args
 
   echo ""
