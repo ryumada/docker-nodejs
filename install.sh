@@ -160,7 +160,6 @@ function main() {
 
   log_info "Update env file."
   "$PATH_TO_ROOT_REPOSITORY/scripts/update_env_file.sh" "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
-  echo "\"$PATH_TO_ROOT_REPOSITORY/scripts/update_env_file.sh\" \"$PATH_TO_ROOT_REPOSITORY/.env.example.merge\""
   log_success "Update env file completed"
 
   log_info "Validate .env file content"
@@ -177,13 +176,15 @@ function main() {
   if [ "$DEPLOYMENT_MODE" == "development" ]; then
     log_info "Setting up for DEVELOPMENT mode..."
 
-    log_info "Running user setup script for development. This may ask for your password."
-    sudo bash "$PATH_TO_ROOT_REPOSITORY/scripts/setup_sudoers.sh"
-    log_success "Sudoers setup for chown complete."
+    if [[ "${RUN_SUDOERS_SETUP}" == "Y" || "${RUN_SUDOERS_SETUP}" == "y" ]]; then
+      log_warn "RUN_SUDOERS_SETUP is set to 'Y'. Running privileged setup scripts. This may ask for your password."
 
-    log_info "Running dev user setup script. This may ask for your password."
-    sudo bash "$PATH_TO_ROOT_REPOSITORY/scripts/setup_dev_user.sh" "$ENV_FILE_PATH"
-    log_success "Dev user setup complete."
+      sudo bash "$PATH_TO_ROOT_REPOSITORY/scripts/setup_sudoers.sh"
+      log_success "Sudoers setup complete."
+
+      sudo bash "$PATH_TO_ROOT_REPOSITORY/scripts/setup_dev_user.sh" "$ENV_FILE_PATH"
+      log_success "Dev user setup complete."
+    fi
 
     log_info "Changing ownership of app directory to dev user..."
     sudo chown -R "${HOST_USER_ID}:${HOST_GROUP_ID}" "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME"
