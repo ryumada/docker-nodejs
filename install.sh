@@ -178,6 +178,10 @@ function main() {
     log_info "Setting up for DEVELOPMENT mode..."
 
     log_info "Running user setup script for development. This may ask for your password."
+    sudo bash "$PATH_TO_ROOT_REPOSITORY/scripts/setup_sudoers.sh"
+    log_success "Sudoers setup for chown complete."
+
+    log_info "Running dev user setup script. This may ask for your password."
     sudo bash "$PATH_TO_ROOT_REPOSITORY/scripts/setup_dev_user.sh" "$ENV_FILE_PATH"
     log_success "Dev user setup complete."
 

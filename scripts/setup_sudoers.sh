@@ -26,6 +26,7 @@ log_info() { log "${COLOR_INFO}" "ℹ️" "$1"; }
 log_success() { log "${COLOR_SUCCESS}" "✅" "$1"; }
 log_warn() { log "${COLOR_WARN}" "⚠️" "$1"; }
 log_error() { log "${COLOR_ERROR}" "❌" "$1"; }
+log_output() { log "${COLOR_RESET}" "" "$1"; }
 # ------------------------------------
 
 if [ "$EUID" -ne 0 ]; then
@@ -33,12 +34,37 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-PATH_TO_ROOT_REPOSITORY=$(git rev-parse --show-toplevel)
+log_output "Do you want to create sudoers for current use or for devops user?"
+log_output "1. Current user"
+log_output "2. Devops user"
+read -rp "Enter your choice [1-2]: " USER_CHOICE
+
+case "$USER_CHOICE" in
+  1)
+    RUNNER_USER=${SUDO_USER:-$(whoami)}
+    log_info "Configuring sudoers for the current user: '$RUNNER_USER'"
+    ;;
+  2)
+    RUNNER_USER="devops"
+    log_info "Configuring sudoers for the 'devops' user."
+    ;;
+  *)
+    log_error "Invalid choice. Please enter 1 or 2."
+    exit 1
+    ;;
+esac
+
+# When run with sudo, the context of the original user is needed to find the git repo.
+# We determine the script's own directory, then ask git for the repo root from there,
+# running the command as the original user.
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+PATH_TO_ROOT_REPOSITORY=$(sudo -u "${SUDO_USER:-$(whoami)}" git -C "$SCRIPT_DIR" rev-parse --show-toplevel)
 if [ -z "$PATH_TO_ROOT_REPOSITORY" ]; then
     log_error "Could not determine the root of the git repository. Make sure you are running this script from within the repository."
     exit 1
 fi
-
+log_info "Repository root found at: $PATH_TO_ROOT_REPOSITORY"
+SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
 ENV_FILE_PATH="$PATH_TO_ROOT_REPOSITORY/.env"
 if [ ! -f "$ENV_FILE_PATH" ]; then
     log_error ".env file not found at $ENV_FILE_PATH"
@@ -56,22 +82,70 @@ if [ -z "$APP_NAME" ] || [ "$APP_NAME" == "enter_your_app_name" ]; then
     exit 1
 fi
 
-RUNNER_USER=${SUDO_USER:-$(whoami)}
 APP_DIR="$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME"
+BASH_PATH=$(which bash)
+GIT_PATH=$(which git)
 CHOWN_PATH=$(which chown)
-SUDOERS_FILENAME="90-chown-for-${APP_NAME}"
-SUDOERS_FILEPATH="/etc/sudoers.d/${SUDOERS_FILENAME}"
+REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
 
-log_info "Configuring sudoers for user '$RUNNER_USER' on directory '$APP_DIR'..."
+CHOWN_SUDOERS_FILENAME="90-chown-for-${SERVICE_NAME}-to-${RUNNER_USER}"
+CHOWN_SUDOERS_FILEPATH="/etc/sudoers.d/${CHOWN_SUDOERS_FILENAME}"
+log_info "Configuring sudoers for 'chown' on directory '$APP_DIR'..."
 
 # The rule allows chown on the app directory and its contents.
 # Using '*' for user/group is more flexible than hardcoding HOST_USER_ID from .env
-SUDOERS_RULE="$RUNNER_USER ALL=(ALL) NOPASSWD: $CHOWN_PATH -R *:* $APP_DIR"
+CHOWN_SUDOERS_RULE="$RUNNER_USER ALL=(ALL) NOPASSWD: $CHOWN_PATH -R *\\:* $APP_DIR/*, $CHOWN_PATH -R *\\:* $APP_DIR"
 
-log_info "Adding the following rule to $SUDOERS_FILEPATH:"
-log_info "  $SUDOERS_RULE"
+if [ -f "$CHOWN_SUDOERS_FILEPATH" ] && grep -qF -- "$CHOWN_SUDOERS_RULE" "$CHOWN_SUDOERS_FILEPATH"; then
+    log_info "Sudoers 'chown' rule already exists. No changes needed."
+else
+    log_info "Adding 'chown' rule to $CHOWN_SUDOERS_FILEPATH:"
+    log_info "  $CHOWN_SUDOERS_RULE"
+    echo "$CHOWN_SUDOERS_RULE" > "$CHOWN_SUDOERS_FILEPATH"
+    chmod 0440 "$CHOWN_SUDOERS_FILEPATH"
+    log_success "Sudoers 'chown' configuration complete."
+fi
 
-echo "$SUDOERS_RULE" > "$SUDOERS_FILEPATH"
-chmod 0440 "$SUDOERS_FILEPATH"
+# Use a generic filename for the scripts rule, as it's not project-specific.
+SCRIPTS_SUDOERS_FILENAME="90-setup-dev-scripts-for-${SERVICE_NAME}-to-${RUNNER_USER}"
+SCRIPTS_SUDOERS_FILEPATH="/etc/sudoers.d/${SCRIPTS_SUDOERS_FILENAME}"
+log_info "Configuring sudoers for setup scripts..."
 
-log_success "Sudoers configuration complete. User '$RUNNER_USER' can now run chown on the app directory without a password."
+# The rules allow running the setup scripts via bash.
+# Using a wildcard '*/scripts/...' makes the rule generic across multiple projects.
+SCRIPTS_SUDOERS_RULES=(
+  "$RUNNER_USER ALL=(ALL) NOPASSWD: $BASH_PATH $PATH_TO_ROOT_REPOSITORY/scripts/setup_sudoers.sh"
+  "$RUNNER_USER ALL=(ALL) NOPASSWD: $BASH_PATH $PATH_TO_ROOT_REPOSITORY/scripts/setup_dev_user.sh *"
+)
+
+log_info "Adding script rules to $SCRIPTS_SUDOERS_FILEPATH:"
+# Clear the file to ensure old/absolute paths are removed before adding new generic ones.
+> "$SCRIPTS_SUDOERS_FILEPATH"
+for rule in "${SCRIPTS_SUDOERS_RULES[@]}"; do
+  log_info "  $rule"
+  # Add rule to file if it doesn't exist
+  echo "$rule" >> "$SCRIPTS_SUDOERS_FILEPATH"
+done
+
+chmod 0440 "$SCRIPTS_SUDOERS_FILEPATH"
+log_success "Sudoers script configuration complete."
+
+# --- Rule 4 & 5: Git commands ---
+GIT_SUDOERS_FILENAME="90-git-for-${SERVICE_NAME}-to-${RUNNER_USER}"
+GIT_SUDOERS_FILEPATH="/etc/sudoers.d/${GIT_SUDOERS_FILENAME}"
+log_info "Configuring sudoers for 'git' commands..."
+
+GIT_SUDOERS_RULES=(
+  "$RUNNER_USER ALL=($REPOSITORY_OWNER) NOPASSWD: $GIT_PATH -C $APP_DIR fetch"
+  "$RUNNER_USER ALL=($REPOSITORY_OWNER) NOPASSWD: $GIT_PATH -C $APP_DIR pull"
+)
+
+log_info "Adding git rules to $GIT_SUDOERS_FILEPATH:"
+> "$GIT_SUDOERS_FILEPATH" # Clear the file first
+for rule in "${GIT_SUDOERS_RULES[@]}"; do
+  log_info "  $rule"
+  echo "$rule" >> "$GIT_SUDOERS_FILEPATH"
+done
+
+chmod 0440 "$GIT_SUDOERS_FILEPATH"
+log_success "Sudoers git configuration complete."

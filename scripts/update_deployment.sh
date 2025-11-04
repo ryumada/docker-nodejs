@@ -69,10 +69,10 @@ function main() {
   fi
 
   log_info "Fetching latest changes for $APP_NAME..."
-  git -C "$APP_DIR" fetch || handle_error "Failed to fetch from git repository in $APP_DIR."
+  sudo -u "$REPOSITORY_OWNER" git -C "$APP_DIR" fetch || handle_error "Failed to fetch from git repository in $APP_DIR."
 
   log_info "Pulling latest changes for $APP_NAME..."
-  git -C "$APP_DIR" pull || handle_error "Failed to pull from git repository in $APP_DIR."
+  sudo -u "$REPOSITORY_OWNER" git -C "$APP_DIR" pull || handle_error "Failed to pull from git repository in $APP_DIR."
   log_success "Application source code is up to date."
 
   if [ "$DEPLOYMENT_MODE" == "development" ]; then
