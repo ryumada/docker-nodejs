@@ -86,6 +86,7 @@ APP_DIR="$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME"
 BASH_PATH=$(which bash)
 GIT_PATH=$(which git)
 CHOWN_PATH=$(which chown)
+DOCKER_PATH=$(which docker)
 REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
 
 CHOWN_SUDOERS_FILENAME="90-chown-for-${SERVICE_NAME}-to-${RUNNER_USER}"
@@ -163,3 +164,18 @@ log_info "  $UPDATE_SCRIPT_SUDOERS_RULE"
 echo "$UPDATE_SCRIPT_SUDOERS_RULE" > "$UPDATE_SCRIPT_SUDOERS_FILEPATH"
 chmod 0440 "$UPDATE_SCRIPT_SUDOERS_FILEPATH"
 log_success "Sudoers update script configuration complete."
+
+DOCKER_SUDOERS_FILENAME="90-docker-for-${SERVICE_NAME}-to-${RUNNER_USER}"
+DOCKER_SUDOERS_FILEPATH="/etc/sudoers.d/${DOCKER_SUDOERS_FILENAME}"
+log_info "Configuring sudoers for 'docker compose' command..."
+
+DOCKER_COMPOSE_YML_PATH="$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+
+# This rule allows running the specific docker compose command used in the update script.
+DOCKER_SUDOERS_RULE="$RUNNER_USER ALL=(root) NOPASSWD: $DOCKER_PATH compose -f $DOCKER_COMPOSE_YML_PATH up -d --build"
+
+log_info "Adding docker compose rule to $DOCKER_SUDOERS_FILEPATH:"
+log_info "  $DOCKER_SUDOERS_RULE"
+echo "$DOCKER_SUDOERS_RULE" > "$DOCKER_SUDOERS_FILEPATH"
+chmod 0440 "$DOCKER_SUDOERS_FILEPATH"
+log_success "Sudoers docker compose configuration complete."

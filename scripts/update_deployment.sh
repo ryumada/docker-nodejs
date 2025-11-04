@@ -86,7 +86,10 @@ function main() {
   log_success "Setup script completed successfully."
 
   log_info "Rebuilding and restarting services with Docker Compose..."
-  sudo -u "$REPOSITORY_OWNER" docker compose -f "$PATH_TO_ROOT_REPOSITORY"/docker-compose.yml up -d --build || handle_error "Docker Compose command failed."
+  # Run docker compose directly with sudo. This ensures the command runs as root,
+  # which has the necessary permissions to access the build context,
+  # resolving "permission denied" errors, especially in CI/CD environments.
+  sudo docker compose -f "$PATH_TO_ROOT_REPOSITORY"/docker-compose.yml up -d --build || handle_error "Docker Compose command failed."
   log_success "Application has been updated and restarted successfully!"
 }
 
