@@ -86,7 +86,7 @@ function main() {
   log_success "Setup script completed successfully."
 
   log_info "Rebuilding and restarting services with Docker Compose..."
-  docker compose -f "$PATH_TO_ROOT_REPOSITORY"/docker-compose.yml up -d --build || handle_error "Docker Compose command failed."
+  sudo -u "$REPOSITORY_OWNER" docker compose -f "$PATH_TO_ROOT_REPOSITORY"/docker-compose.yml up -d --build || handle_error "Docker Compose command failed."
   log_success "Application has been updated and restarted successfully!"
 }
 
