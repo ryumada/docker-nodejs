@@ -130,7 +130,6 @@ done
 chmod 0440 "$SCRIPTS_SUDOERS_FILEPATH"
 log_success "Sudoers script configuration complete."
 
-# --- Rule 4 & 5: Git commands ---
 GIT_SUDOERS_FILENAME="90-git-for-${SERVICE_NAME}-to-${RUNNER_USER}"
 GIT_SUDOERS_FILEPATH="/etc/sudoers.d/${GIT_SUDOERS_FILENAME}"
 log_info "Configuring sudoers for 'git' commands..."
@@ -149,3 +148,18 @@ done
 
 chmod 0440 "$GIT_SUDOERS_FILEPATH"
 log_success "Sudoers git configuration complete."
+
+UPDATE_SCRIPT_SUDOERS_FILENAME="90-update-script-for-${SERVICE_NAME}-to-${RUNNER_USER}"
+UPDATE_SCRIPT_SUDOERS_FILEPATH="/etc/sudoers.d/${UPDATE_SCRIPT_SUDOERS_FILENAME}"
+log_info "Configuring sudoers for 'update_deployment.sh' script..."
+
+UPDATE_SCRIPT_PATH="$PATH_TO_ROOT_REPOSITORY/scripts/update_deployment.sh"
+TARGET_UPDATE_USER="devopsadmin"
+
+UPDATE_SCRIPT_SUDOERS_RULE="$RUNNER_USER ALL=($TARGET_UPDATE_USER) NOPASSWD: $UPDATE_SCRIPT_PATH"
+
+log_info "Adding update script rule to $UPDATE_SCRIPT_SUDOERS_FILEPATH:"
+log_info "  $UPDATE_SCRIPT_SUDOERS_RULE"
+echo "$UPDATE_SCRIPT_SUDOERS_RULE" > "$UPDATE_SCRIPT_SUDOERS_FILEPATH"
+chmod 0440 "$UPDATE_SCRIPT_SUDOERS_FILEPATH"
+log_success "Sudoers update script configuration complete."
