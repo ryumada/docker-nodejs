@@ -66,6 +66,57 @@ To run your application in development mode with features like hot-reloading:
     ```
     You can now edit files in `app/<APP_NAME>` and see changes reflected immediately.
 
+## Initialization Guide (Bootstrapping New Projects)
+
+If you want to create a new Node.js/Next.js application from scratch but don't want to install Node.js locally, follow this guide.
+
+1.  **Configure `.env`**:
+    Open `.env` and set:
+    ```bash
+    APP_NAME=your_new_app_name
+    DEPLOYMENT_MODE=initialization
+    HOST_USER_ID=1000 # Your user ID (run `id -u`)
+    HOST_GROUP_ID=1000 # Your group ID (run `id -g`)
+    ```
+
+2.  **Run Setup**:
+    ```bash
+    ./setup.sh
+    ```
+    This will create the directory `app/<APP_NAME>` if it doesn't exist and generate a minimal `docker-compose.yml` that mounts this directory.
+
+3.  **Start the Initial Container**:
+    ```bash
+    docker compose up -d --build
+    ```
+
+4.  **Run Bootstrapping Commands**:
+    Use the helper script `scripts/bootstraping/run.sh` to execute commands inside the running container.
+
+    *Example: Create a Next.js app*
+    ```bash
+    # Uses a helper script to bypass Docker volume permission issues
+    ./scripts/bootstraping/init-next-app.sh "npx create-next-app@latest temp --typescript --tailwind --eslint"
+    ```
+
+    *Example: Initialize Shadcn UI*
+    ```bash
+    ./scripts/bootstraping/run.sh "npx shadcn@latest init"
+    ```
+
+    *Example: Clean up/Reset directory (Handling wildcards)*
+    ```bash
+    # Use sh -c to ensure wildcards (*) are expanded inside the container, not your local shell
+    ./scripts/bootstraping/run.sh sh -c "rm -rf *"
+    ```
+
+5.  **Switch to Development Mode**:
+    Once your project is initialized:
+    1.  Stop the init container: `docker compose down`
+    2.  Edit `.env`: set `DEPLOYMENT_MODE=development`
+    3.  Run `./setup.sh` again to generate the full development configuration.
+    4.  Start dev server: `docker compose up -d --build`
+
 ## Configuration
 
 ### Environment Variables (.env)

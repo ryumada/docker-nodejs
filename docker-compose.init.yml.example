@@ -1,0 +1,23 @@
+services:
+  app:
+    build: .
+    restart: "no"
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "25m"
+        max-file: "3"
+    volumes:
+      - ./app/${APP_NAME}:/usr/src/app
+    networks:
+      - ${DOCKER_NETWORK}
+
+networks:
+  ${DOCKER_NETWORK}:
+    driver: bridge

@@ -152,8 +152,12 @@ function main() {
   cat "$PATH_TO_ROOT_REPOSITORY/.env.example" > "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
   echo "" >> "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
   if [ -n "$APP_NAME" ] && [ "$APP_NAME" != "enter_your_app_name" ]; then
-    cat "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME/.env.example" >> "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
-    echo "" >> "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
+    if [ -d "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME" ] && [ -f "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME/.env.example" ]; then
+      cat "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME/.env.example" >> "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
+      echo "" >> "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
+    else
+        log_warn "App directory or .env.example not found. Skipping merge of app .env.example."
+    fi
   else
     log_error "Please setup APP_NAME variable in your .env file. Then, re-run this script."
   fi
@@ -204,6 +208,25 @@ function main() {
 
     update_docker_compose_build_args "$ENV_FILE_PATH"
     update_dockerfile_build_args
+
+  elif [ "$DEPLOYMENT_MODE" == "initialization" ]; then
+    log_info "Setting up for INITIALIZATION mode..."
+
+    # In initialization mode, we check if the app folder exists, if not we create it
+    if [ ! -d "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME" ]; then
+        log_info "App directory 'app/$APP_NAME' not found. Creating it..."
+        mkdir -p "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME"
+        # Ensure ownership is correct immediately
+        chown "$HOST_USER_ID:$HOST_GROUP_ID" "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME"
+        log_success "Created directory: app/$APP_NAME"
+    fi
+
+    # In initialization mode, we might not have the app folder yet, so we just setup the container
+    filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.init.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile"
+    filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.init.yml.example" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+
+    update_dockerfile_build_args
+    # typically no build args needed for init, but good to keep consistent if we added any
 
   else
     log_info "Setting up for PRODUCTION mode (standard build)..."

@@ -2,7 +2,7 @@ app/*
 !app/README.md
 
 .env
-.env.bak
+.env.backup*
 .env.example.merge
 
 docker-compose.yml
