@@ -26,28 +26,31 @@ log_error() { log "${COLOR_ERROR}" "❌" "$1"; }
 function main() {
   CURRENT_DIR=$(dirname "$(readlink -f "$0")")
   CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
-  PATH_TO_ODOO=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
-  SERVICE_NAME=$(basename "$PATH_TO_ODOO")
-  REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ODOO")
-  local EXAMPLE_FILE="${1:-$PATH_TO_ODOO/.env.example}"
+  PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+  SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
+  REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
+  
+  TEMPLATE_ENV_FILE=${1:-.env.example}
+  BACKUP_ENV_FILE=${2:-.env.bak}
 
   echo "-------------------------------------------------------------------------------"
   echo " UPDATE ENV FILE FOR $SERVICE_NAME @ $(date +"%A, %d %B %Y %H:%M %Z")"
   echo "-------------------------------------------------------------------------------"
 
-  log_info "Path to Odoo: $PATH_TO_ODOO"
-  if ! cd "$PATH_TO_ODOO"; then
-    log_error "Failed to change directory to $PATH_TO_ODOO"
+  log_info "Path to Odoo: $PATH_TO_ROOT_REPOSITORY"
+  if ! cd "$PATH_TO_ROOT_REPOSITORY"; then
+    log_error "Failed to change directory to $PATH_TO_ROOT_REPOSITORY"
     exit 1
   fi
 
-  if [ -f "$PATH_TO_ODOO/.env" ]; then
+  if [ -f "$PATH_TO_ROOT_REPOSITORY/.env" ]; then
     TIMESTAMP=$(date +"%Y%m%d%H%M%S")
     BACKUP_NAME=".env.backup_${TIMESTAMP}"
     MAX_BACKUPS=3
 
     log_info "Existing .env found. Creating persistent backup: ${BACKUP_NAME}"
     cp .env "$BACKUP_NAME"
+    chown "$REPOSITORY_OWNER": "$BACKUP_NAME"
 
     # Rotate backups: Keep only the MAX_BACKUPS most recent ones
     BACKUP_COUNT=$(ls -1 .env.backup_* 2>/dev/null | wc -l)
@@ -61,11 +64,11 @@ function main() {
     log_warn ".env file not found. Backup skipped"
   fi
 
-  if [ -f "$EXAMPLE_FILE" ]; then
-    log_info "Copy $EXAMPLE_FILE to .env"
-    cp "$EXAMPLE_FILE" .env
+  if [ -f "$TEMPLATE_ENV_FILE" ]; then
+    log_info "Copy $TEMPLATE_ENV_FILE to .env"
+    cp "$TEMPLATE_ENV_FILE" .env
   else
-    log_error "Source example file not found: $EXAMPLE_FILE"
+    log_error "Source example file not found: $TEMPLATE_ENV_FILE"
     exit 1
   fi
 
