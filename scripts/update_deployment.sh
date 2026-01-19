@@ -78,11 +78,11 @@ function main() {
   if [ "$DEPLOYMENT_MODE" == "development" ]; then
     sudo chown -R "${HOST_USER_ID}:${HOST_GROUP_ID}" "$APP_DIR" && {
       log_success "Application directory ownership updated for development."
-    } || handle_error "Failed to change ownership of $APP_DIR to $deployment_user"
+    } || handle_error "Failed to change ownership of $APP_DIR to ${HOST_USER_ID}:${HOST_GROUP_ID}"
   fi
 
-  log_info "Running setup script (./install.sh)..."
-  "$PATH_TO_ROOT_REPOSITORY"/install.sh || handle_error "install.sh script failed."
+  log_info "Running setup script (./setup.sh)..."
+  "$PATH_TO_ROOT_REPOSITORY"/setup.sh || handle_error "setup.sh script failed."
   log_success "Setup script completed successfully."
 
   log_info "Rebuilding and restarting services with Docker Compose..."
