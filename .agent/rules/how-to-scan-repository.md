@@ -7,9 +7,11 @@ category: Reference
 **Objective:** Eliminate hallucinations by grounding project knowledge in the generated map files, respecting both Infrastructure and Application layers.
 
 1.  **Mandatory Context Loading (Recursive):**
-    -   **Step 1 (Root / Infrastructure):** Before answering, you **MUST** first read `REPO_MAP.md` in the project root. This is your source of truth for deployment tools, scripts, and environment configs.
-    -   **Step 2 (App / Logic):** You **MUST** check the `## Directory Structure` of the root map. If you detect an `app/` directory containing a nested `REPO_MAP.md` (e.g., `./app/odoo_custom/REPO_MAP.md`), you **MUST** read that file immediately.
-    -   **Step 3 (Synthesis):** Merge these maps into a single mental model. Do not treat the root map as the *only* context if a nested map offers deeper granularity for the source code.
+    -   **Step 1 (Physical / Layout):** Before answering, you **MUST** first read `REPO_MAP.md` in the project root. This is your source of truth for deployment tools and environment configs.
+    -   **Step 2 (Structural / Infrastructure):** You **MUST** read `REPO_MAP_ARCHITECTURE.md` to understand script orchestration and infrastructure design.
+    -   **Step 3 (App / Logic):** You **MUST** check `REPO_MAP_APP_ARCHITECTURE.md` to understand component hierarchies and data flows in the `app/` directory.
+    -   **Step 4 (Nested Maps):** If `REPO_MAP.md` lists a nested `app/REPO_MAP.md`, read it for granular application-layer file signatures.
+    -   **Step 5 (Synthesis):** Merge all discovered maps and architecture trees into a single mental model.
 
 2.  **Navigation Strategy:**
     -   **Do not** ask "What files are in this repo?" or "Can you list the modules?"

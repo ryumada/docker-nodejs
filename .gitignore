@@ -17,6 +17,6 @@ dockerfile.lockfile-generator
 package*.json
 
 # Generated Documentation
-APP_ARCHITECTURE.md
-ARCHITECTURE.md
+REPO_MAP_APP_ARCHITECTURE.md
+REPO_MAP_ARCHITECTURE.md
 REPO_MAP.md

@@ -20,10 +20,10 @@ Every file in the repository **must** include a 5-line signature header.
 - Captures the first 10 lines of every file.
 - Supports "Russian Doll" nesting: directories with their own `REPO_MAP.md` are linked in the root map.
 
-## 3. Dependency Graphing (`ARCHITECTURE.md`)
-- Generated via `scripts/generate_graph.sh`.
-- Uses `awk` to cluster components by directory in a Mermaid diagram.
-- Represents internal dependencies with solid arrows (`-->`) and external ones with dotted arrows (`-.->`).
+## 3. Dependency Graphing (`REPO_MAP_ARCHITECTURE.md`)
+- Generated via `scripts/generate_app_tree.sh`.
+- Uses `generate_tree.py` to map project orchestration and application logic.
+- Represents internal dependencies and identifies orphaned components.
 
 ## 4. Compliance Auditing
 - Verified via `scripts/check_compliance.sh`.

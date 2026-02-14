@@ -13,8 +13,8 @@ CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 PROJECT_ROOT="$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)"
 GEN_SCRIPT="${CURRENT_DIR}/utility/generate_tree.py"
-APP_ARCH="${PROJECT_ROOT}/APP_ARCHITECTURE.md"
-INFRA_ARCH="${PROJECT_ROOT}/ARCHITECTURE.md"
+APP_ARCH="${PROJECT_ROOT}/REPO_MAP_APP_ARCHITECTURE.md"
+INFRA_ARCH="${PROJECT_ROOT}/REPO_MAP_ARCHITECTURE.md"
 
 echo "ℹ️ Generating Logical Architecture Trees..."
 

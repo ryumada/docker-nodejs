@@ -10,6 +10,7 @@ import sys
 
 def get_category(path):
     """Infers category based on file path."""
+    if 'scripts/' in path: return 'Utility'
     if 'src/app' in path:
         if 'page.tsx' in path: return 'Page'
         if 'layout.tsx' in path: return 'Layout'
@@ -21,6 +22,8 @@ def get_category(path):
     if 'src/lib' in path: return 'Utility'
     if 'src/data' in path: return 'Data'
     if 'src/schemas' in path: return 'Schema'
+    if 'src/actions' in path: return 'Action'
+    if 'src/__tests__' in path: return 'Test'
     return 'Component'
 
 def extract_requires(content):
@@ -89,18 +92,15 @@ def inject_signature(file_path):
     print(f"✅ Processed {rel_path}")
 
 def main():
-    target_dir = sys.argv[1] if len(sys.argv) > 1 else "app/essentia/src"
+    target_dir = sys.argv[1] if len(sys.argv) > 1 else "app/essentia"
     if not os.path.isdir(target_dir):
         print(f"❌ Directory not found: {target_dir}")
         sys.exit(1)
 
     for root, _, files in os.walk(target_dir):
-        # Skip tests
-        if '__tests__' in root:
-            continue
-
+        # We now include tests as they are part of the compliance audit
         for file in files:
-            if file.endswith(('.ts', '.tsx')) and not file.endswith('.d.ts'):
+            if file.endswith(('.ts', '.tsx', '.mjs')) and not file.endswith('.d.ts'):
                 inject_signature(os.path.join(root, file))
 
 if __name__ == "__main__":
