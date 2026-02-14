@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+# Category: Entrypoint
 # Description: Helper script to run commands inside the 'app' service container.
 # Usage: ./scripts/bootstraping/run.sh <command>
 # Dependencies: docker, git

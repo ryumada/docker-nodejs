@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+# Category: Utility
 # Description: Script to update the .env file from .env.example while preserving existing values.
 # Usage: ./scripts/update_env_file.sh [template_env_file] [backup_env_file]
 # Dependencies: git, cp, sed, awk

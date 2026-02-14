@@ -1,3 +1,4 @@
+# Category: Build
 # Service: lockfile-generator
 # Description: Dockerfile used exclusively to generate or update package-lock.json.
 # Maintainer: ryumada

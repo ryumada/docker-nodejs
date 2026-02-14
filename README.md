@@ -1,5 +1,6 @@
 ---
 title: docker-nodejs
+category: Reference
 description: Node.js Docker Deployment Utility for automated setup and environment management.
 context: Root Repository
 ---

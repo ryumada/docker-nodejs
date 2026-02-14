@@ -1,5 +1,6 @@
 ---
 trigger: always_on
+category: Reference
 ---
 
 To run npm command please use the run.sh script located at:

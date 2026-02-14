@@ -1,4 +1,5 @@
 # File: .gitignore
+# Category: Config
 # Description: Git ignore file to exclude files and directories from version control.
 # Maintainer: ryumada
 
@@ -15,4 +16,6 @@ dockerfile.lockfile-generator
 
 package*.json
 
+# Generated Documentation
+ARCHITECTURE.md
 REPO_MAP.md

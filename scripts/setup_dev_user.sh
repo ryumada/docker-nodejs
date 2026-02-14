@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+# Category: Utility
 # Description: Script to create/configure a development user with specific UID/GID in the container environment.
 # Usage: sudo ./scripts/setup_dev_user.sh <env_file_path>
 # Dependencies: groupadd, useradd, id, getent

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+# Category: Utility
 # Description: Helper script to initialize a Next.js app in a Docker volume root.
 # Usage: ./scripts/bootstraping/init-next-app.sh [args...]
 # Dependencies: docker, git

@@ -1,3 +1,4 @@
+# Category: Dev
 # Service: NodeJS Development Dockerfile
 # Description: Development environment for Next.js with volume mounting and hot reloading.
 # Maintainer: ryumada

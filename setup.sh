@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -e
+# Category: Entrypoint
 # Description: Main setup script to configure environments (dev/prod/init) and manage container configs.
 # Usage: ./setup.sh
-# Dependencies: git, docker, rsync, awk
+# Dependencies: git, docker, rsync, awk, ./scripts/update_env_file.sh, ./scripts/generate_map.sh
 
 # Detect Repository Owner to run non-root commands as that user
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")

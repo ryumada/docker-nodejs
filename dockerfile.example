@@ -1,3 +1,4 @@
+# Category: Prod
 # Service: Docker NodeJS Production Dockerfile
 # Description: Production-ready Dockerfile for building and serving the Next.js application.
 # Maintainer: ryumada

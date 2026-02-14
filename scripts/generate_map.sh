@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
+# Category: Utility
 # Description: Generates a REPO_MAP.md file representing the project structure and file signatures.
-# Usage: ./scripts/generate_map.sh
+# Usage: ./scripts/generate_map.sh [target_directory]
 # Dependencies: tree, git, grep, sed, awk
 
 # ==============================================================================
@@ -10,8 +11,10 @@ set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 
-# Resolve the Project Root (One level up from scripts/)
-PROJECT_ROOT=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+# Resolve the Project Root (Default to git toplevel, allow override via ARG1)
+GIT_ROOT=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+TARGET_DIR="${1:-$GIT_ROOT}"
+PROJECT_ROOT=$(readlink -f "$TARGET_DIR")
 
 # Define Output File
 OUTPUT_FILE="${PROJECT_ROOT}/REPO_MAP.md"
@@ -21,7 +24,11 @@ OUTPUT_FILE="${PROJECT_ROOT}/REPO_MAP.md"
 # ==============================================================================
 
 # Directories to always include even if in .gitignore (e.g., "app" "docs")
-FORCE_INCLUDE=("app")
+FORCE_INCLUDE=()
+# If we are at the GIT_ROOT, we might want to include "app"
+if [ "$PROJECT_ROOT" == "$GIT_ROOT" ]; then
+    FORCE_INCLUDE=("app")
+fi
 
 # Files or Patterns to ALWAYS exclude from the map, regardless of source.
 # Uses standard bash glob patterns.
@@ -223,6 +230,23 @@ EOF
 cat <<EOF >> "${OUTPUT_FILE}"
 1. [Directory Structure](#directory-structure)
 2. [File Signatures](#file-signatures)
+EOF
+
+# 4. Check for Nested Maps (Russian Doll Approach)
+# ------------------------------------------------------------------------------
+NESTED_MAPS=$(find "$PROJECT_ROOT" -mindepth 2 -name "REPO_MAP.md" -not -path "*/.*")
+if [[ -n "$NESTED_MAPS" ]]; then
+    echo "3. [Nested Maps](#nested-maps)" >> "${OUTPUT_FILE}"
+    echo -e "\n## Nested Maps" >> "${OUTPUT_FILE}"
+    echo "The following subdirectories have their own detailed repository maps:" >> "${OUTPUT_FILE}"
+    while read -r map_path; do
+        rel_map_path=${map_path#$GIT_ROOT/}
+        map_dir=$(dirname "$rel_map_path")
+        echo "- [$map_dir](file://$map_path)" >> "${OUTPUT_FILE}"
+    done <<< "$NESTED_MAPS"
+fi
+
+cat <<EOF >> "${OUTPUT_FILE}"
 
 ## Directory Structure
 \`\`\`
@@ -264,8 +288,8 @@ while read -r file; do
     filesize=$(du -h "$full_path" | cut -f1)
     echo "// Size: $filesize" >> "${OUTPUT_FILE}"
 
-    # Extract first 5 lines
-    head -n 5 "$full_path" >> "${OUTPUT_FILE}"
+    # Extract first 10 lines
+    head -n 10 "$full_path" >> "${OUTPUT_FILE}"
     echo "\`\`\`" >> "${OUTPUT_FILE}"
     echo "" >> "${OUTPUT_FILE}"
 done < "$FILE_LIST_FILTERED"

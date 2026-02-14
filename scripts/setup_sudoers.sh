@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+# Category: Entrypoint
 # Description: Configures sudoers rules for chown and setup scripts to allow non-password execution.
 # Usage: sudo ./scripts/setup_sudoers.sh
 # Dependencies: sudo, git, grep, chmod, awk

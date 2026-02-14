@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+# Category: Utility
 # Description: Removes sudoers configuration files created by setup_sudoers.sh.
 # Usage: sudo ./scripts/cleanup_sudoers.sh
 # Dependencies: sudo, git, rm

@@ -1,3 +1,4 @@
+# Category: Init
 # Service: Docker NodeJS Initialization Dockerfile
 # Description: Initialization environment for Node.js to bootstrap the application.
 # Maintainer: ryumada

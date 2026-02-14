@@ -1,3 +1,4 @@
+# Category: Orchestration
 # Service: Docker Compose (Production)
 # Description: Production orchestration for the Essentia application.
 # Usage: docker compose up -d (using the production compose file)

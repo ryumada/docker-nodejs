@@ -1,5 +1,6 @@
 ---
 name: Next.js & Appwrite Troubleshooting
+category: Guide
 description: Solutions for common issues encountered when integrating Appwrite with Next.js (App Router), including hydration, CSP, and session management.
 ---
 

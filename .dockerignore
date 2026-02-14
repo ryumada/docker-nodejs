@@ -1,4 +1,5 @@
 # File: .dockerignore
+# Category: Config
 # Description: Specifies patterns of files and directories to ignore when building Docker images.
 # Maintainer: ryumada
 

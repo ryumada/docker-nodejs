@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -e
+# Category: Entrypoint
 # Description: Script to pull latest changes and update the deployment using setup.sh and docker compose.
 # Usage: ./scripts/update_deployment.sh
-# Dependencies: git, docker
+# Dependencies: git, docker, ./setup.sh
 
 # Detect Repository Owner to run non-root commands as that user
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")

@@ -1,3 +1,4 @@
+# Category: Orchestration
 # Service: Docker Compose (Initialization)
 # Description: Initialization orchestration for bootstrapping the application.
 # Usage: docker compose up -d (using the initialization compose file)

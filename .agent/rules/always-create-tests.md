@@ -1,5 +1,6 @@
 ---
 trigger: always_on
+category: Reference
 ---
 
 # Test Creation

@@ -1,5 +1,6 @@
 ---
 trigger: always_on
+category: Reference
 ---
 
 # 🗺️ PROTOCOL: REPO_MAP_FIRST (Multi-Layer Context)
