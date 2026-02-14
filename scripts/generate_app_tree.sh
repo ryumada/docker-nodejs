@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 set -e
-# Category: Utility
+# Category: Entrypoint
 # Description: Generates logical dependency trees for key entry points.
 # Usage: ./scripts/generate_app_tree.sh
-# Dependencies: python3, scripts/generate_tree.py
+# Dependencies: python3, scripts/utility/generate_tree.py
 
 # ==============================================================================
 # 🚀 MAIN SCRIPT LOGIC
 # ==============================================================================
 
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
-PROJECT_ROOT="${CURRENT_DIR}/.."
-GEN_SCRIPT="${CURRENT_DIR}/generate_tree.py"
+CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
+PROJECT_ROOT="$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)"
+GEN_SCRIPT="${CURRENT_DIR}/utility/generate_tree.py"
 APP_ARCH="${PROJECT_ROOT}/APP_ARCHITECTURE.md"
 INFRA_ARCH="${PROJECT_ROOT}/ARCHITECTURE.md"
 

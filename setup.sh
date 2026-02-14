@@ -3,7 +3,7 @@ set -e
 # Category: Entrypoint
 # Description: Main setup script to configure environments (dev/prod/init) and manage container configs.
 # Usage: ./setup.sh
-# Dependencies: git, docker, rsync, awk, ./scripts/update_env_file.sh, ./scripts/generate_map.sh
+# Dependencies: git, docker, rsync, awk, ./scripts/utility/update_env_file.sh, ./scripts/generate_map.sh
 
 # Detect Repository Owner to run non-root commands as that user
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
@@ -14,7 +14,7 @@ REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
 
 # Configuration
 ENV_FILE=".env"
-UPDATE_SCRIPT="./scripts/update_env_file.sh"
+UPDATE_SCRIPT="./scripts/utility/update_env_file.sh"
 MAX_BACKUPS=3
 
 # --- Logging Functions & Colors ---
@@ -174,7 +174,7 @@ function main() {
   fi
 
   log_info "Update env file."
-  "$PATH_TO_ROOT_REPOSITORY/scripts/update_env_file.sh" "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
+  "$PATH_TO_ROOT_REPOSITORY/scripts/utility/update_env_file.sh" "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
   log_success "Update env file completed"
 
   log_info "Validate .env file content"

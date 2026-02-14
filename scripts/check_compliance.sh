@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-# Category: Utility
+# Category: Entrypoint
 # Description: Linting script to verify that project files adhere to the mandatory 5-line signature header protocol.
 # Usage: ./scripts/check_compliance.sh [--exclude-app]
 # Dependencies: git, grep, wc

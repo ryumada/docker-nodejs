@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 # Category: Utility
-# Description: Script to update the .env file from .env.example while preserving existing values.
+# Description: Script to update the .env file from .env.example while preserving existing values. It should be called automatically by the main setup.sh script.
 # Usage: ./scripts/update_env_file.sh [template_env_file] [backup_env_file]
 # Dependencies: git, cp, sed, awk
 
@@ -14,7 +14,7 @@ REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
 
 # Configuration
 ENV_FILE=".env"
-UPDATE_SCRIPT="./scripts/update_env_file.sh"
+UPDATE_SCRIPT="./scripts/utility/update_env_file.sh"
 MAX_BACKUPS=3
 
 # --- Logging Functions & Colors ---
@@ -40,7 +40,7 @@ log_error() { log "${COLOR_ERROR}" "❌" "$1"; }
 # ------------------------------------
 
 function main() {
-  
+
   TEMPLATE_ENV_FILE=${1:-.env.example}
   BACKUP_ENV_FILE=${2:-.env.bak}
 

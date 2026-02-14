@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-# Category: Utility
+# Category: Entrypoint
 # Description: Generates a REPO_MAP.md file representing the project structure and file signatures.
 # Usage: ./scripts/generate_map.sh [target_directory]
 # Dependencies: tree, git, grep, sed, awk
@@ -12,7 +12,7 @@ CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 
 # Resolve the Project Root (Default to git toplevel, allow override via ARG1)
-GIT_ROOT=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+GIT_ROOT=$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)
 TARGET_DIR="${1:-$GIT_ROOT}"
 PROJECT_ROOT=$(readlink -f "$TARGET_DIR")
 

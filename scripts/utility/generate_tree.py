@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Category: Utility
-# Description: Generates a text-based logical dependency tree by tracing signatures.
+# Description: Generates a text-based logical dependency tree by tracing signatures. Don't run this script directly, use generate_app_tree.sh instead.
 # Usage: python3 scripts/generate_tree.py [entrypoint] [max_depth]
 # Dependencies: python3
 
@@ -76,28 +76,28 @@ def resolve_path(current_file, dep, project_root):
 def print_tree(file_rel_path, project_root, visited=None, tracked_files=None, indent="", is_last=True, depth=0, max_depth=8):
     if visited is None: visited = set()
     if tracked_files is not None: tracked_files.add(file_rel_path)
-    
+
     # Use the relative path for display to avoid "profile.ts" ambiguity
     display_name = file_rel_path
 
     marker = "└── " if is_last else "├── "
     prefix = indent + marker
-    
+
     # Use the relative path from root as the unique ID for recursion guard
     if file_rel_path in visited:
         print(f"{prefix}{display_name} (circular)")
         return
 
     print(f"{prefix}{display_name}")
-    
+
     if depth >= max_depth:
         return
 
     visited.add(file_rel_path)
-    
+
     full_path = os.path.join(project_root, file_rel_path)
     deps = get_dependencies(full_path)
-    
+
     # Resolve deps to project-internal paths
     resolved_deps = []
     for d in deps:
@@ -133,7 +133,7 @@ def main():
 
     entrypoint = args.entrypoint
     project_root = os.getcwd()
-    
+
     if not os.path.exists(os.path.join(project_root, entrypoint)):
         print(f"Error: Entrypoint {entrypoint} not found.")
         return

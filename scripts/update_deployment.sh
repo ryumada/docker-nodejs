@@ -14,7 +14,7 @@ REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
 
 # Configuration
 ENV_FILE=".env"
-UPDATE_SCRIPT="./scripts/update_env_file.sh"
+UPDATE_SCRIPT="./scripts/utility/update_env_file.sh"
 MAX_BACKUPS=3
 
 # --- Logging Functions & Colors ---
