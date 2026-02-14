@@ -10,3 +10,5 @@ dockerfile
 dockerfile.lockfile-generator
 
 package*.json
+
+REPO_MAP.md
