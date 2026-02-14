@@ -153,7 +153,47 @@ A helper script to manage environment file updates safely.
     -   Creates a timestamped backup of the existing `.env` (e.g., `.env.backup_20231024...`).
     -   Updates `.env` with new keys from the example file while preserving existing values from the latest backup.
     -   Rotates backups (keeping the last 3).
+    -   Updates `.env` with new keys from the example file while preserving existing values from the latest backup.
+    -   Rotates backups (keeping the last 3).
     -   Ensures correct file ownership.
+
+## Project Architecture & Discovery
+
+This project uses a **Self-Documenting Architecture** system to help developers (and AI agents) understand the codebase structure and logic without reading every file.
+
+### 1. Repository Maps
+These files are generated automatically and serve as the "Source of Truth" for the project structure:
+-   **`REPO_MAP.md`**: The physical layout of the repository, including file signatures (Category, Description) for every file.
+-   **`REPO_MAP_ARCHITECTURE.md`**: The logical dependency tree for infrastructure and orchestration scripts.
+-   **`REPO_MAP_APP_ARCHITECTURE.md`**: The logical dependency tree for the Next.js application, showing how components and pages rely on each other.
+
+### 2. Mapping Tools
+Use these scripts to regenerate the maps after making changes.
+
+#### `scripts/generate_map.sh`
+Regenerates the physical `REPO_MAP.md`.
+```bash
+./scripts/generate_map.sh
+```
+
+#### `scripts/generate_app_tree.sh`
+Regenerates the logical dependency trees (`REPO_MAP_*_ARCHITECTURE.md`). This script allows for **Targeted Analysis** to save context and focus on specific areas.
+
+**Usage:**
+```bash
+# 1. Full Regeneration (All Pages & Scripts)
+./scripts/generate_app_tree.sh
+
+# 2. Scoped Generation (Focus on specific feature)
+# Example: Only map 'admin' related components and pages
+./scripts/generate_app_tree.sh --scope admin
+
+# 3. Discovery Mode (List all valid entry points and suggested scopes)
+./scripts/generate_app_tree.sh --list-scopes
+
+# 4. Help
+./scripts/generate_app_tree.sh --help
+```
 
 ## Project Structure
 
