@@ -1,16 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+# Description: Helper script to run commands inside the 'app' service container.
+# Usage: ./scripts/bootstraping/run.sh <command>
+# Dependencies: docker, git
 
-# --- Helper Script for Running Commands inside Docker ---
-# This script finds the root of the repository, locates the docker-compose.yml file,
-# and executes the provided command inside the 'app' service.
-
-# Get the directory where this script is located
-SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-
-# Find the repository root (assuming git is initialized)
-# If git is not present or we are not in a git repo, we might need a fallback.
-# For now, relying on git rev-parse is standard in this project's setup.sh.
-PATH_TO_ROOT_REPOSITORY=$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null)
+# Detect Repository Owner to run non-root commands as that user
+CURRENT_DIR=$(dirname "$(readlink -f "$0")")
+CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
+PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
+REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
 
 # Fallback if git fails (e.g. if we are in a subdirectory but not a git repo, which is unlikely)
 if [ -z "$PATH_TO_ROOT_REPOSITORY" ]; then

@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -e
+# Description: Generates a REPO_MAP.md file representing the project structure and file signatures.
+# Usage: ./scripts/generate_map.sh
+# Dependencies: tree, git, grep, sed, awk
 
-# ==============================================================================
-# ENVIRONMENT & PATH RESOLUTION
 # ==============================================================================
 
 # Resolve the directory where the script is located
@@ -210,11 +211,16 @@ log_success "Total files identified for mapping: $(wc -l < "$FILE_LIST_FILTERED"
 log_info "Initializing ${OUTPUT_FILE}..."
 
 cat <<EOF > "${OUTPUT_FILE}"
-# Repository Map
-
-Generated at: $(date)
+---
+title: Repository Map
+description: Auto-generated project structure and file signatures map.
+context: Project Root
+---
 
 ## Table of Contents
+EOF
+
+cat <<EOF >> "${OUTPUT_FILE}"
 1. [Directory Structure](#directory-structure)
 2. [File Signatures](#file-signatures)
 

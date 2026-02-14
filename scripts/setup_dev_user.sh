@@ -1,12 +1,30 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+# Description: Script to create/configure a development user with specific UID/GID in the container environment.
+# Usage: sudo ./scripts/setup_dev_user.sh <env_file_path>
+# Dependencies: groupadd, useradd, id, getent
+
+# Detect Repository Owner to run non-root commands as that user
+CURRENT_DIR=$(dirname "$(readlink -f "$0")")
+CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
+PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
+REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
+
+# Configuration
+ENV_FILE=".env"
+UPDATE_SCRIPT="./scripts/update_env_file.sh"
+MAX_BACKUPS=3
 
 # --- Logging Functions & Colors ---
+# Define colors for log messages
 readonly COLOR_RESET="\033[0m"
 readonly COLOR_INFO="\033[0;34m"
 readonly COLOR_SUCCESS="\033[0;32m"
-readonly COLOR_WARN="\033[0;33m"
+readonly COLOR_WARN="\033[1;33m"
 readonly COLOR_ERROR="\033[0;31m"
 
+# Function to log messages with a specific color and emoji
 log() {
   local color="$1"
   local emoji="$2"
@@ -15,8 +33,10 @@ log() {
 }
 
 log_info() { log "${COLOR_INFO}" "ℹ️" "$1"; }
-log_warn() { log "${COLOR_WARN}" "⚠️" "$1"; }
 log_success() { log "${COLOR_SUCCESS}" "✅" "$1"; }
+log_warn() { log "${COLOR_WARN}" "⚠️" "$1"; }
+log_error() { log "${COLOR_ERROR}" "❌" "$1"; }
+# ------------------------------------
 
 if [ "$EUID" -ne 0 ]; then
   echo "Please run this script with sudo."

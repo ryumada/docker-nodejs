@@ -1,3 +1,8 @@
+---
+title: docker-nodejs
+description: Node.js Docker Deployment Utility for automated setup and environment management.
+context: Root Repository
+---
 # docker-nodejs - Node.js Docker Deployment Utility
 
 docker-nodejs is a utility repository designed to streamline the deployment of Node.js applications using Docker Compose. It provides automated setup scripts, environment variable management, and configuration for both development and production environments.

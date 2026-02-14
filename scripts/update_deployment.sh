@@ -1,11 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+# Description: Script to pull latest changes and update the deployment using setup.sh and docker compose.
+# Usage: ./scripts/update_deployment.sh
+# Dependencies: git, docker
+
+# Detect Repository Owner to run non-root commands as that user
+CURRENT_DIR=$(dirname "$(readlink -f "$0")")
+CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
+PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
+REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
+
+# Configuration
+ENV_FILE=".env"
+UPDATE_SCRIPT="./scripts/update_env_file.sh"
+MAX_BACKUPS=3
 
 # --- Logging Functions & Colors ---
 # Define colors for log messages
 readonly COLOR_RESET="\033[0m"
 readonly COLOR_INFO="\033[0;34m"
 readonly COLOR_SUCCESS="\033[0;32m"
-readonly COLOR_WARN="\033[0;33m"
+readonly COLOR_WARN="\033[1;33m"
 readonly COLOR_ERROR="\033[0;31m"
 
 # Function to log messages with a specific color and emoji
@@ -30,11 +46,6 @@ handle_error() {
 }
 
 function main() {
-  CURRENT_DIR=$(dirname "$(readlink -f "$0")")
-  CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
-  PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
-  SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
-  REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
 
   log_info "Starting application update process..."
 

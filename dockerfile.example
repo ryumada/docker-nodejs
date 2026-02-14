@@ -1,4 +1,6 @@
-# STAGE 1: Build the Next.js application
+# Service: Docker NodeJS Production Dockerfile
+# Description: Production-ready Dockerfile for building and serving the Next.js application.
+# Maintainer: ryumada
 FROM node:${DOCKER_NODEJS_TAG} AS builder
 
 USER node

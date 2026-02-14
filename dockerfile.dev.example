@@ -1,4 +1,6 @@
-# STAGE 1: Development environment for Next.js
+# Service: NodeJS Development Dockerfile
+# Description: Development environment for Next.js with volume mounting and hot reloading.
+# Maintainer: ryumada
 FROM node:${DOCKER_NODEJS_TAG}
 
 # Add user and group with matching IDs from the host to fix permissions

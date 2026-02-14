@@ -1,1 +1,5 @@
+# File: .geminiignore
+# Description: Specifies files and directories to be ignored by Gemini/AI tools.
+# Maintainer: ryumada
+
 !app/

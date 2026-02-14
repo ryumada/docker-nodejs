@@ -1,20 +1,17 @@
-#!/bin/bash
-
-# --- Helper to initialize Next.js app in Docker ---
+#!/usr/bin/env bash
+set -e
+# Description: Helper script to initialize a Next.js app in a Docker volume root.
 # Usage: ./scripts/bootstraping/init-next-app.sh [args...]
-#
-# WHY THIS SCRIPT EXISTS:
-# Running 'create-next-app' directly in the root of a Docker volume mount (e.g., 'npx create-next-app .')
-# often fails with a "The application path is not writable" error, even if the user has correct permissions.
-# This is a known issue with how the tool checks permissions on volume roots.
-#
-# Workaround:
-# 1. Create the app in a temporary subdirectory (where the check succeeds).
-# 2. Move the files to the root directory.
-# 3. Clean up.
+# Dependencies: docker, git
 
-SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-RUN_SCRIPT="$SCRIPT_DIR/run.sh"
+# Detect Repository Owner to run non-root commands as that user
+CURRENT_DIR=$(dirname "$(readlink -f "$0")")
+CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
+PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
+REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
+
+RUN_SCRIPT="$CURRENT_DIR/run.sh"
 
 if [ ! -f "$RUN_SCRIPT" ]; then
     echo "Error: run.sh not found at $RUN_SCRIPT"

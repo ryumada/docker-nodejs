@@ -1,2 +1,6 @@
+# File: .ignore
+# Description: VSCode specific ignore file to unignore patterns for search.
+# Maintainer: ryumada
+
 # This ignore file is used by vscode to unignore all ignore files on .gitignore
 !*

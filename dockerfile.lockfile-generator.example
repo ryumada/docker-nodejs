@@ -1,7 +1,6 @@
-# Dockerfile.lockfile-generator
-# This Dockerfile is used ONLY to generate a package-lock.json file.
-# It should NOT be used as the primary Dockerfile for your application.
-
+# Service: lockfile-generator
+# Description: Dockerfile used exclusively to generate or update package-lock.json.
+# Maintainer: ryumada
 FROM node:${DOCKER_NODEJS_TAG} AS lockfile_generator
 
 # Set the working directory inside the container
