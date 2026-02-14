@@ -34,10 +34,81 @@ fi
 # Categories to use as entry points for Infrastructure tree
 INFRA_ENTRY_CATEGORIES=("Entrypoint")
 # Categories to use as entry points for Application tree
-APP_ENTRY_CATEGORIES=("Page" "Layout" "APIRoute")
+APP_ENTRY_CATEGORIES=("Page" "Layout" "APIRoute" "Component")
+
+# ==============================================================================
+# 🚀 HELP FUNCTION
+# ==============================================================================
+
+show_help() {
+    cat << EOF
+Usage: $(basename "$0") [OPTIONS]
+
+Generates logical dependency trees for key entry points (Pages, Layouts, etc.)
+and orchestration scripts, identifying orphaned components and reporting
+ignored categories.
+
+Options:
+  --scope PATTERN   Filter entry points by a pattern (e.g., --scope admin).
+                    Only trees matching the pattern will be generated.
+  --list-scopes     Discover and list all valid entry points and suggested scope patterns.
+  -h, --help        Show this help message and exit.
+
+Outputs:
+  - $(basename "$APP_ARCH")
+  - $(basename "$INFRA_ARCH")
+
+EOF
+}
+
+list_scopes() {
+    echo "🔍 Discovering Valid Scopes from $REPO_MAP..."
+    echo -e "\n--- [ Infrastructure Entry Points ] ---"
+    local INFRA_PATTERN=$(printf "|%s" "${INFRA_ENTRY_CATEGORIES[@]}")
+    INFRA_PATTERN=${INFRA_PATTERN:1}
+    grep -E -B 5 "Category: ($INFRA_PATTERN)" "$REPO_MAP" | grep "###" | sed 's/### //' | sort -u
+
+    echo -e "\n--- [ Application Entry Points ] ---"
+    local APP_PATTERN=$(printf "|@category %s" "${APP_ENTRY_CATEGORIES[@]}")
+    APP_PATTERN=${APP_PATTERN:1}
+    grep -E -B 20 "($APP_PATTERN)" "$REPO_MAP" | grep "###" | sed 's/### //' | sort -u
+
+    echo -e "\n--- [ Suggested Patterns ] ---"
+    echo "You can use any string that matches the paths above. Common patterns:"
+    {
+        # Extract first few segments of paths to suggest scopes
+        grep -E -B 5 "Category: ($INFRA_PATTERN)" "$REPO_MAP" | grep "###" | sed 's/### //'
+        grep -E -B 20 "($APP_PATTERN)" "$REPO_MAP" | grep "###" | sed 's/### //'
+    } | awk -F'/' '{
+        if ($1 == "app" && $2 == "essentia" && $3 == "src" && $4 == "app") print $5;
+        else if ($1 == "scripts") print $2;
+        else print $1;
+    }' | grep -v "^\s*$" | sort -u | sed 's/^/- /'
+    echo ""
+}
+
+# ==============================================================================
+# 🚀 ARGUMENT PARSING
+# ==============================================================================
+
+SCOPE=""
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -h|--help) show_help; exit 0 ;;
+        --list-scopes) list_scopes; exit 0 ;;
+        --scope) SCOPE="$2"; shift ;;
+        *) echo "Unknown parameter passed: $1"; show_help; exit 1 ;;
+    esac
+    shift
+done
+
+SCOPE_DESC="Full Project"
+if [ -n "$SCOPE" ]; then
+    SCOPE_DESC="Scope: $SCOPE"
+fi
 
 # 0. Discovery and Categorization
-echo "🔍 Discovering System Entrypoints..."
+echo "🔍 Discovering System Entrypoints (Mode: $SCOPE_DESC)..."
 # Total categorized files for orphan detection
 CATEGORIZED_FILES=$(grep "### " "$REPO_MAP" | sed 's/### //' | sort -u)
 
@@ -68,32 +139,42 @@ INFRA_PATTERN=$(printf "|%s" "${INFRA_ENTRY_CATEGORIES[@]}")
 INFRA_PATTERN=${INFRA_PATTERN:1}
 INFRA_TARGETS=$(grep -E -B 5 "Category: ($INFRA_PATTERN)" "$REPO_MAP" | grep "###" | sed 's/### //' | sort -u)
 
+# Apply Scope Filter to Infra Targets
+if [ -n "$SCOPE" ]; then
+    INFRA_TARGETS=$(echo "$INFRA_TARGETS" | grep "$SCOPE" || true)
+fi
+
 {
     echo '---'
-    echo 'title: Infrastructure Architecture'
+    echo "title: Infrastructure Architecture ($SCOPE_DESC)"
     echo 'category: Architecture'
     echo 'description: Logical dependency tree for project orchestration and setup scripts.'
+    echo "scope: ${SCOPE:-all}"
     echo '---'
     echo ''
-    echo '# Infrastructure Dependency Tree'
+    echo "# Infrastructure Dependency Tree ($SCOPE_DESC)"
 
-    # Get unique categories for infra targets
-    INFRA_CATEGORIES=$(for t in $INFRA_TARGETS; do get_category "$t"; done | sort -u)
+    if [ -z "$INFRA_TARGETS" ]; then
+        echo -e "\nNo infrastructure entry points match the current scope."
+    else
+        # Get unique categories for infra targets
+        INFRA_CATEGORIES=$(for t in $INFRA_TARGETS; do get_category "$t"; done | sort -u)
 
-    for cat in $INFRA_CATEGORIES; do
-        echo -e "\n## Category: ${cat:-Uncategorized}"
-        for target in $INFRA_TARGETS; do
-            if [ ! -f "$target" ]; then continue; fi
-            t_cat=$(get_category "$target")
-            if [ "$t_cat" == "$cat" ]; then
-                echo ""
-                echo "### Tree: $target"
-                echo '```text'
-                python3 "$GEN_SCRIPT" "$target" --save-seen "$REACHED_FILES"
-                echo '```'
-            fi
+        for cat in $INFRA_CATEGORIES; do
+            echo -e "\n## Category: ${cat:-Uncategorized}"
+            for target in $INFRA_TARGETS; do
+                if [ ! -f "$target" ]; then continue; fi
+                t_cat=$(get_category "$target")
+                if [ "$t_cat" == "$cat" ]; then
+                    echo ""
+                    echo "### Tree: $target"
+                    echo '```text'
+                    python3 "$GEN_SCRIPT" "$target" --save-seen "$REACHED_FILES"
+                    echo '```'
+                fi
+            done
         done
-    done
+    fi
 } > "$INFRA_ARCH"
 
 # 2. Application Architecture
@@ -103,37 +184,49 @@ APP_PATTERN=$(printf "|@category %s" "${APP_ENTRY_CATEGORIES[@]}")
 APP_PATTERN=${APP_PATTERN:1}
 APP_TARGETS=$(grep -E -B 20 "($APP_PATTERN)" "$REPO_MAP" | grep "###" | sed 's/### //' | sort -u)
 
-# Always include root layout if not found
-if [[ ! "$APP_TARGETS" =~ "app/essentia/src/app/layout.tsx" ]] && [ -f "app/essentia/src/app/layout.tsx" ]; then
-    APP_TARGETS="${APP_TARGETS} app/essentia/src/app/layout.tsx"
+# Always include root layout if not found and no scope or scope matches layout
+if [ -z "$SCOPE" ] || [[ "app/essentia/src/app/layout.tsx" == *"$SCOPE"* ]]; then
+    if [[ ! "$APP_TARGETS" =~ "app/essentia/src/app/layout.tsx" ]] && [ -f "app/essentia/src/app/layout.tsx" ]; then
+        APP_TARGETS="${APP_TARGETS} app/essentia/src/app/layout.tsx"
+    fi
+fi
+
+# Apply Scope Filter to App Targets
+if [ -n "$SCOPE" ]; then
+    APP_TARGETS=$(echo "$APP_TARGETS" | grep "$SCOPE" || true)
 fi
 
 {
     echo '---'
-    echo 'title: Application Architecture'
+    echo "title: Application Architecture ($SCOPE_DESC)"
     echo 'category: Architecture'
     echo 'description: Logical dependency tree for the Next.js application layer.'
+    echo "scope: ${SCOPE:-all}"
     echo '---'
     echo ''
-    echo '# Application Dependency Tree'
+    echo "# Application Dependency Tree ($SCOPE_DESC)"
 
-    # Get unique categories
-    CATEGORIES=$(for t in $APP_TARGETS; do get_category "$t"; done | sort -u)
+    if [ -z "$APP_TARGETS" ]; then
+        echo -e "\nNo application entry points match the current scope."
+    else
+        # Get unique categories
+        CATEGORIES=$(for t in $APP_TARGETS; do get_category "$t"; done | sort -u)
 
-    for cat in $CATEGORIES; do
-        echo -e "\n## Category: $cat"
-        for target in $APP_TARGETS; do
-            if [ ! -f "$target" ]; then continue; fi
-            t_cat=$(get_category "$target")
-            if [ "$t_cat" == "$cat" ]; then
-                echo ""
-                echo "### Tree: $target"
-                echo '```text'
-                python3 "$GEN_SCRIPT" "$target" --save-seen "$REACHED_FILES"
-                echo '```'
-            fi
+        for cat in $CATEGORIES; do
+            echo -e "\n## Category: $cat"
+            for target in $APP_TARGETS; do
+                if [ ! -f "$target" ]; then continue; fi
+                t_cat=$(get_category "$target")
+                if [ "$t_cat" == "$cat" ]; then
+                    echo ""
+                    echo "### Tree: $target"
+                    echo '```text'
+                    python3 "$GEN_SCRIPT" "$target" --save-seen "$REACHED_FILES"
+                    echo '```'
+                fi
+            done
         done
-    done
+    fi
 } > "$APP_ARCH"
 
 # 3. Orphan Detection & Ignored Categories
