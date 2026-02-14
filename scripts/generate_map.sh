@@ -16,6 +16,47 @@ PROJECT_ROOT=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0"
 OUTPUT_FILE="${PROJECT_ROOT}/REPO_MAP.md"
 
 # ==============================================================================
+# CONFIGURATION
+# ==============================================================================
+
+# Directories to always include even if in .gitignore (e.g., "app" "docs")
+FORCE_INCLUDE=("app")
+
+# Files or Patterns to ALWAYS exclude from the map, regardless of source.
+# Uses standard bash glob patterns.
+FORCE_EXCLUDE=(
+    ".agent"
+    ".vscode"
+    "node_modules"
+    ".next"
+    ".cache"
+    ".git"
+    "*.tsbuildinfo"
+    "package-lock.json"
+    "yarn.lock"
+    "pnpm-lock.yaml"
+    "*.log"
+    "*.map"
+    "*.lock"
+    "__pycache__"
+)
+
+# Files or Patterns to exclude ONLY from the signature extraction phase.
+# Use this for large assets, images, or files where the signature isn't helpful.
+FORCE_EXCLUDE_SIGNATURE=(
+    "*.png"
+    "*.svg"
+    "*.ico"
+    "*.jpg"
+    "*.jpeg"
+    "*.webp"
+    "*.woff"
+    "*.woff2"
+    "*.ttf"
+    "*.otf"
+)
+
+# ==============================================================================
 # LOGGING UTILITIES (User Provided)
 # ==============================================================================
 
@@ -60,7 +101,6 @@ executeCommand() {
     local exit_code=0
 
     # Execute command, capture both stdout and stderr
-    # redirect stderr to stdout to capture everything in variable 'output'
     if ! output=$(eval "$command_to_run" 2>&1); then
         exit_code=1
     fi
@@ -79,10 +119,7 @@ executeCommand() {
 # MAIN SCRIPT
 # ==============================================================================
 
-# Directories to always include even if in .gitignore (e.g., "app" "docs")
-FORCE_INCLUDE=("app")
-
-# 1. Check for Prerequisites & Compatibility
+# 1. Check for Prerequisites
 # ------------------------------------------------------------------------------
 command_check="command -v tree >/dev/null 2>&1 && command -v git >/dev/null 2>&1"
 executeCommand \
@@ -93,10 +130,13 @@ executeCommand \
 
 # 2. Identify and Filter Files
 # ------------------------------------------------------------------------------
-log_info "Identifying files to map (Forced Inclusion: ${FORCE_INCLUDE[*]})..."
+log_info "Identifying files to map..."
+log_info "Force Include: ${FORCE_INCLUDE[*]}"
+log_info "Force Exclude: ${FORCE_EXCLUDE[*]}"
 
 FILE_LIST_RAW=$(mktemp)
 FILE_LIST_FILTERED=$(mktemp)
+# Ensure temporary files are cleaned up
 trap 'rm -f "$FILE_LIST_RAW" "$FILE_LIST_FILTERED"' EXIT
 
 # A. Collect files from the Root Project (Respects Root .gitignore)
@@ -107,27 +147,58 @@ for dir in "${FORCE_INCLUDE[@]}"; do
     full_dir_path="${PROJECT_ROOT}/${dir}"
 
     if [ -d "$full_dir_path" ]; then
-        # Check if this directory is a Nested Git Repo (e.g., a submodule or sub-repo)
         if [ -d "$full_dir_path/.git" ]; then
             log_info "Detected nested git repository in: ${dir}"
-            # List files using the NESTED git (Respects nested .gitignore)
-            # We append the directory prefix so paths match the root structure
+            # List files using the NESTED git, prepending the directory name
             git -C "$full_dir_path" ls-files | awk -v prefix="$dir/" '{print prefix $0}' >> "$FILE_LIST_RAW"
         else
-            # It is a regular directory.
-            # If it is NOT already tracked by the root git, we search it manually.
-            # Note: 'find' does NOT respect .gitignore, but we exclude node_modules/hidden files.
-            (cd "${PROJECT_ROOT}" && find "$dir" -type f ! -path '*/.*' ! -path '*/node_modules/*' ! -path '*/__pycache__/*') >> "$FILE_LIST_RAW"
+            # Build find exclusion arguments dynamically from FORCE_EXCLUDE
+            FIND_EXCLUDE_ARGS=()
+            for pattern in "${FORCE_EXCLUDE[@]}"; do
+                if [[ "$pattern" == *"*"* ]]; then
+                    FIND_EXCLUDE_ARGS+=("-not" "-name" "$pattern" "-not" "-path" "*/$pattern")
+                else
+                    FIND_EXCLUDE_ARGS+=("-not" "-path" "*/$pattern/*" "-not" "-name" "$pattern")
+                fi
+            done
+
+            # Manual find for non-git folders (Includes hidden files, excludes patterns in FORCE_EXCLUDE)
+            (cd "${PROJECT_ROOT}" && find "$dir" -type f "${FIND_EXCLUDE_ARGS[@]}") >> "$FILE_LIST_RAW"
         fi
     fi
 done
 
-# C. Clean and Sort (Remove duplicates and binaries)
+# C. Clean, Filter, and Sort
+# We iterate over the raw list and apply the FORCE_EXCLUDE logic here.
+# This ensures that exclusions apply to BOTH git-tracked files and forced files.
 sort -u "$FILE_LIST_RAW" | while read -r file; do
     full_path="${PROJECT_ROOT}/$file"
-    # 1. Check if file exists
-    # 2. Check if file is NOT binary (grep -I checks for text content)
-    if [ -f "$full_path" ] && grep -qI . "$full_path" 2>/dev/null; then
+    filename=$(basename "$file")
+
+    # 1. Check Exclusions (The "Gatekeeper")
+    should_exclude=0
+    for pattern in "${FORCE_EXCLUDE[@]}"; do
+        if [[ "$pattern" == *"*"* ]]; then
+             # Glob pattern (e.g., *.log): match against filename or full path
+             if [[ "$filename" == $pattern ]] || [[ "$file" == $pattern ]]; then
+                 should_exclude=1
+                 break
+             fi
+        else
+             # Exact match or Directory (e.g., node_modules): match against filename or anywhere in path
+             if [[ "$filename" == "$pattern" ]] || [[ "$file" == *"/$pattern/"* ]] || [[ "$file" == "$pattern/"* ]] || [[ "$file" == *"/$pattern" ]]; then
+                 should_exclude=1
+                 break
+             fi
+        fi
+    done
+
+    if [ $should_exclude -eq 1 ]; then
+        continue
+    fi
+
+    # 2. Check Validity
+    if [ -f "$full_path" ]; then
         echo "$file" >> "$FILE_LIST_FILTERED"
     fi
 done
@@ -152,8 +223,6 @@ Generated at: $(date)
 EOF
 
 # Append Tree Structure using the filtered file list
-# --fromfile reads paths from stdin and builds a tree
-# We do NOT use -C here to avoid ANSI escape sequences
 (cd "${PROJECT_ROOT}" && tree --fromfile . < "$FILE_LIST_FILTERED") >> "${OUTPUT_FILE}"
 
 echo -e "\`\`\`\n" >> "${OUTPUT_FILE}"
@@ -166,6 +235,20 @@ echo "## File Signatures" >> "${OUTPUT_FILE}"
 
 while read -r file; do
     full_path="${PROJECT_ROOT}/$file"
+    filename=$(basename "$file")
+
+    # 1. Check Signature Exclusions
+    should_exclude_signature=0
+    for pattern in "${FORCE_EXCLUDE_SIGNATURE[@]}"; do
+        if [[ "$filename" == $pattern ]] || [[ "$file" == $pattern ]]; then
+            should_exclude_signature=1
+            break
+        fi
+    done
+
+    if [ $should_exclude_signature -eq 1 ]; then
+        continue
+    fi
 
     # Append signature section
     echo "### $file" >> "${OUTPUT_FILE}"
@@ -177,7 +260,8 @@ while read -r file; do
 
     # Extract first 5 lines
     head -n 5 "$full_path" >> "${OUTPUT_FILE}"
-    echo -e '\`\`\`\n' >> "${OUTPUT_FILE}"
+    echo "\`\`\`" >> "${OUTPUT_FILE}"
+    echo "" >> "${OUTPUT_FILE}"
 done < "$FILE_LIST_FILTERED"
 
 log_success "File signatures extracted and appended."

@@ -35,6 +35,14 @@ trigger: always_on
 * **Line 4:** ` * @requires <Key imports, e.g., 'express', 'react', 'mongoose'>`
 * **Line 5:** ` */`
 
+**E. Markdown / Documentation (`.md`)**
+* *Use YAML Frontmatter style to ensure metadata is machine-readable yet visually clean.*
+* **Line 1:** `---`
+* **Line 2:** `title: <Document Title or Filename>`
+* **Line 3:** `description: <Concise summary of this document>`
+* **Line 4:** `context: <Related Module or Scope>`
+* **Line 5:** `---`
+
 **Enforcement Logic:**
 * **If creating a file:** You must insert this header immediately.
 * **If editing a file:** Check if the header exists. If missing, ADD IT. If present but outdated, UPDATE IT.
