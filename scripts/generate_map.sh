@@ -97,23 +97,36 @@ log_info "Identifying files to map (Forced Inclusion: ${FORCE_INCLUDE[*]})..."
 
 FILE_LIST_RAW=$(mktemp)
 FILE_LIST_FILTERED=$(mktemp)
-# Ensure temporary files are cleaned up
 trap 'rm -f "$FILE_LIST_RAW" "$FILE_LIST_FILTERED"' EXIT
 
-# Collect tracked files
+# A. Collect files from the Root Project (Respects Root .gitignore)
 git -C "${PROJECT_ROOT}" ls-files > "$FILE_LIST_RAW"
 
-# Collect files from forced directories
+# B. Collect files from Forced Directories (Smart Handling)
 for dir in "${FORCE_INCLUDE[@]}"; do
-    if [ -d "${PROJECT_ROOT}/$dir" ]; then
-        # find relative to PROJECT_ROOT, excluding node_modules and .git
-        (cd "${PROJECT_ROOT}" && find "$dir" -type f ! -path '*/.*' ! -path '*/node_modules/*' ! -path '*/.next/*') >> "$FILE_LIST_RAW"
+    full_dir_path="${PROJECT_ROOT}/${dir}"
+
+    if [ -d "$full_dir_path" ]; then
+        # Check if this directory is a Nested Git Repo (e.g., a submodule or sub-repo)
+        if [ -d "$full_dir_path/.git" ]; then
+            log_info "Detected nested git repository in: ${dir}"
+            # List files using the NESTED git (Respects nested .gitignore)
+            # We append the directory prefix so paths match the root structure
+            git -C "$full_dir_path" ls-files | awk -v prefix="$dir/" '{print prefix $0}' >> "$FILE_LIST_RAW"
+        else
+            # It is a regular directory.
+            # If it is NOT already tracked by the root git, we search it manually.
+            # Note: 'find' does NOT respect .gitignore, but we exclude node_modules/hidden files.
+            (cd "${PROJECT_ROOT}" && find "$dir" -type f ! -path '*/.*' ! -path '*/node_modules/*' ! -path '*/__pycache__/*') >> "$FILE_LIST_RAW"
+        fi
     fi
 done
 
-# Filter out duplicates, non-files, and binary files
+# C. Clean and Sort (Remove duplicates and binaries)
 sort -u "$FILE_LIST_RAW" | while read -r file; do
     full_path="${PROJECT_ROOT}/$file"
+    # 1. Check if file exists
+    # 2. Check if file is NOT binary (grep -I checks for text content)
     if [ -f "$full_path" ] && grep -qI . "$full_path" 2>/dev/null; then
         echo "$file" >> "$FILE_LIST_FILTERED"
     fi
@@ -153,15 +166,15 @@ echo "## File Signatures" >> "${OUTPUT_FILE}"
 
 while read -r file; do
     full_path="${PROJECT_ROOT}/$file"
-    
+
     # Append signature section
     echo "### $file" >> "${OUTPUT_FILE}"
     echo '```' >> "${OUTPUT_FILE}"
-    
+
     # Get file info
     filesize=$(du -h "$full_path" | cut -f1)
     echo "// Size: $filesize" >> "${OUTPUT_FILE}"
-    
+
     # Extract first 5 lines
     head -n 5 "$full_path" >> "${OUTPUT_FILE}"
     echo -e '\`\`\`\n' >> "${OUTPUT_FILE}"
