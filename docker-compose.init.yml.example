@@ -12,6 +12,8 @@ services:
       - .env
     ports:
       - ${PORT}:${PORT}
+      - 9229:9229
+      - 9230:9230
     sysctls:
       net.ipv6.conf.all.disable_ipv6: 1
     logging:
