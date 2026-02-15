@@ -12,6 +12,8 @@ set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 PROJECT_ROOT="$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)"
+APP_PATH=$(find "${PROJECT_ROOT}/app" -maxdepth 2 -name src -type d | head -n 1)
+APP_NAME=$(basename "$(dirname "$APP_PATH")")
 GEN_SCRIPT="${CURRENT_DIR}/utility/generate_tree.py"
 APP_ARCH="${PROJECT_ROOT}/REPO_MAP_APP_ARCHITECTURE.md"
 INFRA_ARCH="${PROJECT_ROOT}/REPO_MAP_ARCHITECTURE.md"
@@ -75,17 +77,23 @@ list_scopes() {
 
     echo -e "\n--- [ Suggested Patterns ] ---"
     echo "You can use any string that matches the paths above. Common patterns:"
-    {
-        # Extract first few segments of paths to suggest scopes
-        grep -E -B 5 "Category: ($INFRA_PATTERN)" "$REPO_MAP" | grep "###" | sed 's/### //'
-        grep -E -B 20 "($APP_PATTERN)" "$REPO_MAP" | grep "###" | sed 's/### //'
-    } | awk -F'/' '{
-        if ($1 == "app" && $2 == "essentia" && $3 == "src" && $4 == "app") print $5;
-        else if ($1 == "scripts") print $2;
-        else print $1;
+    echo "$CATEGORIZED_FILES" | awk -F'/' '{
+        # Suggest physical path segments only
+        path = $1
+        if (path != "") {
+            print path
+            for (i=2; i<=NF; i++) {
+                path = path "/" $i
+                print path
+            }
+        }
     }' | grep -v "^\s*$" | sort -u | sed 's/^/- /'
     echo ""
 }
+
+# 0. Discovery and Categorization
+# Total categorized files for orphan detection
+CATEGORIZED_FILES=$(grep "### " "$REPO_MAP" | sed 's/### //' | sort -u)
 
 # ==============================================================================
 # 🚀 ARGUMENT PARSING
@@ -185,9 +193,9 @@ APP_PATTERN=${APP_PATTERN:1}
 APP_TARGETS=$(grep -E -B 20 "($APP_PATTERN)" "$REPO_MAP" | grep "###" | sed 's/### //' | sort -u)
 
 # Always include root layout if not found and no scope or scope matches layout
-if [ -z "$SCOPE" ] || [[ "app/essentia/src/app/layout.tsx" == *"$SCOPE"* ]]; then
-    if [[ ! "$APP_TARGETS" =~ "app/essentia/src/app/layout.tsx" ]] && [ -f "app/essentia/src/app/layout.tsx" ]; then
-        APP_TARGETS="${APP_TARGETS} app/essentia/src/app/layout.tsx"
+if [ -z "$SCOPE" ] || [[ "app/${APP_NAME}/src/app/layout.tsx" == *"$SCOPE"* ]]; then
+    if [[ ! "$APP_TARGETS" =~ "app/${APP_NAME}/src/app/layout.tsx" ]] && [ -f "app/${APP_NAME}/src/app/layout.tsx" ]; then
+        APP_TARGETS="${APP_TARGETS} app/${APP_NAME}/src/app/layout.tsx"
     fi
 fi
 
@@ -255,8 +263,8 @@ for arch_file in "$APP_ARCH" "$INFRA_ARCH"; do
 
             ORPHAN_FOUND=false
             for file in $CATEGORIZED_FILES; do
-                # Only consider app/essentia/src files for app orphans
-                if [[ "$file" == app/essentia/src* ]]; then
+                # Only consider app/${APP_NAME}/src files for app orphans
+                if [[ "$file" == app/${APP_NAME}/src* ]]; then
                     if ! echo "$UNIQ_REACHED" | grep -qx "$file"; then
                         echo "- $file"
                         ORPHAN_FOUND=true

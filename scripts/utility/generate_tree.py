@@ -41,7 +41,17 @@ def resolve_path(current_file, dep, project_root):
 
     # Handle @/ paths (Next.js alias)
     if dep.startswith('@/'):
-        base = os.path.join(project_root, 'app/essentia/src', dep[2:])
+        # Dynamically detect app name if not provided (defaulting to 'essentia')
+        # We look for a directory under 'app/' that has 'src'
+        app_name = 'essentia'
+        app_root = os.path.join(project_root, 'app')
+        if os.path.isdir(app_root):
+            for d in os.listdir(app_root):
+                if os.path.isdir(os.path.join(app_root, d, 'src')):
+                    app_name = d
+                    break
+        
+        base = os.path.join(project_root, f'app/{app_name}/src', dep[2:])
         # Check direct file or directory/index
         for ext in ['', '.tsx', '.ts', '.js']:
             if os.path.exists(base + ext) and not os.path.isdir(base + ext):

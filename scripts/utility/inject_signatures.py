@@ -8,6 +8,16 @@ import os
 import re
 import sys
 
+def get_app_name():
+    """Detects the app name by finding a directory under 'app/' with a 'src' directory."""
+    project_root = os.getcwd()
+    app_dir = os.path.join(project_root, 'app')
+    if os.path.isdir(app_dir):
+        for candidate in os.listdir(app_dir):
+            if os.path.isdir(os.path.join(app_dir, candidate, 'src')):
+                return candidate
+    return 'essentia'
+
 def get_category(path):
     """Infers category based on file path."""
     if 'scripts/' in path: return 'Utility'
@@ -92,7 +102,8 @@ def inject_signature(file_path):
     print(f"✅ Processed {rel_path}")
 
 def main():
-    target_dir = sys.argv[1] if len(sys.argv) > 1 else "app/essentia"
+    app_name = get_app_name()
+    target_dir = sys.argv[1] if len(sys.argv) > 1 else f"app/{app_name}"
     if not os.path.isdir(target_dir):
         print(f"❌ Directory not found: {target_dir}")
         sys.exit(1)
