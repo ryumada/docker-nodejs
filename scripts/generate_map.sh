@@ -52,6 +52,7 @@ FORCE_EXCLUDE=(
 # Files or Patterns to exclude ONLY from the signature extraction phase.
 # Use this for large assets, images, or files where the signature isn't helpful.
 FORCE_EXCLUDE_SIGNATURE=(
+    "*.gif"
     "*.png"
     "*.svg"
     "*.ico"
@@ -62,6 +63,8 @@ FORCE_EXCLUDE_SIGNATURE=(
     "*.woff2"
     "*.ttf"
     "*.otf"
+    "*.min.css"
+    "*.min.js"
 )
 
 # ==============================================================================
