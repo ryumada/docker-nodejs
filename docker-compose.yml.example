@@ -10,6 +10,7 @@ services:
     restart: always
     env_file:
       - .env
+    # PROXY_LABELS_PLACEHOLDER
     ports:
       - ${PORT}:${PORT}
       - 9229:9229
@@ -38,6 +39,7 @@ services:
       start_period: 1m
     networks:
       - ${DOCKER_NETWORK}
+      # PROXY_NETWORK_PLACEHOLDER
 
 networks:
   ${DOCKER_NETWORK}:

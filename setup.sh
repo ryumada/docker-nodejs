@@ -122,6 +122,36 @@ function update_dockerfile_build_args() {
   log_success "Successfully added environment variables to dockerfile: $PATH_TO_ROOT_REPOSITORY/dockerfile"
 }
 
+function configure_proxy_mode() {
+  local compose_file="$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+
+  if [[ "$PROXY_MODE" == "traefik" ]]; then
+    log_info "Configuring Traefik proxy mode..."
+
+    # Define the Traefik labels block (YAML formatted)
+    local labels_block="    labels:\n      - \"traefik.enable=true\"\n      - \"traefik.http.routers.\${APP_NAME}.rule=Host(\\\`\${DOMAIN}\\\`)\"\n      - \"traefik.http.routers.\${APP_NAME}.entrypoints=websecure\"\n      - \"traefik.http.routers.\${APP_NAME}.tls.certresolver=\${TRAEFIK_CERTRESOLVER}\"\n      - \"traefik.http.services.\${APP_NAME}.loadbalancer.server.port=\${PORT}\""
+
+    # Inject labels and the secondary proxy network
+    sed -e "s|# PROXY_LABELS_PLACEHOLDER|${labels_block}|g" \
+        -e "s|# PROXY_NETWORK_PLACEHOLDER|- \${PROXY_NETWORK}|g" \
+        "$compose_file" > "${compose_file}.tmp"
+
+    mv "${compose_file}.tmp" "$compose_file"
+
+    # Append the external proxy network definition to the bottom of the compose file
+    echo -e "\n  \${PROXY_NETWORK}:\n    external: true" >> "$compose_file"
+
+    log_success "Traefik configuration injected successfully."
+  else
+    # Clean up the placeholders if PROXY_MODE is 'none'
+    sed -e "/# PROXY_LABELS_PLACEHOLDER/d" \
+        -e "/# PROXY_NETWORK_PLACEHOLDER/d" \
+        "$compose_file" > "${compose_file}.tmp"
+
+    mv "${compose_file}.tmp" "$compose_file"
+  fi
+}
+
 function filesubstitution() {
   local env_file_path=$1
   local template_file=$2
@@ -253,6 +283,8 @@ function main() {
     update_docker_compose_build_args "$ENV_FILE_PATH"
     update_dockerfile_build_args
   fi
+
+  configure_proxy_mode
 
   echo ""
   log_success "Setup finished."
