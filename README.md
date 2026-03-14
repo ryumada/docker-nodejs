@@ -211,10 +211,11 @@ This repository includes a `.agents/` directory that optimizes AI coding assista
 ```
 .agents/
 ├── knowledge/          # Persistent reference documents (backup of global rules, etc.)
-├── rules/              # Always-on instructions injected into every conversation
+├── rules/              # Conditional instructions loaded by model decision
 │   ├── always-create-tests.md
 │   ├── file-signature-enforcement.md
 │   ├── how-to-scan-repository.md
+│   ├── phased-execution.md
 │   └── run-npm-command.md
 └── skills/             # On-demand capabilities loaded only when relevant
     ├── bash-orchestration/
@@ -250,7 +251,7 @@ When working with AI agents in this repository, your prompting style directly im
 |---|---|---|
 | Agent edits files | "Do it" / "Edit it directly" | Agent proceeds without asking |
 | Agent guides you | "Guide me" / "Just show me the code" | Skips file reads + tool overhead (~15% savings) |
-| Focused scope | "Only touch [setup.sh](cci:7://file:///home/ryumada/personal_projects/essentia/setup.sh:0:0-0:0)" | Prevents unnecessary REPO_MAP reads |
+| Focused scope | "Only touch `setup.sh`" | Prevents unnecessary REPO_MAP reads |
 | Phased work | "Let's do this in phases" | Keeps per-turn context small (critical for lightest LLM like Gemini Flash) |
 
 ### Cost Awareness
@@ -264,7 +265,7 @@ When working with AI agents in this repository, your prompting style directly im
 
 ### Best Practices
 
-1. **Be specific upfront** — "Fix the logging in [setup.sh](cci:7://file:///home/ryumada/personal_projects/essentia/setup.sh:0:0-0:0) line 45" is cheaper than "fix the logging" (avoids exploratory reads).
+1. **Be specific upfront** — "Fix the logging in `setup.sh` line 45" is cheaper than "fix the logging" (avoids exploratory reads).
 2. **Name the files** — If you know which files are involved, list them. This prevents the agent from scanning REPO_MAP.
 3. **Say "guide me" for simple edits** — Config changes, frontmatter updates, one-liners. You save ~15% tokens.
 4. **Say "do it" for complex changes** — Multi-file refactors, new features. The precision is worth the small overhead.
