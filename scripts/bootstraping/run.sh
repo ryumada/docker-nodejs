@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-set -e
 # Category: Entrypoint
 # Description: Helper script to run commands inside the 'app' service container.
 # Usage: ./scripts/bootstraping/run.sh <command>
 # Dependencies: docker, git
 
 # Detect Repository Owner to run non-root commands as that user
+set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)

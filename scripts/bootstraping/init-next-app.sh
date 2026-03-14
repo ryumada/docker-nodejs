@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-set -e
 # Category: Utility
 # Description: Helper script to initialize a Next.js app in a Docker volume root.
 # Usage: ./scripts/bootstraping/init-next-app.sh [args...]
 # Dependencies: docker, git
 
 # Detect Repository Owner to run non-root commands as that user
+set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)

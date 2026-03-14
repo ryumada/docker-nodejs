@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 # Category: Entrypoint
 # Description: Generates logical dependency trees for key entry points.
 # Usage: ./scripts/generate_app_tree.sh
@@ -8,7 +7,8 @@ set -e
 # ==============================================================================
 # 🚀 MAIN SCRIPT LOGIC
 # ==============================================================================
-
+# Detect Repository Owner to run non-root commands as that user
+set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 PROJECT_ROOT="$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)"

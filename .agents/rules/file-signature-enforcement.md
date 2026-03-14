@@ -1,6 +1,5 @@
 ---
 trigger: always_on
-category: Reference
 ---
 
 # 📝 PROTOCOL: FILE_SIGNATURE_ENFORCEMENT
@@ -10,11 +9,10 @@ category: Reference
 
 **A. Bash Scripts (`.sh`)**
 * **Line 1:** `#!/usr/bin/env bash`
-* **Line 2:** `set -e`
-* **Line 3:** `# Category: <Entrypoint|Utility|Config>`
-* **Line 4:** `# Description: <Concise summary of script function>`
-* **Line 5:** `# Usage: <e.g., ./script.sh [env]>`
-* **Line 6:** `# Dependencies: <Key binaries, e.g., docker, jq, git>`
+* **Line 2:** `# Category: <Entrypoint|Utility|Config>`
+* **Line 3:** `# Description: <Concise summary of script function>`
+* **Line 4:** `# Usage: <e.g., ./script.sh [env]>`
+* **Line 5:** `# Dependencies: <Key binaries, e.g., docker, jq, git>`
 
 **B. Python / Odoo (`.py`)**
 * **Line 1:** `# -*- coding: utf-8 -*-`

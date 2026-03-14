@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 # Category: Entrypoint
 # Description: Generates a REPO_MAP.md file representing the project structure and file signatures.
 # Usage: ./scripts/generate_map.sh [target_directory]
@@ -8,6 +7,7 @@ set -e
 # ==============================================================================
 
 # Resolve the directory where the script is located
+set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 
@@ -23,17 +23,17 @@ OUTPUT_FILE="${PROJECT_ROOT}/REPO_MAP.md"
 # CONFIGURATION
 # ==============================================================================
 
-# Directories to always include even if in .gitignore (e.g., "app" "docs")
+# Directories to always include even if in .gitignore (e.g., "docs")
 FORCE_INCLUDE=()
-# If we are at the GIT_ROOT, we might want to include "app"
-if [ "$PROJECT_ROOT" == "$GIT_ROOT" ]; then
-    FORCE_INCLUDE=("app")
-fi
+
+# Note: "app" is deliberately left out of FORCE_INCLUDE for the root map
+# to keep REPO_MAP.md concise. Run \`./scripts/generate_map.sh app\`
+# to generate a dedicated app/REPO_MAP.md.
 
 # Files or Patterns to ALWAYS exclude from the map, regardless of source.
 # Uses standard bash glob patterns.
 FORCE_EXCLUDE=(
-    ".agent"
+    ".agents"
     ".vscode"
     "node_modules"
     ".next"
@@ -138,6 +138,37 @@ executeCommand \
     "$command_check" \
     "Prerequisites found." \
     "Missing dependencies. Please install 'tree' and ensure 'git' is available."
+
+# 1.5 Auto-Generate Nested Maps (If running at root)
+# ------------------------------------------------------------------------------
+# If the script was called with NO arguments (defaulting to GIT_ROOT),
+# recursively trigger map generation for known nested architectures first.
+if [[ -z "$1" ]] || [[ "$PROJECT_ROOT" == "$GIT_ROOT" && "$1" == "." ]]; then
+    log_info "Root execution detected. Automatically generating known nested maps first..."
+
+    # Dynamically discover nested git repositories under app/
+    NESTED_TARGETS=()
+    if [ -d "${GIT_ROOT}/app" ]; then
+        while IFS= read -r git_dir; do
+            # Extract the app directory (parent of .git)
+            nested_dir="${git_dir%/.git}"
+            # Convert to relative path from GIT_ROOT
+            rel_path="${nested_dir#"${GIT_ROOT}/"}"
+            NESTED_TARGETS+=("$rel_path")
+        done < <(find "${GIT_ROOT}/app" -mindepth 2 -maxdepth 2 -type d -name ".git")
+    fi
+
+    if [ ${#NESTED_TARGETS[@]} -eq 0 ]; then
+        log_info "No nested git repositories found under app/. Skipping."
+    else
+        for nested_dir in "${NESTED_TARGETS[@]}"; do
+            log_info "Triggering generate_map for: ${nested_dir}"
+            # Re-execute this script as a subprocess targeting the nested dir
+            bash "${0}" "${GIT_ROOT}/${nested_dir}"
+        done
+    fi
+    log_info "Nested maps generated. Proceeding with root map generation..."
+fi
 
 # 2. Identify and Filter Files
 # ------------------------------------------------------------------------------
@@ -291,8 +322,8 @@ while read -r file; do
     filesize=$(du -h "$full_path" | cut -f1)
     echo "// Size: $filesize" >> "${OUTPUT_FILE}"
 
-    # Extract first 10 lines
-    head -n 10 "$full_path" >> "${OUTPUT_FILE}"
+    # Extract first 5 lines (Matching the 5-Line Signature Rule)
+    head -n 5 "$full_path" >> "${OUTPUT_FILE}"
     echo "\`\`\`" >> "${OUTPUT_FILE}"
     echo "" >> "${OUTPUT_FILE}"
 done < "$FILE_LIST_FILTERED"

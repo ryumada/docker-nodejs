@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-set -e
 # Category: Entrypoint
 # Description: Linting script to verify that project files adhere to the mandatory 5-line signature header protocol.
 # Usage: ./scripts/check_compliance.sh [--exclude-app]
 # Dependencies: git, grep, wc
 
 # Detect Repository Owner to run non-root commands as that user
+set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 PROJECT_ROOT=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)

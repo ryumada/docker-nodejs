@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-set -e
 # Category: Utility
 # Description: Script to update the .env file from .env.example while preserving existing values. It should be called automatically by the main setup.sh script.
 # Usage: ./scripts/update_env_file.sh [template_env_file] [backup_env_file]
 # Dependencies: git, cp, sed, awk
 
 # Detect Repository Owner to run non-root commands as that user
+set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)

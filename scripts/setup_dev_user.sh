@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-set -e
 # Category: Utility
 # Description: Script to create/configure a development user with specific UID/GID in the container environment.
 # Usage: sudo ./scripts/setup_dev_user.sh <env_file_path>
 # Dependencies: groupadd, useradd, id, getent
 
 # Detect Repository Owner to run non-root commands as that user
+set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)

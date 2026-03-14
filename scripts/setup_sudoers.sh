@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-set -e
 # Category: Entrypoint
 # Description: Configures sudoers rules for chown and setup scripts to allow non-password execution.
 # Usage: sudo ./scripts/setup_sudoers.sh
 # Dependencies: sudo, git, grep, chmod, awk
 
 # Detect Repository Owner to run non-root commands as that user
+set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
 PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)

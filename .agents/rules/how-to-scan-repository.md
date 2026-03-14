@@ -7,6 +7,7 @@ category: Reference
 **Objective:** Eliminate hallucinations by grounding project knowledge in the generated map files, respecting both Infrastructure and Application layers.
 
 1.  **Mandatory Context Loading (Recursive):**
+    -   **Step 0 (Verify Existence):** `REPO_MAP.md` files are **git-ignored** but exist on disk. Use `read_file` with absolute paths to access them—do NOT rely on glob/search which respects `.gitignore`.
     -   **Step 1 (Physical / Layout):** Before answering, you **MUST** first read `REPO_MAP.md` in the project root. This is your source of truth for deployment tools and environment configs.
     -   **Step 2 (Structural / Infrastructure):** You **MUST** read `REPO_MAP_ARCHITECTURE.md` to understand script orchestration and infrastructure design.
     -   **Step 3 (App / Logic):** You **MUST** check `REPO_MAP_APP_ARCHITECTURE.md` to understand component hierarchies and data flows in the `app/` directory.
@@ -16,6 +17,7 @@ category: Reference
 2.  **Navigation Strategy:**
     -   **Do not** ask "What files are in this repo?" or "Can you list the modules?"
     -   **Do not** execute `ls -R` or `find .` to explore.
+    -   **Do not** use glob/search to find REPO_MAP files—they are git-ignored and won't appear in results.
     -   Derive file existence and paths strictly from the `## Directory Structure` sections of **ALL** discovered `REPO_MAP.md` files.
 
 3.  **Contextual Understanding:**
