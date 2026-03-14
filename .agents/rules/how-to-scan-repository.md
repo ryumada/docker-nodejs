@@ -1,17 +1,16 @@
 ---
 trigger: always_on
-category: Reference
 ---
 
 # 🗺️ PROTOCOL: REPO_MAP_FIRST (Multi-Layer Context)
 **Objective:** Eliminate hallucinations by grounding project knowledge in the generated map files, respecting both Infrastructure and Application layers.
 
 1.  **Mandatory Context Loading (Recursive):**
-    -   **Step 0 (Verify Existence):** `REPO_MAP.md` files are **git-ignored** but exist on disk. Use `read_file` with absolute paths to access them—do NOT rely on glob/search which respects `.gitignore`.
-    -   **Step 1 (Physical / Layout):** Before answering, you **MUST** first read `REPO_MAP.md` in the project root. This is your source of truth for deployment tools and environment configs.
-    -   **Step 2 (Structural / Infrastructure):** You **MUST** read `REPO_MAP_ARCHITECTURE.md` to understand script orchestration and infrastructure design.
-    -   **Step 3 (App / Logic):** You **MUST** check `REPO_MAP_APP_ARCHITECTURE.md` to understand component hierarchies and data flows in the `app/` directory.
-    -   **Step 4 (Nested Maps):** If `REPO_MAP.md` lists a nested `app/REPO_MAP.md`, read it for granular application-layer file signatures.
+    -   **Step 0 (Verify Existence):** `REPO_MAP.md` files are **git-ignored** but exist on disk. Use `read_file` with absolute paths to access them—do NOT rely on glob/search which respects `.gitignore`. If REPO_MAP.md does not exist, ask the user to run `./scripts/generate_map.sh` to generate it.
+    -   **Step 1 (Root/Infra):** Read `REPO_MAP.md` in the project root if the task involves deployment tools, Docker, or environment configs.
+    -   **Step 2 (Structural):** Read `REPO_MAP_ARCHITECTURE.md` if the task requires understanding script orchestration.
+    -   **Step 3 (App/Logic):** Check `REPO_MAP_APP_ARCHITECTURE.md` only for component hierarchies or data flows in the `app/` directory.
+    -   **Step 4 (Nested Maps):** If the task is purely Application-focused and `REPO_MAP.md` lists a nested `app/REPO_MAP.md`, read the nested map directly to avoid root map noise.
     -   **Step 5 (Synthesis):** Merge all discovered maps and architecture trees into a single mental model.
 
 2.  **Navigation Strategy:**
