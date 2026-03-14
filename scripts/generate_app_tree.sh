@@ -11,17 +11,22 @@
 set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
-PROJECT_ROOT="$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)"
-APP_PATH=$(find "${PROJECT_ROOT}/app" -maxdepth 2 -name src -type d | head -n 1)
+# Only use sudo if the current user differs from the file owner
+if [ "$(whoami)" = "$CURRENT_DIR_USER" ]; then
+  PATH_TO_ROOT_REPOSITORY=$(git -C "$CURRENT_DIR" rev-parse --show-toplevel)
+else
+  PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)
+fi
+APP_PATH=$(find "${PATH_TO_ROOT_REPOSITORY}/app" -maxdepth 2 -name src -type d | head -n 1)
 APP_NAME=$(basename "$(dirname "$APP_PATH")")
 GEN_SCRIPT="${CURRENT_DIR}/utility/generate_tree.py"
-APP_ARCH="${PROJECT_ROOT}/REPO_MAP_APP_ARCHITECTURE.md"
-INFRA_ARCH="${PROJECT_ROOT}/REPO_MAP_ARCHITECTURE.md"
+APP_ARCH="${PATH_TO_ROOT_REPOSITORY}/REPO_MAP_APP_ARCHITECTURE.md"
+INFRA_ARCH="${PATH_TO_ROOT_REPOSITORY}/REPO_MAP_ARCHITECTURE.md"
 
 # Ensure we are in the project root for consistent path resolution
-cd "$PROJECT_ROOT"
+cd "$PATH_TO_ROOT_REPOSITORY"
 
-REPO_MAP="${PROJECT_ROOT}/REPO_MAP.md"
+REPO_MAP="${PATH_TO_ROOT_REPOSITORY}/REPO_MAP.md"
 REACHED_FILES=$(mktemp)
 
 if [ ! -f "$REPO_MAP" ]; then

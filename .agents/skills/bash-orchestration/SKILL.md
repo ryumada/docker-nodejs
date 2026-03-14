@@ -16,9 +16,15 @@ Use this skill when creating or modifying bash scripts to ensure consistency wit
 set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
-PATH_TO_ODOO=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
-SERVICE_NAME=$(basename "$PATH_TO_ODOO")
-REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ODOO")
+# Only use sudo if the current user differs from the file owner
+if [ "$(whoami)" = "$CURRENT_DIR_USER" ]; then
+  PATH_TO_ROOT_REPOSITORY=$(git -C "$CURRENT_DIR" rev-parse --show-toplevel)
+else
+  PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)
+fi
+
+SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
+REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
 
 # Configuration
 ENV_FILE=".env"

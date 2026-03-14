@@ -8,7 +8,12 @@
 set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
-PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+# Only use sudo if the current user differs from the file owner
+if [ "$(whoami)" = "$CURRENT_DIR_USER" ]; then
+  PATH_TO_ROOT_REPOSITORY=$(git -C "$CURRENT_DIR" rev-parse --show-toplevel)
+else
+  PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)
+fi
 SERVICE_NAME=$(basename "$PATH_TO_ROOT_REPOSITORY")
 REPOSITORY_OWNER=$(stat -c '%U' "$PATH_TO_ROOT_REPOSITORY")
 
@@ -69,7 +74,6 @@ esac
 # We determine the script's own directory, then ask git for the repo root from there,
 # running the command as the original user.
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-PATH_TO_ROOT_REPOSITORY=$(sudo -u "${SUDO_USER:-$(whoami)}" git -C "$SCRIPT_DIR" rev-parse --show-toplevel)
 if [ -z "$PATH_TO_ROOT_REPOSITORY" ]; then
     log_error "Could not determine the root of the git repository. Make sure you are running this script from within the repository."
     exit 1

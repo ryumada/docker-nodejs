@@ -10,10 +10,15 @@
 set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
+# Only use sudo if the current user differs from the file owner
+if [ "$(whoami)" = "$CURRENT_DIR_USER" ]; then
+  PATH_TO_ROOT_REPOSITORY=$(git -C "$CURRENT_DIR" rev-parse --show-toplevel)
+else
+  PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)
+fi
 
 # Resolve the Project Root (Default to git toplevel, allow override via ARG1)
-GIT_ROOT=$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)
-TARGET_DIR="${1:-$GIT_ROOT}"
+TARGET_DIR="${1:-$PATH_TO_ROOT_REPOSITORY}"
 PROJECT_ROOT=$(readlink -f "$TARGET_DIR")
 
 # Define Output File
@@ -141,21 +146,21 @@ executeCommand \
 
 # 1.5 Auto-Generate Nested Maps (If running at root)
 # ------------------------------------------------------------------------------
-# If the script was called with NO arguments (defaulting to GIT_ROOT),
+# If the script was called with NO arguments (defaulting to PATH_TO_ROOT_REPOSITORY),
 # recursively trigger map generation for known nested architectures first.
-if [[ -z "$1" ]] || [[ "$PROJECT_ROOT" == "$GIT_ROOT" && "$1" == "." ]]; then
+if [[ -z "$1" ]] || [[ "$PROJECT_ROOT" == "$PATH_TO_ROOT_REPOSITORY" && "$1" == "." ]]; then
     log_info "Root execution detected. Automatically generating known nested maps first..."
 
     # Dynamically discover nested git repositories under app/
     NESTED_TARGETS=()
-    if [ -d "${GIT_ROOT}/app" ]; then
+    if [ -d "${PATH_TO_ROOT_REPOSITORY}/app" ]; then
         while IFS= read -r git_dir; do
             # Extract the app directory (parent of .git)
             nested_dir="${git_dir%/.git}"
-            # Convert to relative path from GIT_ROOT
-            rel_path="${nested_dir#"${GIT_ROOT}/"}"
+            # Convert to relative path from PATH_TO_ROOT_REPOSITORY
+            rel_path="${nested_dir#"${PATH_TO_ROOT_REPOSITORY}/"}"
             NESTED_TARGETS+=("$rel_path")
-        done < <(find "${GIT_ROOT}/app" -mindepth 2 -maxdepth 2 -type d -name ".git")
+        done < <(find "${PATH_TO_ROOT_REPOSITORY}/app" -mindepth 2 -maxdepth 2 -type d -name ".git")
     fi
 
     if [ ${#NESTED_TARGETS[@]} -eq 0 ]; then
@@ -164,7 +169,7 @@ if [[ -z "$1" ]] || [[ "$PROJECT_ROOT" == "$GIT_ROOT" && "$1" == "." ]]; then
         for nested_dir in "${NESTED_TARGETS[@]}"; do
             log_info "Triggering generate_map for: ${nested_dir}"
             # Re-execute this script as a subprocess targeting the nested dir
-            bash "${0}" "${GIT_ROOT}/${nested_dir}"
+            bash "${0}" "${PATH_TO_ROOT_REPOSITORY}/${nested_dir}"
         done
     fi
     log_info "Nested maps generated. Proceeding with root map generation..."
@@ -274,7 +279,7 @@ if [[ -n "$NESTED_MAPS" ]]; then
     echo -e "\n## Nested Maps" >> "${OUTPUT_FILE}"
     echo "The following subdirectories have their own detailed repository maps:" >> "${OUTPUT_FILE}"
     while read -r map_path; do
-        rel_map_path=${map_path#$GIT_ROOT/}
+        rel_map_path=${map_path#$PATH_TO_ROOT_REPOSITORY/}
         map_dir=$(dirname "$rel_map_path")
         echo "- [$map_dir](file://$map_path)" >> "${OUTPUT_FILE}"
     done <<< "$NESTED_MAPS"

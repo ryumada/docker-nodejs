@@ -8,7 +8,12 @@
 set -e
 CURRENT_DIR=$(dirname "$(readlink -f "$0")")
 CURRENT_DIR_USER=$(stat -c '%U' "$CURRENT_DIR")
-PROJECT_ROOT=$(sudo -u "$CURRENT_DIR_USER" git -C "$(dirname "$(readlink -f "$0")")" rev-parse --show-toplevel)
+# Only use sudo if the current user differs from the file owner
+if [ "$(whoami)" = "$CURRENT_DIR_USER" ]; then
+  PATH_TO_ROOT_REPOSITORY=$(git -C "$CURRENT_DIR" rev-parse --show-toplevel)
+else
+  PATH_TO_ROOT_REPOSITORY=$(sudo -u "$CURRENT_DIR_USER" git -C "$CURRENT_DIR" rev-parse --show-toplevel)
+fi
 
 # --- Logging Functions & Colors ---
 readonly COLOR_RESET="\033[0m"
@@ -70,7 +75,7 @@ log_info "Starting Compliance Audit..."
 
 log_info "Collecting files from REPO_MAP.md..."
 
-REPO_MAP="${PROJECT_ROOT}/REPO_MAP.md"
+REPO_MAP="${PATH_TO_ROOT_REPOSITORY}/REPO_MAP.md"
 
 if [ ! -f "$REPO_MAP" ]; then
     log_error "REPO_MAP.md not found at project root. Please run scripts/generate_map.sh first."
@@ -86,8 +91,8 @@ FILES=$(grep "^### " "$REPO_MAP" | sed 's/^### //')
 
 # 3. Process files
 for rel_file in $FILES; do
-    # Ensure path is relative to PROJECT_ROOT
-    rel_file=${rel_file#$PROJECT_ROOT/}
+    # Ensure path is relative to PATH_TO_ROOT_REPOSITORY
+    rel_file=${rel_file#$PATH_TO_ROOT_REPOSITORY/}
     # Remove leading slash if it exists
     rel_file=${rel_file#/}
 
