@@ -1,6 +1,6 @@
 ---
-trigger: always_on
-category: Reference
+trigger: model_decision
+description: Use when running npm, npx, or Node.js commands. All commands must go through the run.sh wrapper script.
 ---
 
 To run npm command please use the run.sh script located at:

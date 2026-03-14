@@ -1,5 +1,6 @@
 ---
-trigger: always_on
+trigger: model_decision
+description: Use when the task requires understanding project structure or locating files. Guides REPO_MAP-first navigation strategy.
 ---
 
 # 🗺️ PROTOCOL: REPO_MAP_FIRST (Multi-Layer Context)

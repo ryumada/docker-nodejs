@@ -240,3 +240,39 @@ cp .agents/knowledge/gemini-global-rules.md ~/.gemini/GEMINI.md
 
 This configures the agent for concise output, token conservation, and structured communication. A backup is maintained in `.agents/knowledge/gemini-global-rules.md`.
 
+## Token-Efficient Prompting Guide
+
+When working with AI agents in this repository, your prompting style directly impacts token consumption and cost. Follow these patterns to stay efficient.
+
+### Quick Reference
+
+| You Want | Say This | Why It Saves Tokens |
+|---|---|---|
+| Agent edits files | "Do it" / "Edit it directly" | Agent proceeds without asking |
+| Agent guides you | "Guide me" / "Just show me the code" | Skips file reads + tool overhead (~15% savings) |
+| Focused scope | "Only touch [setup.sh](cci:7://file:///home/ryumada/personal_projects/essentia/setup.sh:0:0-0:0)" | Prevents unnecessary REPO_MAP reads |
+| Phased work | "Let's do this in phases" | Keeps per-turn context small (critical for lightest LLM like Gemini Flash) |
+
+### Cost Awareness
+
+| Agent Action | Token Cost | When It Happens |
+|---|---|---|
+| Reading a file | ~250 tokens per 1KB | Every `view_file` call |
+| Reading nested app REPO_MAP | ~20,000 tokens | When agent scans app structure |
+| Editing a file | ~same as guiding | Code content is same size either way |
+| Asking a clarifying question | ~50-100 tokens | Cheap — saves expensive wrong turns |
+
+### Best Practices
+
+1. **Be specific upfront** — "Fix the logging in [setup.sh](cci:7://file:///home/ryumada/personal_projects/essentia/setup.sh:0:0-0:0) line 45" is cheaper than "fix the logging" (avoids exploratory reads).
+2. **Name the files** — If you know which files are involved, list them. This prevents the agent from scanning REPO_MAP.
+3. **Say "guide me" for simple edits** — Config changes, frontmatter updates, one-liners. You save ~15% tokens.
+4. **Say "do it" for complex changes** — Multi-file refactors, new features. The precision is worth the small overhead.
+5. **Use phased execution for large tasks** — Say "let's phase this" to trigger the phased-execution rule. Essential for Gemini Flash.
+6. **Batch related requests** — "Add signatures to these 3 files: X, Y, Z" in one prompt beats 3 separate conversations.
+
+---
+
+Copyright © 2025 TILabs and ryumada. All Rights Reserved.
+
+Licensed under the [MIT](LICENSE) license.

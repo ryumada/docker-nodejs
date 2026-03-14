@@ -1,6 +1,6 @@
 ---
-trigger: always_on
-category: Reference
+trigger: model_decision
+description: Use after creating or modifying application code. Ensures tests are written and passing.
 ---
 
 # Test Creation

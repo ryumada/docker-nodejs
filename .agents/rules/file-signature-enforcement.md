@@ -1,5 +1,6 @@
 ---
-trigger: always_on
+trigger: model_decision
+description: Use when creating new files or editing file headers. Defines the mandatory 5-line signature format per file type.
 ---
 
 # 📝 PROTOCOL: FILE_SIGNATURE_ENFORCEMENT
