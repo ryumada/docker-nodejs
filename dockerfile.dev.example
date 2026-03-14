@@ -14,6 +14,9 @@ USER node
 
 WORKDIR /usr/src/app
 
+# Hardening: Disable Next.js telemetry
+ENV NEXT_TELEMETRY_DISABLED=1
+
 # Copy package files first to leverage Docker cache
 COPY --chown=node:node app/${APP_NAME}/package.json app/${APP_NAME}/package-lock.json ./
 RUN npm ci

@@ -8,6 +8,10 @@ USER node
 
 WORKDIR /usr/src/app
 
+# Hardening: Set production environment and disable Next.js telemetry
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
 COPY --chown=node:node app/${APP_NAME}/package.json app/${APP_NAME}/package-lock.json ./
 RUN npm ci
 
@@ -21,6 +25,10 @@ FROM node:${DOCKER_NODEJS_TAG} AS runner
 USER node
 
 WORKDIR /usr/src/app
+
+# Hardening: Set production environment and disable Next.js telemetry
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Copy only necessary files from the builder stage
 COPY --from=builder --chown=node:node /usr/src/app/.next ./.next
