@@ -141,7 +141,7 @@ function configure_proxy_mode() {
     log_info "Configuring Traefik proxy mode..."
 
     # Define the Traefik labels block using a Heredoc.
-    # We allow the shell to expand the variables here so they are hardcoded 
+    # We allow the shell to expand the variables here so they are hardcoded
     # in the final compose file, matching the repository's substitution pattern.
     export LABELS_BLOCK
     LABELS_BLOCK=$(cat <<EOF
@@ -169,6 +169,10 @@ EOF
       }
     ' "$compose_file" > "${compose_file}.tmp"
     mv "${compose_file}.tmp" "$compose_file"
+
+    # Clean up the environment
+    unset LABELS_BLOCK
+    unset PROXY_NETWORK_LINE
 
     # Append the external proxy network definition to the bottom.
     printf "\n  ${PROXY_NETWORK}:\n    external: true\n" >> "$compose_file"
