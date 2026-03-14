@@ -3,6 +3,8 @@
 # Description: Git ignore file to exclude files and directories from version control.
 # Maintainer: ryumada
 
+.vscode/
+
 app/*
 !app/README.md
 
