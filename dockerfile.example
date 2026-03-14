@@ -39,4 +39,5 @@ COPY --from=builder --chown=node:node /usr/src/app/next.config.mjs ./next.config
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+# Start the application directly to ensure OS signals are passed for graceful shutdowns
+CMD ["./node_modules/.bin/next", "start"]
