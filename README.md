@@ -201,3 +201,42 @@ Regenerates the logical dependency trees (`REPO_MAP_*_ARCHITECTURE.md`). This sc
 -   `scripts/`: Contains helper scripts for environment updates and deployment tasks.
 -   `setup.sh`: Main configuration automation script.
 -   `docker-compose.yml.example` & `dockerfile.*.example`: Templates used by `setup.sh` to generate actual configuration files.
+
+## AI Agent Integration
+
+This repository includes a `.agents/` directory that optimizes AI coding assistants (Antigravity, Gemini, Claude) for **token-efficient** operation across both Infrastructure and Application layers.
+
+### Directory Structure
+
+```
+.agents/
+├── knowledge/          # Persistent reference documents (backup of global rules, etc.)
+├── rules/              # Always-on instructions injected into every conversation
+│   ├── always-create-tests.md
+│   ├── file-signature-enforcement.md
+│   ├── how-to-scan-repository.md
+│   └── run-npm-command.md
+└── skills/             # On-demand capabilities loaded only when relevant
+    ├── bash-orchestration/
+    ├── frontend-design/
+    └── nextjs-appwrite-troubleshooting/
+```
+
+### Key Design Principles
+
+1. **Layered Context Loading** — The agent only reads maps relevant to the current task (Infrastructure vs Application), avoiding unnecessary token consumption.
+2. **5-Line File Signatures** — Every file has a machine-readable header captured by `generate_map.sh`, enabling rapid codebase navigation without reading full files.
+3. **Nested "Russian Doll" Maps** — The root `REPO_MAP.md` covers DevOps files (~30 files), while `app/<APP_NAME>/REPO_MAP.md` covers the application separately. Loaded on-demand.
+4. **Skills over Global Rules** — Heavy templates (e.g., bash boilerplate) are stored as skills and loaded only when needed, instead of being injected into every conversation.
+
+### Global Rules Setup
+
+To enable AI agent optimizations across all repositories, create a global rules file:
+
+```bash
+mkdir -p ~/.gemini
+cp .agents/knowledge/gemini-global-rules.md ~/.gemini/GEMINI.md
+```
+
+This configures the agent for concise output, token conservation, and structured communication. A backup is maintained in `.agents/knowledge/gemini-global-rules.md`.
+
