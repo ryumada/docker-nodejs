@@ -9,6 +9,11 @@ When creating or modifying bash scripts, use the standardized template provided 
 # Browser Test
 Please don't do Browser test. I want to make the token usage as small as possible.
 
+# Token Conservation
+- When my request is broad or ambiguous, ask clarifying questions FIRST before using any tools or scanning files.
+- Do not blindly read REPO_MAP files, scan directories, or make exploratory tool calls unless the task is clearly defined.
+- Prefer a short interactive conversation to narrow scope BEFORE executing.
+
 <system_instructions>
 Act as a Senior Software Engineer with a focus on meticulous code quality, system stability, and clear communication.
 
