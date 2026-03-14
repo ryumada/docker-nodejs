@@ -68,10 +68,15 @@ function update_docker_compose_build_args() {
   log_info "Variables to pass as build args: $LIST_BUILDER_ENV"
 
   local BUILD_ARGS_YAML_FOR_AWK
-  BUILD_ARGS_YAML_FOR_AWK=$(echo "$LIST_BUILDER_ENV" | tr ',' '\n' | \
-    sed -e 's/.*/        &: ${&}/' | \
-    paste -sd'\n' - | \
-    sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e 's/\n/\\n/g')
+  # Use awk to format the build args block. This avoids non-portable sed escaping of newlines.
+  BUILD_ARGS_YAML_FOR_AWK=$(echo "$LIST_BUILDER_ENV" | tr ',' '\n' | awk '
+    {
+      line = "        " $0 ": ${" $0 "}"
+      gsub(/\\/, "\\\\", line)
+      gsub(/"/, "\\\"", line)
+      if (NR > 1) { printf "\\n" }
+      printf "%s", line
+    }')
 
   local FULL_BUILD_BLOCK_FOR_AWK
   FULL_BUILD_BLOCK_FOR_AWK=$(printf "    build:\\n      context: .\\n      args:\\n%s" "${BUILD_ARGS_YAML_FOR_AWK}")
@@ -104,7 +109,14 @@ function update_dockerfile_build_args() {
     fi
   done
 
-  ESCAPED_DOCKERFILE_BLOCK=$(echo -e "$DOCKERFILE_ARGS_ENV_BLOCK" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e 's/\n/\\n/g')
+  # Escape backslashes and quotes, and convert actual newlines to \n characters for awk variable injection.
+  ESCAPED_DOCKERFILE_BLOCK=$(printf "%b" "$DOCKERFILE_ARGS_ENV_BLOCK" | awk '
+    {
+      gsub(/\\/, "\\\\")
+      gsub(/"/, "\\\"")
+      if (NR > 1) { printf "\\n" }
+      printf "%s", $0
+    }')
 
   awk -v block="${ESCAPED_DOCKERFILE_BLOCK}" '
     BEGIN { flag=0 }
@@ -128,26 +140,43 @@ function configure_proxy_mode() {
   if [[ "$PROXY_MODE" == "traefik" ]]; then
     log_info "Configuring Traefik proxy mode..."
 
-    # Define the Traefik labels block (YAML formatted)
-    local labels_block="    labels:\n      - \"traefik.enable=true\"\n      - \"traefik.http.routers.\${APP_NAME}.rule=Host(\\\`\${DOMAIN}\\\`)\"\n      - \"traefik.http.routers.\${APP_NAME}.entrypoints=websecure\"\n      - \"traefik.http.routers.\${APP_NAME}.tls.certresolver=\${TRAEFIK_CERTRESOLVER}\"\n      - \"traefik.http.services.\${APP_NAME}.loadbalancer.server.port=\${PORT}\""
+    # Define the Traefik labels block using a Heredoc.
+    # We allow the shell to expand the variables here so they are hardcoded 
+    # in the final compose file, matching the repository's substitution pattern.
+    export LABELS_BLOCK
+    LABELS_BLOCK=$(cat <<EOF
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${APP_NAME}.rule=Host(\`${DOMAIN}\`)"
+      - "traefik.http.routers.${APP_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${APP_NAME}.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
+      - "traefik.http.services.${APP_NAME}.loadbalancer.server.port=${PORT}"
+EOF
+)
+    export PROXY_NETWORK_LINE="      - ${PROXY_NETWORK}"
 
-    # Inject labels and the secondary proxy network
-    sed -e "s|# PROXY_LABELS_PLACEHOLDER|${labels_block}|g" \
-        -e "s|# PROXY_NETWORK_PLACEHOLDER|- \${PROXY_NETWORK}|g" \
-        "$compose_file" > "${compose_file}.tmp"
-
+    # Use awk to inject the block and the network placeholder.
+    # Accessing variables via ENVIRON is the most robust cross-platform approach.
+    awk '
+      {
+        if ($0 ~ /# PROXY_LABELS_PLACEHOLDER/) {
+          print ENVIRON["LABELS_BLOCK"]
+        } else if ($0 ~ /# PROXY_NETWORK_PLACEHOLDER/) {
+          print ENVIRON["PROXY_NETWORK_LINE"]
+        } else {
+          print $0
+        }
+      }
+    ' "$compose_file" > "${compose_file}.tmp"
     mv "${compose_file}.tmp" "$compose_file"
 
-    # Append the external proxy network definition to the bottom of the compose file
-    echo -e "\n  \${PROXY_NETWORK}:\n    external: true" >> "$compose_file"
+    # Append the external proxy network definition to the bottom.
+    printf "\n  ${PROXY_NETWORK}:\n    external: true\n" >> "$compose_file"
 
     log_success "Traefik configuration injected successfully."
   else
-    # Clean up the placeholders if PROXY_MODE is 'none'
-    sed -e "/# PROXY_LABELS_PLACEHOLDER/d" \
-        -e "/# PROXY_NETWORK_PLACEHOLDER/d" \
-        "$compose_file" > "${compose_file}.tmp"
-
+    # Clean up the placeholders if PROXY_MODE is not 'traefik'
+    awk '!/# PROXY_LABELS_PLACEHOLDER/ && !/# PROXY_NETWORK_PLACEHOLDER/' "$compose_file" > "${compose_file}.tmp"
     mv "${compose_file}.tmp" "$compose_file"
   fi
 }
@@ -244,11 +273,23 @@ function main() {
     filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.example" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
     filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator"
 
-    # Add volume mount for development
-    # The second volume for /usr/src/app/node_modules is an anonymous volume.
-    # It prevents the host's empty node_modules from overwriting the container's node_modules.
-    sed -i '/build:/a \    volumes:\n      - ./app/${APP_NAME}:/usr/src/app\n      - /usr/src/app/node_modules' "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
-    sed -i 's/command: npm start/command: npm run dev/' "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+    # Add volume mount for development.
+    # We use awk to handle the multi-line injection and command update portably.
+    local volumes_block="    volumes:
+      - ./app/\${APP_NAME}:/usr/src/app
+      - /usr/src/app/node_modules"
+
+    awk -v block="$volumes_block" '
+      {
+        print $0
+        if ($0 ~ /^[[:space:]]*build: \.$/) {
+          print block
+        }
+      }
+    ' "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml" | \
+    sed "s/command: npm start/command: npm run dev/" > "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.tmp"
+
+    mv "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.tmp" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
 
     log_success "Development setup: Added volume mount and updated command in docker-compose.yml."
 
