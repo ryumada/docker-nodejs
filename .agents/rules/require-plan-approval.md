@@ -1,9 +1,6 @@
 ---
-trigger: model_decision
+trigger: always_on
 description: Use whenever creating or modifying an implementation plan to prevent premature code execution.
-title: Require Plan Approval
-category: Rules
-context: All Layers
 ---
 
 # 🛑 Mandatory Rule: Require Plan Approval Before Execution

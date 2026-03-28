@@ -42,9 +42,8 @@ if [ $# -eq 0 ]; then
 fi
 
 # Execute the command inside the running container
-# -T disables pseudo-tty allocation (useful for some automation, but for interactive usage we might want basic exec)
-# But standard 'exec' is interactive if you don't redirect stdin.
-# Let's just use simple arguments forwarding.
+# Always use -T to prevent hanging in non-interactive contexts (e.g., AI agent execution)
 
 echo "Running in container '$SERVICE_NAME': $*"
-docker compose -f "$DOCKER_COMPOSE_FILE" exec "$SERVICE_NAME" "$@"
+# shellcheck disable=SC2086
+docker compose -f "$DOCKER_COMPOSE_FILE" exec -T "$SERVICE_NAME" "$@"
