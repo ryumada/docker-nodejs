@@ -22,3 +22,4 @@ package*.json
 REPO_MAP_APP_ARCHITECTURE.md
 REPO_MAP_ARCHITECTURE.md
 REPO_MAP.md
+exports/*
