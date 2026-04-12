@@ -13,9 +13,22 @@ context: Root Repository
 3. **Follow Standard Rules**: All active instructions reside in the `.agents/rules/` directory.
 
 ## Core Checklist
-- [ ] 5-Line Signatures mandatory for all files.
-- [ ] No browser testing (use logs and build status).
-- [ ] Use `./scripts/bootstraping/run.sh` for npm commands.
-- [ ] For design rules see `.agents/skills/frontend-design/SKILL.md`.
+- 5-Line Signatures mandatory for all files.
+- No browser testing (use logs and build status).
+- Use `./scripts/bootstraping/run.sh` for npm commands.
+- For design rules see `.agents/skills/frontend-design/SKILL.md`.
 
-Refer to `.agents/rules/` for detailed protocol enforcement.
+## Example
+```yaml
+Task(
+  description="Load rule",
+  prompt="/load .agents/rules/how-to-scan-repository.md",
+  subagent_type="explore"
+)
+```
+
+## References
+- Lint command: `npm run lint`
+- Type‑check command: `npm run typecheck`
+
+*Centralizing rules in AGENTS.md reduces token usage by avoiding repeated inclusion of the same protocol text across multiple agents and tasks.*
