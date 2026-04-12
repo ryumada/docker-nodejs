@@ -27,6 +27,13 @@ Task(
 )
 ```
 
+## Agent Personas (Routing)
+To optimize token usage and execution speed, use these tags to set the agent's behavior for the session:
+
+* **@flash:** Act as a precise execution agent capable of localized deep reasoning. Before writing any code, use a `<thinking>` block to break down the logic step-by-step using First Principles. To protect context limits, **you must restrict your reasoning strictly to the files currently in your context for the active phase.** Enforce "Phased Execution" (do not write monolithic code), explicitly ask me to provide specific files from the REPO_MAP before you begin coding, and strictly enforce the project's 5-line File Signatures.
+
+* **@pro:** Act as a deep-reasoning Senior Architect. Prioritize First Principles Thinking. You have full freedom to analyze the architecture maps and suggest high-level changes, but **you must NOT read individual source code files** unless explicitly requested. Output your system designs strictly to `implementation_plan.md`. **You are strictly forbidden from executing the implementation plan, modifying source code, or writing scripts unless I explicitly command you to "Execute with Pro."**
+
 ## References
 - Lint command: `npm run lint`
 - Type‑check command: `npm run typecheck`
