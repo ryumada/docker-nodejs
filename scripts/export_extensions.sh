@@ -50,16 +50,16 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 
     # Method 1: Download from Marketplace
     URL="https://marketplace.visualstudio.com/_apis/public/gallery/publishers/${PUBLISHER}/vsextensions/${EXTENSION}/${VERSION}/vspackage"
-    
+
     log_info "Attempting to download from Marketplace..."
     if curl -sL -f -o "$TARGET_PATH" "$URL"; then
       log_success "Successfully exported ${FILE_NAME} (Marketplace)"
     else
       log_warn "Marketplace download failed for ${ID}. Checking local installation..."
-      
+
       # Method 2: Check local installation (approximate folder name)
       LOCAL_EXT_DIR=$(find ~/.vscode/extensions/ -maxdepth 1 -name "${PUBLISHER}.${EXTENSION}-${VERSION}*" | head -n 1)
-      
+
       if [[ -d "$LOCAL_EXT_DIR" ]]; then
         log_info "Found local extension folder: $(basename "$LOCAL_EXT_DIR"). Attempting to package..."
         # Note: Packaging locally requires 'vsce'. We use npx.
