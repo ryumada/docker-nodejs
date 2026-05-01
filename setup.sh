@@ -319,17 +319,63 @@ function main() {
     update_dockerfile_build_args
     # typically no build args needed for init, but good to keep consistent if we added any
 
-  else
-    log_info "Setting up for PRODUCTION mode (standard build)..."
+  elif [ "$DEPLOYMENT_MODE" == "builder" ]; then
+    log_info "Setting up for BUILDER mode..."
     filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile"
     filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.example" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
     filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator.example" "$PATH_TO_ROOT_REPOSITORY/dockerfile.lockfile-generator"
 
     update_docker_compose_build_args "$ENV_FILE_PATH"
     update_dockerfile_build_args
-  fi
+    configure_proxy_mode
 
-  configure_proxy_mode
+    log_info "Starting Automated Build..."
+    if sudo -u "$REPOSITORY_OWNER" docker compose build; then
+      log_success "Build completed successfully."
+
+      if [ -n "$DOCKER_PUSHPULL_USERNAME" ] && [ -n "$DOCKER_PUSH_KEY" ] && [ -n "$IMAGE_NAME" ] && [ "$IMAGE_NAME" != "enter_image_name" ]; then
+        log_info "Logging into registry..."
+        if sudo -u "$REPOSITORY_OWNER" docker login "$DOCKER_REGISTRY_PROVIDER" -u "$DOCKER_PUSHPULL_USERNAME" -p "$DOCKER_PUSH_KEY"; then
+          log_info "Pushing image: $IMAGE_NAME"
+          if sudo -u "$REPOSITORY_OWNER" docker push "$IMAGE_NAME"; then
+            log_success "Image pushed successfully!"
+          else
+            log_error "Failed to push image."
+          fi
+        else
+          log_error "Registry login failed."
+        fi
+      else
+        log_warn "Skipping push: Credentials or IMAGE_NAME not configured correctly in .env."
+      fi
+    else
+      log_error "Build failed."
+    fi
+
+  elif [ "$DEPLOYMENT_MODE" == "production" ]; then
+    log_info "Setting up for PRODUCTION mode (Pull-only)..."
+
+    # Validation
+    if [ -z "$IMAGE_NAME" ] || [ "$IMAGE_NAME" == "enter_image_name" ]; then
+      log_error "IMAGE_NAME is not configured in .env. Production mode requires a valid image name to pull."
+      exit 1
+    fi
+
+    # Skip Dockerfile, only prepare docker-compose
+    filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.example" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+    configure_proxy_mode
+
+    echo ""
+    log_success "Production files prepared."
+    log_info "Next steps for deployment:"
+    log_info "1. (Optional) Login to registry: docker login $DOCKER_REGISTRY_PROVIDER"
+    log_info "2. Pull the latest image: docker compose pull"
+    log_info "3. Start the application: docker compose up -d"
+
+  else
+    log_error "Invalid DEPLOYMENT_MODE: $DEPLOYMENT_MODE"
+    exit 1
+  fi
 
   echo ""
   log_success "Setup finished."

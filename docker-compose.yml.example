@@ -6,6 +6,7 @@
 
 services:
   app:
+    image: ${IMAGE_NAME:-$APP_NAME}
     build: .
     restart: always
     env_file:
