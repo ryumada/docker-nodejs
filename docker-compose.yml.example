@@ -7,7 +7,9 @@
 services:
   app:
     image: ${IMAGE_NAME:-$APP_NAME}
-    build: .
+    build:
+      context: .
+      # BUILD_ARGS_PLACEHOLDER
     restart: always
     env_file:
       - .env

@@ -54,41 +54,33 @@ if [ -f "$PATH_TO_ROOT_REPOSITORY/.env" ]; then
 fi
 
 function update_docker_compose_build_args() {
+  local ENV_FILE_PATH="$1"
   # Read the .env file, filter for NEXT_PUBLIC_ variables,
   #    extract just the variable names, and join them with commas.
-  #
-  #    - `grep -E '^NEXT_PUBLIC_[A-Za-z0-9_]+='`: Filters lines that start with
-  #      "NEXT_PUBLIC_" followed by alphanumeric characters/underscores and an equals sign.
-  #    - `cut -d '=' -f 1`: Splits each line by '=', and takes the first field (the variable name).
-  #    - `paste -sd ',' -`: Joins all the extracted variable names into a single string,
-  #      separated by commas.
   LIST_BUILDER_ENV=$(grep -E '^NEXT_PUBLIC_[A-Za-z0-9_]+=' "$ENV_FILE_PATH" | cut -d '=' -f 1 | paste -sd ',' -)
-  local ENV_FILE_PATH="$1"
 
   log_info "Variables to pass as build args: $LIST_BUILDER_ENV"
 
   local BUILD_ARGS_YAML_FOR_AWK
-  # Use awk to format the build args block. This avoids non-portable sed escaping of newlines.
+  # Use awk to format the build args block.
   BUILD_ARGS_YAML_FOR_AWK=$(echo "$LIST_BUILDER_ENV" | tr ',' '\n' | awk '
     {
-      line = "        " $0 ": ${" $0 "}"
+      line = "      args:\\n        " $0 ": ${" $0 "}"
       gsub(/\\/, "\\\\", line)
       gsub(/"/, "\\\"", line)
       if (NR > 1) { printf "\\n" }
       printf "%s", line
     }')
 
-  local FULL_BUILD_BLOCK_FOR_AWK
-  FULL_BUILD_BLOCK_FOR_AWK=$(printf "    build:\\n      context: .\\n      args:\\n%s" "${BUILD_ARGS_YAML_FOR_AWK}")
-
-  awk -v block="${FULL_BUILD_BLOCK_FOR_AWK}" '
-    BEGIN { flag=0 }
-    /^[[:space:]]*build: \.$/ && flag == 0 {
+  # Replace the placeholder with the formatted args
+  awk -v block="${BUILD_ARGS_YAML_FOR_AWK}" '
+    {
+      if ($0 ~ /# BUILD_ARGS_PLACEHOLDER/) {
         print block
-        flag=1
-        next
+      } else {
+        print $0
+      }
     }
-    { print }
   ' "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml" > "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.tmp"
 
   filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.tmp" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
