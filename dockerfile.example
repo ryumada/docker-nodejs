@@ -18,6 +18,7 @@ RUN npm ci --include=dev
 COPY --chown=node:node app/${APP_NAME} ./
 
 RUN npm run build
+RUN npm run build:scripts
 
 # Strip out devDependencies so they aren't copied to the runner stage
 RUN npm prune --omit=dev
@@ -39,7 +40,8 @@ COPY --from=builder --chown=node:node /usr/src/app/node_modules ./node_modules
 COPY --from=builder --chown=node:node /usr/src/app/public ./public
 COPY --from=builder --chown=node:node /usr/src/app/package.json ./package.json
 COPY --from=builder --chown=node:node /usr/src/app/${NEXT_CONFIG_FILENAME} ./${NEXT_CONFIG_FILENAME}
-COPY --from=builder --chown=node:node /usr/src/app/scripts ./scripts
+COPY --from=builder --chown=node:node /usr/src/app/dist ./dist
+COPY --from=builder --chown=node:node /usr/src/app/appwrite-schema.json ./appwrite-schema.json
 
 EXPOSE 3000
 
