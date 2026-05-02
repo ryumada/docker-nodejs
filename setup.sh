@@ -213,6 +213,13 @@ EOF
     printf "\n  ${PROXY_NETWORK}:\n    external: true\n" >> "$compose_file"
 
     log_success "Traefik configuration injected successfully."
+
+    # Update NEXT_PUBLIC_SITE_URL in .env to match the production domain
+    if grep -q "^NEXT_PUBLIC_SITE_URL=" "$ENV_FILE_PATH"; then
+        log_info "Updating NEXT_PUBLIC_SITE_URL in .env to https://${DOMAIN}..."
+        sed -i "s|^NEXT_PUBLIC_SITE_URL=.*|NEXT_PUBLIC_SITE_URL=https://${DOMAIN}|" "$ENV_FILE_PATH"
+        log_success "NEXT_PUBLIC_SITE_URL updated to https://${DOMAIN}"
+    fi
   else
     # Clean up the placeholders if PROXY_MODE is not 'traefik'
     awk '!/# PROXY_LABELS_PLACEHOLDER/ && !/# PROXY_NETWORK_PLACEHOLDER/' "$compose_file" > "${compose_file}.tmp"
