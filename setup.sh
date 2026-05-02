@@ -55,28 +55,36 @@ fi
 
 function update_docker_compose_build_args() {
   local ENV_FILE_PATH="$1"
-  # Read the .env file, filter for NEXT_PUBLIC_ variables,
-  #    extract just the variable names, and join them with commas.
-  LIST_BUILDER_ENV=$(grep -E '^NEXT_PUBLIC_[A-Za-z0-9_]+=' "$ENV_FILE_PATH" | cut -d '=' -f 1 | paste -sd ',' -)
+  # Read the .env file, filter for NEXT_PUBLIC_ variables and Appwrite backend variables needed for build
+  # Note: APPWRITE_ENDPOINT and APPWRITE_API_KEY are included because Next.js may require them
+  # for static analysis or server-side data fetching during 'next build'.
+  LIST_BUILDER_ENV=$(grep -E '^(NEXT_PUBLIC_[A-Za-z0-9_]+|APPWRITE_ENDPOINT|APPWRITE_API_KEY)=' "$ENV_FILE_PATH" | cut -d '=' -f 1 | paste -sd ',' -)
+
+  if [[ -z "$LIST_BUILDER_ENV" ]]; then
+    log_warn "No suitable build variables found in $ENV_FILE_PATH. Skipping build args injection."
+    sed -i '/# BUILD_ARGS_PLACEHOLDER/d' "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
+    return
+  fi
 
   log_info "Variables to pass as build args: $LIST_BUILDER_ENV"
 
-  local BUILD_ARGS_YAML_FOR_AWK
-  # Use awk to format the build args block.
-  BUILD_ARGS_YAML_FOR_AWK=$(echo "$LIST_BUILDER_ENV" | tr ',' '\n' | awk '
-    {
-      line = "      args:\\n        " $0 ": ${" $0 "}"
-      gsub(/\\/, "\\\\", line)
-      gsub(/"/, "\\\"", line)
-      if (NR > 1) { printf "\\n" }
-      printf "%s", line
-    }')
+  local BUILD_ARGS_YAML_RAW="      args:\n"
+  IFS=',' read -ra VAR_NAMES <<< "$LIST_BUILDER_ENV"
+  for VAR_NAME in "${VAR_NAMES[@]}"; do
+    VAR_NAME=$(echo "$VAR_NAME" | xargs)
+    if [[ -n "$VAR_NAME" ]]; then
+      BUILD_ARGS_YAML_RAW+="        ${VAR_NAME}: \"\${${VAR_NAME}}\"\n"
+    fi
+  done
 
-  # Replace the placeholder with the formatted args
-  awk -v block="${BUILD_ARGS_YAML_FOR_AWK}" '
+  # prepare for awk injection (Note: $(...) strips trailing newline)
+  export INJECT_BLOCK
+  INJECT_BLOCK=$(printf "%b" "$BUILD_ARGS_YAML_RAW")
+
+  awk '
     {
       if ($0 ~ /# BUILD_ARGS_PLACEHOLDER/) {
-        print block
+        printf "%s\n", ENVIRON["INJECT_BLOCK"]
       } else {
         print $0
       }
@@ -85,6 +93,7 @@ function update_docker_compose_build_args() {
 
   filesubstitution "$ENV_FILE_PATH" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.tmp" "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
   rm "$PATH_TO_ROOT_REPOSITORY/docker-compose.yml.tmp"
+  unset INJECT_BLOCK
   log_success "Successfully added environment variables to docker-compose file: $PATH_TO_ROOT_REPOSITORY/docker-compose.yml"
 }
 
@@ -101,29 +110,56 @@ function update_dockerfile_build_args() {
     fi
   done
 
-  # Escape backslashes and quotes, and convert actual newlines to \n characters for awk variable injection.
-  ESCAPED_DOCKERFILE_BLOCK=$(printf "%b" "$DOCKERFILE_ARGS_ENV_BLOCK" | awk '
-    {
-      gsub(/\\/, "\\\\")
-      gsub(/"/, "\\\"")
-      if (NR > 1) { printf "\\n" }
-      printf "%s", $0
-    }')
+  # prepare for awk injection (Note: $(...) strips trailing newline)
+  export INJECT_DOCKER_BLOCK
+  INJECT_DOCKER_BLOCK=$(printf "%b" "$DOCKERFILE_ARGS_ENV_BLOCK")
 
-  awk -v block="${ESCAPED_DOCKERFILE_BLOCK}" '
+  awk '
     BEGIN { flag=0 }
     /^FROM / && flag == 0 {
         print # Print the FROM line
-        print block # Print the new ARG/ENV block
+        printf "%s\n", ENVIRON["INJECT_DOCKER_BLOCK"]
         flag=1 # Set flag to prevent further insertions
         next # Skip to next line of input
     }
     { print } # Print all other lines as is
   ' "$PATH_TO_ROOT_REPOSITORY/dockerfile" > "$PATH_TO_ROOT_REPOSITORY/dockerfile.tmp"
 
-  rsync -qavzc "$PATH_TO_ROOT_REPOSITORY/dockerfile.tmp" "$PATH_TO_ROOT_REPOSITORY/dockerfile"
-  rm "$PATH_TO_ROOT_REPOSITORY/dockerfile.tmp"
+  mv "$PATH_TO_ROOT_REPOSITORY/dockerfile.tmp" "$PATH_TO_ROOT_REPOSITORY/dockerfile"
+  unset INJECT_DOCKER_BLOCK
   log_success "Successfully added environment variables to dockerfile: $PATH_TO_ROOT_REPOSITORY/dockerfile"
+}
+
+function update_dockerfile_labels() {
+  local GIT_URL
+  GIT_URL=$(git -C "$PATH_TO_ROOT_REPOSITORY"/app/"$APP_NAME" remote get-url origin 2>/dev/null)
+
+  if [ -z "$GIT_URL" ]; then
+    log_warn "Git remote not found. Skipping GHCR label injection."
+    return
+  fi
+
+  # Convert SSH to HTTPS if needed
+  if [[ $GIT_URL == git@github.com:* ]]; then
+    GIT_URL="https://github.com/${GIT_URL#git@github.com:}"
+    GIT_URL="${GIT_URL%.git}"
+  elif [[ $GIT_URL == https://github.com/* ]]; then
+    GIT_URL="${GIT_URL%.git}"
+  fi
+
+  log_info "Injecting GHCR source label: $GIT_URL"
+
+  # Inject label after every FROM line to ensure it persists in the final multi-stage image
+  awk -v url="$GIT_URL" '
+    /^FROM / {
+      print $0
+      printf "LABEL org.opencontainers.image.source=\"%s\"\n", url
+      next
+    }
+    { print }
+  ' "$PATH_TO_ROOT_REPOSITORY/dockerfile" > "$PATH_TO_ROOT_REPOSITORY/dockerfile.tmp"
+
+  mv "$PATH_TO_ROOT_REPOSITORY/dockerfile.tmp" "$PATH_TO_ROOT_REPOSITORY/dockerfile"
 }
 
 function configure_proxy_mode() {
@@ -233,6 +269,23 @@ function main() {
     log_error "Please setup APP_NAME variable in your .env file. Then, re-run this script."
   fi
 
+  log_info "Detecting Next.js configuration file..."
+  NEXT_CONFIG_FILENAME="next.config.mjs" # Default
+  if [ -d "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME" ]; then
+    if [ -f "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME/next.config.ts" ]; then
+      NEXT_CONFIG_FILENAME="next.config.ts"
+    elif [ -f "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME/next.config.mjs" ]; then
+      NEXT_CONFIG_FILENAME="next.config.mjs"
+    elif [ -f "$PATH_TO_ROOT_REPOSITORY/app/$APP_NAME/next.config.js" ]; then
+      NEXT_CONFIG_FILENAME="next.config.js"
+    fi
+  fi
+  log_info "  └─ Detected: $NEXT_CONFIG_FILENAME"
+
+  # Add to .env.example.merge so update_env_file.sh preserves it
+  echo "" >> "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
+  echo "NEXT_CONFIG_FILENAME=$NEXT_CONFIG_FILENAME" >> "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
+
   log_info "Update env file."
   "$PATH_TO_ROOT_REPOSITORY/scripts/utility/update_env_file.sh" "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
   log_success "Update env file completed"
@@ -319,6 +372,7 @@ function main() {
 
     update_docker_compose_build_args "$ENV_FILE_PATH"
     update_dockerfile_build_args
+    update_dockerfile_labels
     configure_proxy_mode
 
     log_info "Starting Automated Build..."
