@@ -34,7 +34,7 @@ services:
         max-file: "3"
     healthcheck:
       # Uses native Node.js fetch, works on any base image (Debian, Alpine, etc.) without installing curl
-      test: ["CMD", "node", "-e", "fetch('http://localhost:${PORT}/${HEALTHCHECK_PATH}').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:${PORT}/${HEALTHCHECK_PATH}').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
       interval: 30s
       timeout: 10s
       retries: 5

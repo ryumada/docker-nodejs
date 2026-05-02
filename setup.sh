@@ -175,10 +175,17 @@ function configure_proxy_mode() {
     LABELS_BLOCK=$(cat <<EOF
     labels:
       - "traefik.enable=true"
+      # HTTPS Router
       - "traefik.http.routers.${APP_NAME}.rule=Host(\`${DOMAIN}\`)"
       - "traefik.http.routers.${APP_NAME}.entrypoints=websecure"
       - "traefik.http.routers.${APP_NAME}.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
       - "traefik.http.services.${APP_NAME}.loadbalancer.server.port=${PORT}"
+      # Explicitly tell Traefik which network to use
+      - "traefik.docker.network=${PROXY_NETWORK}"
+      # HTTP Router (for redirects and ACME challenge)
+      - "traefik.http.routers.${APP_NAME}-http.rule=Host(\`${DOMAIN}\`)"
+      - "traefik.http.routers.${APP_NAME}-http.entrypoints=web"
+      - "traefik.http.routers.${APP_NAME}-http.middlewares=redirect-to-https@docker"
 EOF
 )
     export PROXY_NETWORK_LINE="      - ${PROXY_NETWORK}"

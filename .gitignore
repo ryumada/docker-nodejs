@@ -9,6 +9,9 @@ app/*
 !app/README.md
 
 .env
+.env.development*
+.env.production*
+.env.test*
 .env.backup*
 .env.example.merge
 
