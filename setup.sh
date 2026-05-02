@@ -298,9 +298,17 @@ function main() {
   log_success "Update env file completed"
 
   log_info "Validate .env file content"
-  if grep -q "enter_" "$ENV_FILE_PATH"; then
+  local validation_errors
+  if [ "$DEPLOYMENT_MODE" == "initialization" ]; then
+    # In initialization mode, we don't care about registry/push variables yet
+    validation_errors=$(grep "enter_" "$ENV_FILE_PATH" | grep -vE "IMAGE_NAME|DOCKER_REGISTRY_PROVIDER|DOCKER_PUSHPULL_USERNAME|DOCKER_PUSH_KEY|DOCKER_PULL_KEY" || true)
+  else
+    validation_errors=$(grep "enter_" "$ENV_FILE_PATH" || true)
+  fi
+
+  if [ -n "$validation_errors" ]; then
     log_error "Your .env file still contains default placeholder values."
-    grep "enter_" "$ENV_FILE_PATH" | while read -r line ; do
+    echo "$validation_errors" | while read -r line ; do
       log_error "  - Please configure: ${line}"
     done
     log_error "Exiting. Please update the .env file and re-run the script again."
