@@ -3,6 +3,7 @@
 # Description: Dockerfile used exclusively to generate or update package-lock.json.
 # Maintainer: ryumada
 FROM node:${DOCKER_NODEJS_TAG} AS lockfile_generator
+RUN apk add --no-cache libc6-compat python3 make g++
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app

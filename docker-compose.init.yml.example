@@ -6,7 +6,9 @@
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      # BUILD_ARGS_PLACEHOLDER
     restart: "no"
     env_file:
       - .env

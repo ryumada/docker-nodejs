@@ -2,8 +2,13 @@
 # Service: Docker NodeJS Initialization Dockerfile
 # Description: Initialization environment for Node.js to bootstrap the application.
 # Maintainer: ryumada
-FROM node:${DOCKER_NODEJS_TAG}
 
+# STAGE 0: Base image with system dependencies (Cached)
+FROM node:${DOCKER_NODEJS_TAG} AS base
+RUN apk add --no-cache libc6-compat python3 make g++ shadow
+
+# STAGE 1: Initialization environment
+FROM base AS init
 # Add user and group with matching IDs from the host to fix permissions
 ARG HOST_USER_ID
 ARG HOST_GROUP_ID
@@ -11,7 +16,6 @@ RUN groupmod -g ${HOST_GROUP_ID} node && \
     usermod -u ${HOST_USER_ID} -g ${HOST_GROUP_ID} node
 
 USER node
-
 WORKDIR /usr/src/app
 
 # Hardening: Disable Next.js telemetry

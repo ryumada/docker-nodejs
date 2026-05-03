@@ -2,48 +2,61 @@
 # Service: Docker NodeJS Production Dockerfile
 # Description: Production-ready Dockerfile for building and serving the Next.js application.
 # Maintainer: ryumada
-FROM node:${DOCKER_NODEJS_TAG} AS builder
 
-USER node
+# STAGE 0: Base image with system dependencies (Cached)
+FROM node:${DOCKER_NODEJS_TAG} AS base
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk add --no-cache libc6-compat python3 make g++ shadow
 
+# STAGE 1: Install node dependencies
+FROM base AS deps
 WORKDIR /usr/src/app
+
+COPY app/${APP_NAME}/package.json app/${APP_NAME}/package-lock.json ./
+RUN npm ci
+
+# STAGE 2: Build the application
+FROM base AS builder
+WORKDIR /usr/src/app
+
+COPY --from=deps /usr/src/app/node_modules ./node_modules
+COPY app/${APP_NAME} ./
 
 # Hardening: Set production environment and disable Next.js telemetry
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-
-COPY --chown=node:node app/${APP_NAME}/package.json app/${APP_NAME}/package-lock.json ./
-RUN npm ci --include=dev
-
-COPY --chown=node:node app/${APP_NAME} ./
 
 RUN npm run build
 RUN npm run build:scripts
 
-# Strip out devDependencies so they aren't copied to the runner stage
+# Prune devDependencies
 RUN npm prune --omit=dev
 
-# STAGE 2: Serve the Next.js application with a production-ready environment
+# STAGE 3: Production server
 FROM node:${DOCKER_NODEJS_TAG} AS runner
-
-USER node
-
 WORKDIR /usr/src/app
 
-# Hardening: Set production environment and disable Next.js telemetry
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Add node user for security
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
 # Copy only necessary files from the builder stage
-COPY --from=builder --chown=node:node /usr/src/app/.next ./.next
-COPY --from=builder --chown=node:node /usr/src/app/node_modules ./node_modules
-COPY --from=builder --chown=node:node /usr/src/app/public ./public
-COPY --from=builder --chown=node:node /usr/src/app/package.json ./package.json
-COPY --from=builder --chown=node:node / usr/src/app/${NEXT_CONFIG_FILENAME} ./${NEXT_CONFIG_FILENAME}
-COPY --from=builder --chown=node:node /usr/src/app/dist ./dist
-COPY --from=builder --chown=node:node /usr/src/app/appwrite-schema.json ./appwrite-schema.json
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/package.json ./package.json
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/${NEXT_CONFIG_FILENAME} ./${NEXT_CONFIG_FILENAME}
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/dist ./dist
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/appwrite-schema.json ./appwrite-schema.json
+
+USER nextjs
 
 EXPOSE 3000
+
+ENV PORT=3000
 
 # Start the application directly to ensure OS signals are passed for graceful shutdowns
 CMD ["./node_modules/.bin/next", "start"]

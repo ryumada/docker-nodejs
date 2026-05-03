@@ -115,12 +115,10 @@ function update_dockerfile_build_args() {
   INJECT_DOCKER_BLOCK=$(printf "%b" "$DOCKERFILE_ARGS_ENV_BLOCK")
 
   awk '
-    BEGIN { flag=0 }
-    /^FROM / && flag == 0 {
+    /^FROM / && !/AS (base|alpine-base)/ {
         print # Print the FROM line
         printf "%s\n", ENVIRON["INJECT_DOCKER_BLOCK"]
-        flag=1 # Set flag to prevent further insertions
-        next # Skip to next line of input
+        next
     }
     { print } # Print all other lines as is
   ' "$PATH_TO_ROOT_REPOSITORY/dockerfile" > "$PATH_TO_ROOT_REPOSITORY/dockerfile.tmp"
