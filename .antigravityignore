@@ -1,7 +1,5 @@
-# File: .geminiignore
-# Category: Config
-# Description: Specifies files and directories to be ignored by Gemini/AI tools.
-# Maintainer: ryumada
+# .antigravityignore
+# Stop background token drain by excluding generated, compiled, and massive static files.
 
 # 1. Dependency Directories (The biggest token sinks)
 node_modules/
