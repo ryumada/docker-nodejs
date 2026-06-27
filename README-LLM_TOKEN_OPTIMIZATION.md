@@ -70,6 +70,7 @@ The largest baseline saving. Antigravity injects `always_on` rules into every se
 | `ponytail.md` | `always_on` | Core behavioral discipline — slim header referencing full file |
 | `do-not-answer-if-repo-map-file-not-found.md` | `always_on` | Critical safety gate, only 10 lines |
 | `session-pruning.md` | `always_on` | Monitors session length to trigger context reset warnings |
+| `auto-icm-recall.md` | `always_on` | Automatically queries ICM context at the start of every session |
 | `cavecrew-builder.md` | `model_decision` | Only needed during file editing tasks |
 | `cavecrew-investigator.md` | `model_decision` | Only needed during code investigation (Search-First) |
 | `cavecrew-reviewer.md` | `model_decision` | Only needed during code reviews |
