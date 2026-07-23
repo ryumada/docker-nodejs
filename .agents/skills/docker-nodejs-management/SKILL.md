@@ -22,10 +22,15 @@ This toolkit deploys Node.js applications via Docker containers. Run `./setup.sh
 ## Critical Workflows
 
 ### Executing Commands in Container
-Run npm/npx or Node.js commands inside the container via `run.sh`:
+> [!IMPORTANT]
+> **ALWAYS** use `./scripts/bootstraping/run.sh` to run **ANY** `npm`, `npx`, `node`, `tsc`, `vitest`, or build/test/install commands. Node.js and npm are executed inside the Docker container (`app`). Never run `npm` or `node` directly on the host machine.
+
 ```bash
 ./scripts/bootstraping/run.sh <command>
-# Example: ./scripts/bootstraping/run.sh npm run build
+# Examples:
+# ./scripts/bootstraping/run.sh npm install <package>
+# ./scripts/bootstraping/run.sh npm run build
+# ./scripts/bootstraping/run.sh npm run dev
 ```
 
 ### Test Log Compression

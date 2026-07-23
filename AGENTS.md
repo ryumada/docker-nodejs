@@ -13,6 +13,7 @@ context: Root Repository
 ## Core Checklist
 - 5-Line Signatures mandatory for all files.
 - No browser testing (use logs and build status).
+- **Mandatory Container Execution**: Always run all `npm`, `npx`, `node`, build, test, and package management commands via `./scripts/bootstraping/run.sh <cmd>` from the workspace root (Node.js environment runs inside the Docker container).
 
 ## Example
 ```yaml
