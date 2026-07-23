@@ -1,8 +1,9 @@
 ---
 title: Ponytail Reference
+trigger: on_demand
 category: Reference
-description: Full reference instructions for Ponytail (Lazy Senior Dev Mode).
-context: Code Implementation
+description: Full reference instructions for Ponytail (Lazy Senior Dev Mode)
+tokens: ~25
 ---
 
 # Ponytail, lazy senior dev mode (Reference)

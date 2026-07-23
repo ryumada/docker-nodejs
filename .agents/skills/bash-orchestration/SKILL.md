@@ -1,6 +1,7 @@
 ---
 name: bash-orchestration
 description: Standardized bash script templates and logging utilities for DevOps automation.
+tokens: ~60
 ---
 
 # Bash Orchestration Skill

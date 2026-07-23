@@ -4,6 +4,7 @@ trigger: always_on
 category: Reference
 description: Always prefix shell commands with rtk to compress LLM context output.
 context: Environment & Shell Commands
+tokens: ~8
 ---
 
 # RTK - Rust Token Killer
