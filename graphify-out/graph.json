@@ -1,0 +1,5703 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "extract_requires()",
+      "file_type": "code",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L39",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_utility_inject_signatures_extract_requires",
+      "community": 10,
+      "community_name": "Inject Utility Signatures",
+      "norm_label": "extract_requires()"
+    },
+    {
+      "label": "get_app_name()",
+      "file_type": "code",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_utility_inject_signatures_get_app_name",
+      "community": 10,
+      "community_name": "Inject Utility Signatures",
+      "norm_label": "get_app_name()"
+    },
+    {
+      "label": "get_category()",
+      "file_type": "code",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_utility_inject_signatures_get_category",
+      "community": 10,
+      "community_name": "Inject Utility Signatures",
+      "norm_label": "get_category()"
+    },
+    {
+      "label": "inject_signature()",
+      "file_type": "code",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L49",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_utility_inject_signatures_inject_signature",
+      "community": 10,
+      "community_name": "Inject Utility Signatures",
+      "norm_label": "inject_signature()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L104",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_utility_inject_signatures_main",
+      "community": 10,
+      "community_name": "Inject Utility Signatures",
+      "norm_label": "main()"
+    },
+    {
+      "label": "get_dependencies()",
+      "file_type": "code",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_utility_generate_tree_get_dependencies",
+      "community": 11,
+      "community_name": "Tree Utility Generate",
+      "norm_label": "get_dependencies()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L137",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_utility_generate_tree_main",
+      "community": 11,
+      "community_name": "Tree Utility Generate",
+      "norm_label": "main()"
+    },
+    {
+      "label": "print_tree()",
+      "file_type": "code",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L86",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_utility_generate_tree_print_tree",
+      "community": 11,
+      "community_name": "Tree Utility Generate",
+      "norm_label": "print_tree()"
+    },
+    {
+      "label": "resolve_path()",
+      "file_type": "code",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L34",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "scripts_utility_generate_tree_resolve_path",
+      "community": 11,
+      "community_name": "Tree Utility Generate",
+      "norm_label": "resolve_path()"
+    },
+    {
+      "label": "setup.sh",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "setup",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "setup.sh"
+    },
+    {
+      "label": "COLOR_ERROR",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L31",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "setup_color_error",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "color_error"
+    },
+    {
+      "label": "COLOR_INFO",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L28",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "setup_color_info",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "color_info"
+    },
+    {
+      "label": "COLOR_RESET",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L27",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "setup_color_reset",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "color_reset"
+    },
+    {
+      "label": "COLOR_SUCCESS",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L29",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "setup_color_success",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "color_success"
+    },
+    {
+      "label": "COLOR_WARN",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L30",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "setup_color_warn",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "color_warn"
+    },
+    {
+      "label": "configure_proxy_mode()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L163",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_configure_proxy_mode",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "configure_proxy_mode()"
+    },
+    {
+      "label": "filesubstitution()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L228",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_filesubstitution",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "filesubstitution()"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L34",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_log",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "log()"
+    },
+    {
+      "label": "log_error()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L44",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_log_error",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "log_error()"
+    },
+    {
+      "label": "log_info()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L41",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_log_info",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "log_info()"
+    },
+    {
+      "label": "log_success()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L42",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_log_success",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "log_success()"
+    },
+    {
+      "label": "log_warn()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L43",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_log_warn",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "log_warn()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L267",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_main",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "main()"
+    },
+    {
+      "label": "setup.sh script",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "setup_sh__entry",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "setup.sh script"
+    },
+    {
+      "label": "update_docker_compose_build_args()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L56",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_update_docker_compose_build_args",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "update_docker_compose_build_args()"
+    },
+    {
+      "label": "update_dockerfile_build_args()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L100",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_update_dockerfile_build_args",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "update_dockerfile_build_args()"
+    },
+    {
+      "label": "update_dockerfile_labels()",
+      "file_type": "code",
+      "source_file": "setup.sh",
+      "source_location": "L131",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "setup_update_dockerfile_labels",
+      "community": 0,
+      "community_name": "Setup Color Log",
+      "norm_label": "update_dockerfile_labels()"
+    },
+    {
+      "label": "generate_map.sh",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "generate_map.sh"
+    },
+    {
+      "label": "COLOR_ERROR",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L84",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_color_error",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "color_error"
+    },
+    {
+      "label": "COLOR_INFO",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L81",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_color_info",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "color_info"
+    },
+    {
+      "label": "COLOR_RESET",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L80",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_color_reset",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "color_reset"
+    },
+    {
+      "label": "COLOR_SUCCESS",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L82",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_color_success",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "color_success"
+    },
+    {
+      "label": "COLOR_WARN",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L83",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_color_warn",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "color_warn"
+    },
+    {
+      "label": "executeCommand()",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L108",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_executecommand",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "executecommand()"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L87",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_log",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "log()"
+    },
+    {
+      "label": "log_error()",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L97",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_log_error",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "log_error()"
+    },
+    {
+      "label": "log_info()",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L94",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_log_info",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "log_info()"
+    },
+    {
+      "label": "log_output()",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L100",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_log_output",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "log_output()"
+    },
+    {
+      "label": "log_success()",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L95",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_log_success",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "log_success()"
+    },
+    {
+      "label": "log_warn()",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L96",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_log_warn",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "log_warn()"
+    },
+    {
+      "label": "generate_map.sh script",
+      "file_type": "code",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_map_sh__entry",
+      "community": 1,
+      "community_name": "Generate Map Log",
+      "norm_label": "generate_map.sh script"
+    },
+    {
+      "label": "inject_signatures.py",
+      "file_type": "code",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_utility_inject_signatures",
+      "community": 10,
+      "community_name": "Inject Utility Signatures",
+      "norm_label": "inject_signatures.py"
+    },
+    {
+      "label": "Detects the app name by finding a directory under 'app/' with a 'src' directory.",
+      "file_type": "rationale",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "scripts_utility_inject_signatures_rationale_12",
+      "community": 10,
+      "community_name": "Inject Utility Signatures",
+      "norm_label": "detects the app name by finding a directory under 'app/' with a 'src' directory."
+    },
+    {
+      "label": "Infers category based on file path.",
+      "file_type": "rationale",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "scripts_utility_inject_signatures_rationale_22",
+      "community": 10,
+      "community_name": "Inject Utility Signatures",
+      "norm_label": "infers category based on file path."
+    },
+    {
+      "label": "Extracts internal and key external dependencies from import statements.",
+      "file_type": "rationale",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "scripts_utility_inject_signatures_rationale_40",
+      "community": 10,
+      "community_name": "Inject Utility Signatures",
+      "norm_label": "extracts internal and key external dependencies from import statements."
+    },
+    {
+      "label": "generate_tree.py",
+      "file_type": "code",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_utility_generate_tree",
+      "community": 11,
+      "community_name": "Tree Utility Generate",
+      "norm_label": "generate_tree.py"
+    },
+    {
+      "label": "Extracts dependencies from the 5-line signature header.",
+      "file_type": "rationale",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "scripts_utility_generate_tree_rationale_12",
+      "community": 11,
+      "community_name": "Tree Utility Generate",
+      "norm_label": "extracts dependencies from the 5-line signature header."
+    },
+    {
+      "label": "Tries to resolve a dependency string to a physical file path.",
+      "file_type": "rationale",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "scripts_utility_generate_tree_rationale_35",
+      "community": 11,
+      "community_name": "Tree Utility Generate",
+      "norm_label": "tries to resolve a dependency string to a physical file path."
+    },
+    {
+      "label": "generate_app_tree.sh",
+      "file_type": "code",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_app_tree",
+      "community": 12,
+      "community_name": "Generate Tree Category",
+      "norm_label": "generate_app_tree.sh"
+    },
+    {
+      "label": "get_category()",
+      "file_type": "code",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L129",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_app_tree_get_category",
+      "community": 12,
+      "community_name": "Generate Tree Category",
+      "norm_label": "get_category()"
+    },
+    {
+      "label": "is_entry_category()",
+      "file_type": "code",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L136",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_app_tree_is_entry_category",
+      "community": 12,
+      "community_name": "Generate Tree Category",
+      "norm_label": "is_entry_category()"
+    },
+    {
+      "label": "list_scopes()",
+      "file_type": "code",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L71",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_app_tree_list_scopes",
+      "community": 12,
+      "community_name": "Generate Tree Category",
+      "norm_label": "list_scopes()"
+    },
+    {
+      "label": "generate_app_tree.sh script",
+      "file_type": "code",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_app_tree_sh__entry",
+      "community": 12,
+      "community_name": "Generate Tree Category",
+      "norm_label": "generate_app_tree.sh script"
+    },
+    {
+      "label": "show_help()",
+      "file_type": "code",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L50",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_app_tree_show_help",
+      "community": 12,
+      "community_name": "Generate Tree Category",
+      "norm_label": "show_help()"
+    },
+    {
+      "label": "validate-agent-config.sh",
+      "file_type": "code",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_validate_agent_config",
+      "community": 13,
+      "community_name": "Validate Agent Config",
+      "norm_label": "validate-agent-config.sh"
+    },
+    {
+      "label": "fail()",
+      "file_type": "code",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L22",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_validate_agent_config_fail",
+      "community": 13,
+      "community_name": "Validate Agent Config",
+      "norm_label": "fail()"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L19",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_validate_agent_config_log",
+      "community": 13,
+      "community_name": "Validate Agent Config",
+      "norm_label": "log()"
+    },
+    {
+      "label": "ok()",
+      "file_type": "code",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L20",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_validate_agent_config_ok",
+      "community": 13,
+      "community_name": "Validate Agent Config",
+      "norm_label": "ok()"
+    },
+    {
+      "label": "validate-agent-config.sh script",
+      "file_type": "code",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_validate_agent_config_sh__entry",
+      "community": 13,
+      "community_name": "Validate Agent Config",
+      "norm_label": "validate-agent-config.sh script"
+    },
+    {
+      "label": "warn()",
+      "file_type": "code",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L21",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_validate_agent_config_warn",
+      "community": 13,
+      "community_name": "Validate Agent Config",
+      "norm_label": "warn()"
+    },
+    {
+      "label": "generate_graph.sh",
+      "file_type": "code",
+      "source_file": "scripts/generate_graph.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_graph",
+      "community": 14,
+      "community_name": "Graph Generate Build",
+      "norm_label": "generate_graph.sh"
+    },
+    {
+      "label": "build_graph_for_dir()",
+      "file_type": "code",
+      "source_file": "scripts/generate_graph.sh",
+      "source_location": "L67",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_graph_build_graph_for_dir",
+      "community": 14,
+      "community_name": "Graph Generate Build",
+      "norm_label": "build_graph_for_dir()"
+    },
+    {
+      "label": "resolve_python()",
+      "file_type": "code",
+      "source_file": "scripts/generate_graph.sh",
+      "source_location": "L21",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_graph_resolve_python",
+      "community": 14,
+      "community_name": "Graph Generate Build",
+      "norm_label": "resolve_python()"
+    },
+    {
+      "label": "generate_graph.sh script",
+      "file_type": "code",
+      "source_file": "scripts/generate_graph.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_generate_graph_sh__entry",
+      "community": 14,
+      "community_name": "Graph Generate Build",
+      "norm_label": "generate_graph.sh script"
+    },
+    {
+      "label": "init-next-app.sh",
+      "file_type": "code",
+      "source_file": "scripts/bootstraping/init-next-app.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_bootstraping_init_next_app",
+      "community": 15,
+      "community_name": "Bootstraping Init Next",
+      "norm_label": "init-next-app.sh"
+    },
+    {
+      "label": "init-next-app.sh script",
+      "file_type": "code",
+      "source_file": "scripts/bootstraping/init-next-app.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_bootstraping_init_next_app_sh__entry",
+      "community": 15,
+      "community_name": "Bootstraping Init Next",
+      "norm_label": "init-next-app.sh script"
+    },
+    {
+      "label": "run.sh",
+      "file_type": "code",
+      "source_file": "scripts/bootstraping/run.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_bootstraping_run",
+      "community": 16,
+      "community_name": "Bootstraping Run Entry",
+      "norm_label": "run.sh"
+    },
+    {
+      "label": "run.sh script",
+      "file_type": "code",
+      "source_file": "scripts/bootstraping/run.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_bootstraping_run_sh__entry",
+      "community": 16,
+      "community_name": "Bootstraping Run Entry",
+      "norm_label": "run.sh script"
+    },
+    {
+      "label": "update_deployment.sh",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "update_deployment.sh"
+    },
+    {
+      "label": "COLOR_ERROR",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L31",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_color_error",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "color_error"
+    },
+    {
+      "label": "COLOR_INFO",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L28",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_color_info",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "color_info"
+    },
+    {
+      "label": "COLOR_RESET",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L27",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_color_reset",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "color_reset"
+    },
+    {
+      "label": "COLOR_SUCCESS",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L29",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_color_success",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "color_success"
+    },
+    {
+      "label": "COLOR_WARN",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L30",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_color_warn",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "color_warn"
+    },
+    {
+      "label": "handle_error()",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L48",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_handle_error",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "handle_error()"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L34",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_log",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "log()"
+    },
+    {
+      "label": "log_error()",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L44",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_log_error",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "log_error()"
+    },
+    {
+      "label": "log_info()",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L41",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_log_info",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "log_info()"
+    },
+    {
+      "label": "log_success()",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L42",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_log_success",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "log_success()"
+    },
+    {
+      "label": "log_warn()",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L43",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_log_warn",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "log_warn()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L54",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_main",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "main()"
+    },
+    {
+      "label": "update_deployment.sh script",
+      "file_type": "code",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_update_deployment_sh__entry",
+      "community": 2,
+      "community_name": "Update Deployment Color",
+      "norm_label": "update_deployment.sh script"
+    },
+    {
+      "label": "check_compliance.sh",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "check_compliance.sh"
+    },
+    {
+      "label": "COLOR_ERROR",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L23",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_color_error",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "color_error"
+    },
+    {
+      "label": "COLOR_INFO",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L20",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_color_info",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "color_info"
+    },
+    {
+      "label": "COLOR_RESET",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L19",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_color_reset",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "color_reset"
+    },
+    {
+      "label": "COLOR_SUCCESS",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L21",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_color_success",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "color_success"
+    },
+    {
+      "label": "COLOR_WARN",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L22",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_color_warn",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "color_warn"
+    },
+    {
+      "label": "is_excluded()",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L46",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_is_excluded",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "is_excluded()"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L25",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_log",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "log()"
+    },
+    {
+      "label": "log_error()",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L35",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_log_error",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "log_error()"
+    },
+    {
+      "label": "log_info()",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L32",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_log_info",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "log_info()"
+    },
+    {
+      "label": "log_success()",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L33",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_log_success",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "log_success()"
+    },
+    {
+      "label": "log_warn()",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L34",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_log_warn",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "log_warn()"
+    },
+    {
+      "label": "check_compliance.sh script",
+      "file_type": "code",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_check_compliance_sh__entry",
+      "community": 3,
+      "community_name": "Check Compliance Color",
+      "norm_label": "check_compliance.sh script"
+    },
+    {
+      "label": "cleanup_sudoers.sh",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "cleanup_sudoers.sh"
+    },
+    {
+      "label": "COLOR_ERROR",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L31",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_color_error",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "color_error"
+    },
+    {
+      "label": "COLOR_INFO",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L28",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_color_info",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "color_info"
+    },
+    {
+      "label": "COLOR_RESET",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L27",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_color_reset",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "color_reset"
+    },
+    {
+      "label": "COLOR_SUCCESS",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L29",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_color_success",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "color_success"
+    },
+    {
+      "label": "COLOR_WARN",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L30",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_color_warn",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "color_warn"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L34",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_log",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "log()"
+    },
+    {
+      "label": "log_error()",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L44",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_log_error",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "log_error()"
+    },
+    {
+      "label": "log_info()",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L41",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_log_info",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "log_info()"
+    },
+    {
+      "label": "log_output()",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L45",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_log_output",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "log_output()"
+    },
+    {
+      "label": "log_success()",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L42",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_log_success",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "log_success()"
+    },
+    {
+      "label": "log_warn()",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L43",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_log_warn",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "log_warn()"
+    },
+    {
+      "label": "cleanup_sudoers.sh script",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_cleanup_sudoers_sh__entry",
+      "community": 4,
+      "community_name": "Cleanup Sudoers Log",
+      "norm_label": "cleanup_sudoers.sh script"
+    },
+    {
+      "label": "setup_sudoers.sh",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "setup_sudoers.sh"
+    },
+    {
+      "label": "COLOR_ERROR",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L31",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_color_error",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "color_error"
+    },
+    {
+      "label": "COLOR_INFO",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L28",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_color_info",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "color_info"
+    },
+    {
+      "label": "COLOR_RESET",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L27",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_color_reset",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "color_reset"
+    },
+    {
+      "label": "COLOR_SUCCESS",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L29",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_color_success",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "color_success"
+    },
+    {
+      "label": "COLOR_WARN",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L30",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_color_warn",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "color_warn"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L34",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_log",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "log()"
+    },
+    {
+      "label": "log_error()",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L44",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_log_error",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "log_error()"
+    },
+    {
+      "label": "log_info()",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L41",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_log_info",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "log_info()"
+    },
+    {
+      "label": "log_output()",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L45",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_log_output",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "log_output()"
+    },
+    {
+      "label": "log_success()",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L42",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_log_success",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "log_success()"
+    },
+    {
+      "label": "log_warn()",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L43",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_log_warn",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "log_warn()"
+    },
+    {
+      "label": "setup_sudoers.sh script",
+      "file_type": "code",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_sudoers_sh__entry",
+      "community": 5,
+      "community_name": "Setup Sudoers Log",
+      "norm_label": "setup_sudoers.sh script"
+    },
+    {
+      "label": "fix_webview.sh",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "fix_webview.sh"
+    },
+    {
+      "label": "clear_cache()",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L56",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_clear_cache",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "clear_cache()"
+    },
+    {
+      "label": "COLOR_ERROR",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L31",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_color_error",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "color_error"
+    },
+    {
+      "label": "COLOR_INFO",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L28",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_color_info",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "color_info"
+    },
+    {
+      "label": "COLOR_RESET",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L27",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_color_reset",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "color_reset"
+    },
+    {
+      "label": "COLOR_SUCCESS",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L29",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_color_success",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "color_success"
+    },
+    {
+      "label": "COLOR_WARN",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L30",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_color_warn",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "color_warn"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L34",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_log",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "log()"
+    },
+    {
+      "label": "log_error()",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L44",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_log_error",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "log_error()"
+    },
+    {
+      "label": "log_info()",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L41",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_log_info",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "log_info()"
+    },
+    {
+      "label": "log_success()",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L42",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_log_success",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "log_success()"
+    },
+    {
+      "label": "log_warn()",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L43",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_log_warn",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "log_warn()"
+    },
+    {
+      "label": "fix_webview.sh script",
+      "file_type": "code",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_fix_webview_sh__entry",
+      "community": 6,
+      "community_name": "Utility Fix Webview",
+      "norm_label": "fix_webview.sh script"
+    },
+    {
+      "label": "update_env_file.sh",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "update_env_file.sh"
+    },
+    {
+      "label": "COLOR_ERROR",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L31",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_color_error",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "color_error"
+    },
+    {
+      "label": "COLOR_INFO",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L28",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_color_info",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "color_info"
+    },
+    {
+      "label": "COLOR_RESET",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L27",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_color_reset",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "color_reset"
+    },
+    {
+      "label": "COLOR_SUCCESS",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L29",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_color_success",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "color_success"
+    },
+    {
+      "label": "COLOR_WARN",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L30",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_color_warn",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "color_warn"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L34",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_log",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "log()"
+    },
+    {
+      "label": "log_error()",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L44",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_log_error",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "log_error()"
+    },
+    {
+      "label": "log_info()",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L41",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_log_info",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "log_info()"
+    },
+    {
+      "label": "log_success()",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L42",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_log_success",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "log_success()"
+    },
+    {
+      "label": "log_warn()",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L43",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_log_warn",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "log_warn()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L47",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_main",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "main()"
+    },
+    {
+      "label": "update_env_file.sh script",
+      "file_type": "code",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_utility_update_env_file_sh__entry",
+      "community": 7,
+      "community_name": "Utility Update Env",
+      "norm_label": "update_env_file.sh script"
+    },
+    {
+      "label": "export_extensions.sh",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "export_extensions.sh"
+    },
+    {
+      "label": "COLOR_ERROR",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L23",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_color_error",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "color_error"
+    },
+    {
+      "label": "COLOR_INFO",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L20",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_color_info",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "color_info"
+    },
+    {
+      "label": "COLOR_RESET",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L19",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_color_reset",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "color_reset"
+    },
+    {
+      "label": "COLOR_SUCCESS",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L21",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_color_success",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "color_success"
+    },
+    {
+      "label": "COLOR_WARN",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L22",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_color_warn",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "color_warn"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L25",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_log",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "log()"
+    },
+    {
+      "label": "log_error()",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L29",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_log_error",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "log_error()"
+    },
+    {
+      "label": "log_info()",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L26",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_log_info",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "log_info()"
+    },
+    {
+      "label": "log_success()",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L27",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_log_success",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "log_success()"
+    },
+    {
+      "label": "log_warn()",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L28",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_log_warn",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "log_warn()"
+    },
+    {
+      "label": "export_extensions.sh script",
+      "file_type": "code",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_export_extensions_sh__entry",
+      "community": 8,
+      "community_name": "Export Extensions Color",
+      "norm_label": "export_extensions.sh script"
+    },
+    {
+      "label": "setup_dev_user.sh",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "setup_dev_user.sh"
+    },
+    {
+      "label": "COLOR_ERROR",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L31",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_color_error",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "color_error"
+    },
+    {
+      "label": "COLOR_INFO",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L28",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_color_info",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "color_info"
+    },
+    {
+      "label": "COLOR_RESET",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L27",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_color_reset",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "color_reset"
+    },
+    {
+      "label": "COLOR_SUCCESS",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L29",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_color_success",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "color_success"
+    },
+    {
+      "label": "COLOR_WARN",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L30",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_color_warn",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "color_warn"
+    },
+    {
+      "label": "log()",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L34",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_log",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "log()"
+    },
+    {
+      "label": "log_error()",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L44",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_log_error",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "log_error()"
+    },
+    {
+      "label": "log_info()",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L41",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_log_info",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "log_info()"
+    },
+    {
+      "label": "log_success()",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L42",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_log_success",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "log_success()"
+    },
+    {
+      "label": "log_warn()",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L43",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_log_warn",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "log_warn()"
+    },
+    {
+      "label": "setup_dev_user.sh script",
+      "file_type": "code",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_dev_user_sh__entry",
+      "community": 9,
+      "community_name": "Setup Dev User",
+      "norm_label": "setup_dev_user.sh script"
+    }
+  ],
+  "links": [
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L35",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_check_compliance_log_error",
+      "target": "scripts_check_compliance_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L32",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_check_compliance_log_info",
+      "target": "scripts_check_compliance_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L33",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_check_compliance_log_success",
+      "target": "scripts_check_compliance_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L34",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_check_compliance_log_warn",
+      "target": "scripts_check_compliance_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L100",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_check_compliance_sh__entry",
+      "target": "scripts_check_compliance_is_excluded",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L105",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_check_compliance_sh__entry",
+      "target": "scripts_check_compliance_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L124",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_check_compliance_sh__entry",
+      "target": "scripts_check_compliance_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L74",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_check_compliance_sh__entry",
+      "target": "scripts_check_compliance_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L81",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_check_compliance_sh__entry",
+      "target": "scripts_check_compliance_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers_log_error",
+      "target": "scripts_cleanup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers_log_info",
+      "target": "scripts_cleanup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L45",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers_log_output",
+      "target": "scripts_cleanup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers_log_success",
+      "target": "scripts_cleanup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers_log_warn",
+      "target": "scripts_cleanup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L49",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers_sh__entry",
+      "target": "scripts_cleanup_sudoers_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L53",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers_sh__entry",
+      "target": "scripts_cleanup_sudoers_log_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L61",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers_sh__entry",
+      "target": "scripts_cleanup_sudoers_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L94",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers_sh__entry",
+      "target": "scripts_cleanup_sudoers_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L96",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers_sh__entry",
+      "target": "scripts_cleanup_sudoers_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_export_extensions_log_error",
+      "target": "scripts_export_extensions_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L26",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_export_extensions_log_info",
+      "target": "scripts_export_extensions_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_export_extensions_log_success",
+      "target": "scripts_export_extensions_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_export_extensions_log_warn",
+      "target": "scripts_export_extensions_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L32",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_export_extensions_sh__entry",
+      "target": "scripts_export_extensions_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L35",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_export_extensions_sh__entry",
+      "target": "scripts_export_extensions_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L56",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_export_extensions_sh__entry",
+      "target": "scripts_export_extensions_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L58",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_export_extensions_sh__entry",
+      "target": "scripts_export_extensions_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L110",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_app_tree_sh__entry",
+      "target": "scripts_generate_app_tree_show_help",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L111",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_app_tree_sh__entry",
+      "target": "scripts_generate_app_tree_list_scopes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L256",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_app_tree_sh__entry",
+      "target": "scripts_generate_app_tree_is_entry_category",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_graph.sh",
+      "source_location": "L168",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_graph_sh__entry",
+      "target": "scripts_generate_graph_build_graph_for_dir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L114",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_executecommand",
+      "target": "scripts_generate_map_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L125",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_executecommand",
+      "target": "scripts_generate_map_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L127",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_executecommand",
+      "target": "scripts_generate_map_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L128",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_executecommand",
+      "target": "scripts_generate_map_log_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L97",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_log_error",
+      "target": "scripts_generate_map_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L94",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_log_info",
+      "target": "scripts_generate_map_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L95",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_log_success",
+      "target": "scripts_generate_map_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L96",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_log_warn",
+      "target": "scripts_generate_map_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L141",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_sh__entry",
+      "target": "scripts_generate_map_executecommand",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L152",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_sh__entry",
+      "target": "scripts_generate_map_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L253",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_generate_map_sh__entry",
+      "target": "scripts_generate_map_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user_log_error",
+      "target": "scripts_setup_dev_user_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user_log_info",
+      "target": "scripts_setup_dev_user_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user_log_success",
+      "target": "scripts_setup_dev_user_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user_log_warn",
+      "target": "scripts_setup_dev_user_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L55",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user_sh__entry",
+      "target": "scripts_setup_dev_user_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L61",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user_sh__entry",
+      "target": "scripts_setup_dev_user_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L66",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user_sh__entry",
+      "target": "scripts_setup_dev_user_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L69",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user_sh__entry",
+      "target": "scripts_setup_dev_user_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers_log_error",
+      "target": "scripts_setup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers_log_info",
+      "target": "scripts_setup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L45",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers_log_output",
+      "target": "scripts_setup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers_log_success",
+      "target": "scripts_setup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers_log_warn",
+      "target": "scripts_setup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L122",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers_sh__entry",
+      "target": "scripts_setup_sudoers_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L49",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers_sh__entry",
+      "target": "scripts_setup_sudoers_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L53",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers_sh__entry",
+      "target": "scripts_setup_sudoers_log_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L61",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers_sh__entry",
+      "target": "scripts_setup_sudoers_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L49",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_update_deployment_handle_error",
+      "target": "scripts_update_deployment_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_update_deployment_log_error",
+      "target": "scripts_update_deployment_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_update_deployment_log_info",
+      "target": "scripts_update_deployment_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_update_deployment_log_success",
+      "target": "scripts_update_deployment_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_update_deployment_log_warn",
+      "target": "scripts_update_deployment_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L56",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_update_deployment_main",
+      "target": "scripts_update_deployment_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L65",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_update_deployment_main",
+      "target": "scripts_update_deployment_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L67",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_update_deployment_main",
+      "target": "scripts_update_deployment_handle_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L113",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_update_deployment_sh__entry",
+      "target": "scripts_update_deployment_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L61",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_clear_cache",
+      "target": "scripts_utility_fix_webview_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L72",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_clear_cache",
+      "target": "scripts_utility_fix_webview_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L74",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_clear_cache",
+      "target": "scripts_utility_fix_webview_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_log_error",
+      "target": "scripts_utility_fix_webview_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_log_info",
+      "target": "scripts_utility_fix_webview_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_log_success",
+      "target": "scripts_utility_fix_webview_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_log_warn",
+      "target": "scripts_utility_fix_webview_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L47",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_sh__entry",
+      "target": "scripts_utility_fix_webview_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L51",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_sh__entry",
+      "target": "scripts_utility_fix_webview_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L78",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_sh__entry",
+      "target": "scripts_utility_fix_webview_clear_cache",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L81",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview_sh__entry",
+      "target": "scripts_utility_fix_webview_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L153",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_generate_tree_main",
+      "target": "scripts_utility_generate_tree_print_tree",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_generate_tree_print_tree",
+      "target": "scripts_utility_generate_tree_get_dependencies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_generate_tree_print_tree",
+      "target": "scripts_utility_generate_tree_resolve_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures_inject_signature",
+      "target": "scripts_utility_inject_signatures_get_category",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures_inject_signature",
+      "target": "scripts_utility_inject_signatures_extract_requires",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures_main",
+      "target": "scripts_utility_inject_signatures_get_app_name",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures_main",
+      "target": "scripts_utility_inject_signatures_inject_signature",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file_log_error",
+      "target": "scripts_utility_update_env_file_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file_log_info",
+      "target": "scripts_utility_update_env_file_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file_log_success",
+      "target": "scripts_utility_update_env_file_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file_log_warn",
+      "target": "scripts_utility_update_env_file_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L114",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file_main",
+      "target": "scripts_utility_update_env_file_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L56",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file_main",
+      "target": "scripts_utility_update_env_file_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L58",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file_main",
+      "target": "scripts_utility_update_env_file_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L80",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file_main",
+      "target": "scripts_utility_update_env_file_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L117",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file_sh__entry",
+      "target": "scripts_utility_update_env_file_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_validate_agent_config_sh__entry",
+      "target": "scripts_validate_agent_config_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_validate_agent_config_sh__entry",
+      "target": "scripts_validate_agent_config_ok",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_validate_agent_config_sh__entry",
+      "target": "scripts_validate_agent_config_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L70",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "scripts_validate_agent_config_sh__entry",
+      "target": "scripts_validate_agent_config_fail",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L167",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_configure_proxy_mode",
+      "target": "setup_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L213",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_configure_proxy_mode",
+      "target": "setup_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L233",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_filesubstitution",
+      "target": "setup_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L263",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_filesubstitution",
+      "target": "setup_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_log_error",
+      "target": "setup_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_log_info",
+      "target": "setup_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_log_success",
+      "target": "setup_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_log_warn",
+      "target": "setup_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L278",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_main",
+      "target": "setup_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L281",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_main",
+      "target": "setup_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L284",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_main",
+      "target": "setup_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L303",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_main",
+      "target": "setup_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L341",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_main",
+      "target": "setup_filesubstitution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L365",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_main",
+      "target": "setup_update_docker_compose_build_args",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L366",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_main",
+      "target": "setup_update_dockerfile_build_args",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L395",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_main",
+      "target": "setup_update_dockerfile_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L396",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_main",
+      "target": "setup_configure_proxy_mode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L450",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_sh__entry",
+      "target": "setup_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L64",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_update_docker_compose_build_args",
+      "target": "setup_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L69",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_update_docker_compose_build_args",
+      "target": "setup_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L94",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_update_docker_compose_build_args",
+      "target": "setup_filesubstitution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L97",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_update_docker_compose_build_args",
+      "target": "setup_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L128",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_update_dockerfile_build_args",
+      "target": "setup_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L136",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_update_dockerfile_labels",
+      "target": "setup_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L148",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "setup_update_dockerfile_labels",
+      "target": "setup_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/bootstraping/init-next-app.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_bootstraping_init_next_app",
+      "target": "scripts_bootstraping_init_next_app_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/bootstraping/run.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_bootstraping_run",
+      "target": "scripts_bootstraping_run_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_app_tree",
+      "target": "scripts_generate_app_tree_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_graph.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_graph",
+      "target": "scripts_generate_graph_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_generate_tree",
+      "target": "scripts_utility_generate_tree_get_dependencies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_generate_tree",
+      "target": "scripts_utility_generate_tree_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_generate_tree",
+      "target": "scripts_utility_generate_tree_resolve_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_generate_tree",
+      "target": "scripts_utility_generate_tree_print_tree",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures",
+      "target": "scripts_utility_inject_signatures_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures",
+      "target": "scripts_utility_inject_signatures_get_app_name",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures",
+      "target": "scripts_utility_inject_signatures_get_category",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures",
+      "target": "scripts_utility_inject_signatures_extract_requires",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures",
+      "target": "scripts_utility_inject_signatures_inject_signature",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_validate_agent_config",
+      "target": "scripts_validate_agent_config_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_color_reset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_color_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_color_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_color_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_color_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/check_compliance.sh",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_check_compliance",
+      "target": "scripts_check_compliance_is_excluded",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_color_reset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_color_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_color_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_color_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_color_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_sudoers.sh",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_cleanup_sudoers",
+      "target": "scripts_cleanup_sudoers_log_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_color_reset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_color_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_color_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_color_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_color_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/export_extensions.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_export_extensions",
+      "target": "scripts_export_extensions_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L129",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_app_tree",
+      "target": "scripts_generate_app_tree_get_category",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L136",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_app_tree",
+      "target": "scripts_generate_app_tree_is_entry_category",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_app_tree",
+      "target": "scripts_generate_app_tree_show_help",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_app_tree.sh",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_app_tree",
+      "target": "scripts_generate_app_tree_list_scopes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_graph.sh",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_graph",
+      "target": "scripts_generate_graph_resolve_python",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_graph.sh",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_graph",
+      "target": "scripts_generate_graph_build_graph_for_dir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_log_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_executecommand",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_color_reset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_color_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_color_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_color_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_color_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate_map.sh",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_generate_map",
+      "target": "scripts_generate_map_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_color_reset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_color_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_color_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_color_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_color_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_dev_user.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_dev_user",
+      "target": "scripts_setup_dev_user_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_color_reset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_color_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_color_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_color_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_color_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup_sudoers.sh",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_setup_sudoers",
+      "target": "scripts_setup_sudoers_log_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_color_reset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_color_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_color_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_color_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_color_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_handle_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/update_deployment.sh",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_update_deployment",
+      "target": "scripts_update_deployment_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_color_reset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_color_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_color_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_color_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_color_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/fix_webview.sh",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_fix_webview",
+      "target": "scripts_utility_fix_webview_clear_cache",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_color_reset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_color_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_color_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_color_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_color_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/update_env_file.sh",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_update_env_file",
+      "target": "scripts_utility_update_env_file_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_validate_agent_config",
+      "target": "scripts_validate_agent_config_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_validate_agent_config",
+      "target": "scripts_validate_agent_config_ok",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_validate_agent_config",
+      "target": "scripts_validate_agent_config_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-agent-config.sh",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_validate_agent_config",
+      "target": "scripts_validate_agent_config_fail",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_update_dockerfile_build_args",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L131",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_update_dockerfile_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L163",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_configure_proxy_mode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L228",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_filesubstitution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L267",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_color_reset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_color_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_color_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_color_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_color_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_log_info",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_log_success",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_log_warn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_log_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "setup.sh",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "setup",
+      "target": "setup_update_docker_compose_build_args",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_generate_tree_rationale_12",
+      "target": "scripts_utility_generate_tree_get_dependencies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/generate_tree.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_generate_tree_rationale_35",
+      "target": "scripts_utility_generate_tree_resolve_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures_rationale_12",
+      "target": "scripts_utility_inject_signatures_get_app_name",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures_rationale_22",
+      "target": "scripts_utility_inject_signatures_get_category",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/utility/inject_signatures.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "scripts_utility_inject_signatures_rationale_40",
+      "target": "scripts_utility_inject_signatures_extract_requires",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "0e0bca459989ece5c6b19c3e2645abe3ddf1a0e9"
+}
