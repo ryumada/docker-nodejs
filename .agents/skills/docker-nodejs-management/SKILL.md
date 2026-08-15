@@ -64,13 +64,27 @@ This repository follows a two-tier nested architecture:
 ./scripts/generate_graph.sh app [optional_app_dir]
 ```
 
-### 3. Graph Outputs & Navigation
+### 3. Graph Outputs & Zero-Token AST Querying
 Each `graphify-out/` folder contains:
 - `GRAPH_REPORT.md` — Architectural breakdown, community clusters, and god nodes.
 - `graph.json` — Structured graph for AST calls, imports, and component hierarchies.
 - `graph.html` — Interactive visual graph viewable in browser.
 
+> [!TIP]
+> **Do not load `graph.json` or `GRAPH_REPORT.md` in full.** Use the lightweight CLI query tool instead:
+> ```bash
+> # Lookup callers, callees, and imports for a symbol or file:
+> python3 scripts/utility/query_graph.py lookup <symbol_name>
+> 
+> # Identify top central god nodes in codebase:
+> python3 scripts/utility/query_graph.py god-nodes
+> 
+> # View community clusters:
+> python3 scripts/utility/query_graph.py community [optional_cluster_id]
+> ```
+
 ### 4. Test Log Compression
 - Always run tests with `--bail` or fail-fast flags:
   `./scripts/bootstraping/run.sh npm run test -- --bail=1`
 - On test failures: inspect ONLY the assertion failure message, expected vs. actual values, and exact `file:line` reference. Discard passing setup logs.
+

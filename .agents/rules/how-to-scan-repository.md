@@ -4,20 +4,19 @@ category: Reference
 tokens: ~12
 ---
 
-# 🗺️ PROTOCOL: REPO_MAP_FIRST
-**Objective:** Eliminate hallucinations by grounding project knowledge in the generated `REPO_MAP.md`.
+# 🗺️ PROTOCOL: REPO_MAP_FIRST & TIERED DISCOVERY
+**Objective:** Eliminate hallucinations and token bloat by using structured, tiered discovery.
 
-This repository is **Infrastructure-only** (Docker, Bash scripts, config files). The `app/` directory is a placeholder folder for cloned applications.
+1.  **Tier 1 — File Presence & Top-Level Topology:**
+    -   Read root [`REPO_MAP.md`](REPO_MAP.md) for infrastructure files.
+    -   For nested apps (`app/<app_name>`), use `grep_search` or slice-view specific sections of `app/<app_name>/REPO_MAP.md` rather than loading the entire file.
+    -   **Navigation Rule:** Do NOT execute `ls -R` or `find .` to explore. Derive file existence strictly from `REPO_MAP.md`.
 
-1.  **Mandatory Context Loading:**
-    -   Read `REPO_MAP.md` in the project root. This is your single source of truth for file layout and signatures.
-    -   Do NOT look for `REPO_MAP_ARCHITECTURE.md` or `REPO_MAP_APP_ARCHITECTURE.md` — they do not exist in this repo.
+2.  **Tier 2 — Symbol & Dependency Tracing (Zero-Overhead AST):**
+    -   Do NOT read raw `graph.json` or full `GRAPH_REPORT.md` into context.
+    -   Use `python3 scripts/utility/query_graph.py lookup <symbol_or_path>` for callers, callees, and imports.
+    -   Use `python3 scripts/utility/query_graph.py god-nodes` to identify central coupled modules.
 
-2.  **Navigation Strategy:**
-    -   **Do not** ask "What files are in this repo?" or "Can you list the modules?"
-    -   **Do not** execute `ls -R` or `find .` to explore.
-    -   Derive file existence and paths strictly from the `## Directory Structure` section of `REPO_MAP.md`.
-
-3.  **Contextual Understanding:**
-    -   Consult the `## File Signatures` in `REPO_MAP.md` to understand file purposes.
-    -   **Blind Spot Rule:** If a file is NOT listed in `REPO_MAP.md`, assume it is git-ignored (secrets, generated files) and treat it as non-existent unless explicitly provided.
+3.  **Tier 3 — Slice-Reading Code:**
+    -   Never load 500+ line files with `view_file` unless absolutely required.
+    -   Always supply `StartLine` and `EndLine` parameters to view only the target function/component.

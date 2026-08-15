@@ -44,6 +44,12 @@ FORCE_EXCLUDE=(
     ".next"
     ".cache"
     ".git"
+    ".turbo"
+    ".output"
+    "dist"
+    "build"
+    "out"
+    "coverage"
     "*.tsbuildinfo"
     "package-lock.json"
     "yarn.lock"
@@ -52,6 +58,7 @@ FORCE_EXCLUDE=(
     "*.map"
     "*.lock"
     "__pycache__"
+    "*.d.ts"
 )
 
 # Files or Patterns to exclude ONLY from the signature extraction phase.
@@ -70,6 +77,8 @@ FORCE_EXCLUDE_SIGNATURE=(
     "*.otf"
     "*.min.css"
     "*.min.js"
+    "*.json"
+    "*.md"
 )
 
 # ==============================================================================

@@ -7,4 +7,4 @@ context: Session Lifecycle Management
 tokens: ~6
 ---
 
-Run `rtk proxy icm recall-context "docker-nodejs" --limit 5 || icm recall-context "docker-nodejs" --limit 5` at session start and integrate recalled context.
+Run `rtk proxy icm recall-context "docker-nodejs" --limit 3 || icm recall-context "docker-nodejs" --limit 3` at session start and integrate recalled context.

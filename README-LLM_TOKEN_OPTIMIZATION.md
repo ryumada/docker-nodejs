@@ -19,6 +19,8 @@ Token usage is reduced at four distinct levels:
 | Agent context compression | Rule trigger optimization | ~84% baseline reduction |
 | Code output minimalism | Ponytail + Cavecrew | Prevents token-heavy responses |
 | Persistent context sync | ICM (Interactive Context Memory) | Stops redundant explanation cycles |
+| Topology & AST Partitioning | REPO_MAP + `query_graph.py` | Eliminates 30k+ token whole-file dumps |
+| Target reading discipline | Slice-reading & Grep | 70–90% per file inspection |
 
 ---
 
@@ -141,8 +143,39 @@ Agents start sessions by loading context dynamically:
 ```bash
 icm recall "query"                        # search memories
 icm recall "query" -t "topic-name"        # filter by topic
-icm recall-context "query" --limit 5      # inject into agent context
+icm recall-context "query" --limit 3      # inject into agent context
 ```
+
+---
+
+## Layer 5: REPO_MAP vs. Graphify Division of Labor
+
+To prevent reading massive 100KB+ maps or 3MB AST graphs into LLM context:
+
+| Tool | Primary Purpose | How Agents Consume It |
+|---|---|---|
+| **`REPO_MAP.md`** | Top-level file directory & 5-line signature contracts | Read root map for infra; slice-view nested maps |
+| **`graphify-out/`** | AST code symbol graphs, caller/callee coupling, god nodes | Query via `python3 scripts/utility/query_graph.py` |
+
+### CLI AST Query Helper (`query_graph.py`)
+
+Instead of dumping `graph.json` or `GRAPH_REPORT.md`:
+```bash
+# Query caller/callee references for a symbol:
+python3 scripts/utility/query_graph.py lookup <symbol_name>
+
+# Find top central coupled nodes:
+python3 scripts/utility/query_graph.py god-nodes
+
+# Inspect community cluster:
+python3 scripts/utility/query_graph.py community [cluster_id]
+```
+
+---
+
+## Layer 6: Slice-Reading Discipline
+
+Agents must never call `view_file` on large files (300+ lines) without `StartLine` and `EndLine` parameters or using `grep_search` to pinpoint targets.
 
 ---
 
@@ -155,19 +188,26 @@ Defined in [`AGENTS.md`](AGENTS.md), these session tags further control token us
 
 ---
 
-## Summary: How the Four Layers Stack
+## Summary: How the Six Layers Stack
 
 ```
 Session Start
 │
-├── Layer 2 & 4: Only 3 slim always-on rules loaded. Dynamic ICM context injection.
+├── Layer 2 & 4: Only 3 slim always-on rules loaded. Dynamic ICM context injection (< 3 items).
 │
 ├── User types a command
 │   └── Layer 1: RTK compresses shell output (60-90% savings per command)
 │
-├── Agent needs to edit/review code
-│   ├── Layer 2: model_decision rules load (only what's needed)
-│   └── Layer 3: Ponytail + Cavecrew keep output minimal
+├── Agent discovers files & symbols
+│   ├── Layer 5: Reads compact REPO_MAP.md for file existence
+│   └── Layer 5: Runs query_graph.py to trace AST callers/callees (< 20 lines)
 │
-└── Net result: drastically fewer input + output tokens per task
+├── Agent inspects code
+│   └── Layer 6: Slice-reading (StartLine/EndLine) prevents reading 500+ line files
+│
+├── Agent edits code
+│   ├── Layer 2: model_decision rules load (only what's needed)
+│   └── Layer 3: Ponytail + Cavecrew keep diff output minimal
+│
+└── Net result: Maximum context efficiency across the full development lifecycle
 ```
