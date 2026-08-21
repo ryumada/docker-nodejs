@@ -89,7 +89,7 @@ while IFS= read -r -d '' f; do
 done < <(grep -rl "trigger: always_on" "$RULES_DIR" --include='*.md' -print0 2>/dev/null)
 
 log "=== Deleted Files Still Referenced ==="
-DELETED_FILES="multi-model-pipeline.md cavecrew-builder.md cavecrew-investigator.md cavecrew-reviewer.md phased-execution.md require-plan-approval.md test-log-compression.md run-npm-command.md always-create-tests.md CLINE.md"
+DELETED_FILES="multi-model-pipeline.md cavecrew-builder.md cavecrew-investigator.md cavecrew-reviewer.md phased-execution.md require-plan-approval.md test-log-compression.md run-npm-command.md always-create-tests.md CLINE.md antigravity-rtk-rules.md"
 for df in $DELETED_FILES; do
     if grep -r "$df" "$RULES_DIR" "$SKILLS_DIR" "$PATH_TO_REPO/AGENTS.md" 2>/dev/null | grep -v '^.*:.*#' > /dev/null 2>&1; then
         fail "'$df' is deleted but still referenced in active files"
@@ -102,13 +102,6 @@ if [ -f "$PATH_TO_REPO/.clinerules" ]; then
         ok ".clinerules is a thin reference"
     else
         warn ".clinerules may contain duplicate content"
-    fi
-fi
-if [ -f "$PATH_TO_REPO/.kilocode/rules/rtk-rules.md" ]; then
-    if grep -q "canonical rule" "$PATH_TO_REPO/.kilocode/rules/rtk-rules.md"; then
-        ok ".kilocode/rules/rtk-rules.md is a thin reference"
-    else
-        warn ".kilocode/rules/rtk-rules.md may contain duplicate content"
     fi
 fi
 
