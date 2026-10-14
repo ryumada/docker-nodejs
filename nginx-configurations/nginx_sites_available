@@ -35,7 +35,7 @@ upstream $DOMAIN {
 }
 
 server {
-    listen 443 ssl http2;
+    listen 443 ssl;
     server_name $DOMAIN;
     proxy_read_timeout 900s;
     proxy_connect_timeout 75s;
@@ -76,7 +76,7 @@ server {
         proxy_pass http://$DOMAIN;
         proxy_buffering on;
 
-        proxy_cache ${DOMAIN}_static_cache;
+        proxy_cache $DOMAIN_static_cache;
         proxy_cache_key "$scheme$request_method$host$request_uri";
         proxy_ignore_headers Cache-Control Expires Set-Cookie;
         proxy_hide_header Set-Cookie;
@@ -97,7 +97,7 @@ server {
         proxy_ignore_headers Cache-Control Expires Set-Cookie;
         proxy_hide_header Set-Cookie;
 
-        proxy_cache ${DOMAIN}_image_cache;
+        proxy_cache $DOMAIN_image_cache;
         proxy_cache_valid 200 301 302 24h;
         proxy_cache_valid 404 1m;
 
