@@ -88,3 +88,33 @@ Each `graphify-out/` folder contains:
   `./scripts/bootstraping/run.sh npm run test -- --bail=1`
 - On test failures: inspect ONLY the assertion failure message, expected vs. actual values, and exact `file:line` reference. Discard passing setup logs.
 
+### 5. Next.js Dockerfile Portability Best Practices
+
+When maintaining or updating `dockerfile.*.example` templates for Next.js applications:
+
+1. **Optional Build Scripts**:
+   - Never chain unverified npm scripts directly (e.g., `RUN npm run build:scripts`).
+   - Always use `npm run --if-present <script>` so standard Next.js apps build cleanly without missing script errors.
+
+2. **Optional Runner Artifacts in Multi-Stage Builds**:
+   - Docker `COPY` in runner stages fails if the source path does not exist in the builder stage.
+   - Always ensure optional directories or files exist in the builder stage before runner `COPY`:
+     ```dockerfile
+     RUN mkdir -p /usr/src/app/dist /usr/src/app/public && \
+         touch /usr/src/app/appwrite-schema.json
+     ```
+
+3. **Next.js Config File Flexibility**:
+   - Next.js config files may be `.js`, `.mjs`, or `.ts`.
+   - In builder stage, ensure at least one config exists to prevent `COPY` failure:
+     ```dockerfile
+     RUN (test -f next.config.js -o -f next.config.mjs -o -f next.config.ts || echo "module.exports = {};" > next.config.js)
+     ```
+   - In runner stage, copy using wildcard:
+     ```dockerfile
+     COPY --from=builder --chown=nextjs:nodejs /usr/src/app/next.config.* ./
+     ```
+
+4. **Configuration File Hygiene**:
+   - Be vigilant of accidental IDE clipboard pastes (e.g., `scm-history-item:...` from Git history viewers) that break YAML syntax in compose files.
+

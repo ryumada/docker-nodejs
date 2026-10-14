@@ -302,6 +302,13 @@ function main() {
   "$PATH_TO_ROOT_REPOSITORY/scripts/utility/update_env_file.sh" "$PATH_TO_ROOT_REPOSITORY/.env.example.merge"
   log_success "Update env file completed"
 
+  # Force-sync detected Next.js config filename to .env
+  if grep -q "^NEXT_CONFIG_FILENAME=" "$ENV_FILE_PATH"; then
+    sed -i "s|^NEXT_CONFIG_FILENAME=.*|NEXT_CONFIG_FILENAME=$NEXT_CONFIG_FILENAME|" "$ENV_FILE_PATH"
+  else
+    echo "NEXT_CONFIG_FILENAME=$NEXT_CONFIG_FILENAME" >> "$ENV_FILE_PATH"
+  fi
+
   log_info "Validate .env file content"
   local validation_errors
   if [ "$DEPLOYMENT_MODE" == "initialization" ]; then

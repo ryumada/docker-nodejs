@@ -29,7 +29,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build && npm run --if-present build:scripts
 
 # Ensure optional artifacts exist for the runner stage
-RUN mkdir -p /usr/src/app/dist /usr/src/app/public && touch /usr/src/app/appwrite-schema.json
+RUN mkdir -p /usr/src/app/dist /usr/src/app/public && \
+    touch /usr/src/app/appwrite-schema.json && \
+    (test -f next.config.js -o -f next.config.mjs -o -f next.config.ts || echo "module.exports = {};" > next.config.js)
 
 # Prune devDependencies
 RUN npm prune --omit=dev
@@ -50,7 +52,7 @@ COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next ./.next
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/node_modules ./node_modules
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/package.json ./package.json
-COPY --from=builder --chown=nextjs:nodejs /usr/src/app/${NEXT_CONFIG_FILENAME} ./${NEXT_CONFIG_FILENAME}
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/next.config.* ./
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/dist ./dist
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/appwrite-schema.json ./appwrite-schema.json
 
