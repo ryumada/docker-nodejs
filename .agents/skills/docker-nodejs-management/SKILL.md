@@ -25,7 +25,7 @@ This repository follows a two-tier nested architecture:
 - `scripts/generate_map.sh` — generates structured `REPO_MAP.md` with 5-line file signatures.
 - `scripts/generate_graph.sh` — generates AST knowledge graphs (`graphify-out/`) for root and nested app.
 - `app/` — local mount point for cloned or initialized Node.js projects (`app/<app_name>`).
-- `nginx-sites-available.conf` — Nginx reverse proxy configuration.
+- `nginx-configurations/` — Nginx reverse proxy configuration (`nginx_sites_available`) and automated setup scripts (`setup_nginx_cache_conf.sh`, `setup_nginx_security_conf.sh`).
 
 ## Critical Workflows
 

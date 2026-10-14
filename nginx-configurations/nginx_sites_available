@@ -1,0 +1,135 @@
+# Category: Config
+# File: nginx_sites_available
+# Description: Nginx server block configuration for Node.js / Next.js.
+# Usage: Symlink to /etc/nginx/sites-enabled/
+# Maintainer: ryumada
+
+# Validate Origin header: auto-allows same-origin and optional external whitelisted domains
+map "$http_origin##$host" $bad_origin {
+    default 1;
+
+    # Allow requests without an Origin header (e.g., same-site, curl, postman)
+    "~^##" 0;
+
+    # Auto-allow Same-Origin (Origin matches current request host)
+    "~^https?://(?<o_host>[^/:]+)(?::\d+)?##\k<o_host>$" 0;
+
+    # Allowed external domains to access (add additional domains as needed)
+    # example:
+    # "~^https:\/\/api\.example\.com##" 0;
+}
+
+server {
+    listen 80;
+    server_name $DOMAIN;
+
+    if ($host != "$DOMAIN") {
+        return 403;
+    }
+
+    return 301 https://$host$request_uri;
+}
+
+upstream $DOMAIN {
+    server 127.0.0.1:$PORT;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name $DOMAIN;
+    proxy_read_timeout 900s;
+    proxy_connect_timeout 75s;
+    proxy_send_timeout 900s;
+    proxy_http_version 1.1;
+
+    if ($host != "$DOMAIN") {
+        return 403;
+    }
+
+    # Stop and forbid if Origin header exists and is not allowed (untrusted cross-origin)
+    if ($bad_origin) {
+        return 403;
+    }
+
+    # Global Proxy Headers
+    proxy_set_header Connection             '';
+    proxy_set_header Host                   $host;
+    proxy_set_header X-Forwarded-Host       $host;
+    proxy_set_header X-Forwarded-For        $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto      $scheme;
+    proxy_set_header X-Real-IP              $remote_addr;
+
+    # SSL parameters
+    ssl_certificate         /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
+    ssl_certificate_key     /etc/letsencrypt/live/$DOMAIN/privkey.pem;
+    include                 /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam             /etc/letsencrypt/ssl-dhparams.pem;
+
+    # Proxy logs
+    access_log      /var/log/nginx/nodejs.$DOMAIN.access.log;
+    error_log       /var/log/nginx/nodejs.$DOMAIN.error.log warn;
+    access_log      /var/log/nginx/access.log;
+    error_log       /var/log/nginx/error.log warn;
+
+    # Next.js Static Asset Caching (Immutable files with hash in filename)
+    location ~* ^/_next/static/ {
+        proxy_pass http://$DOMAIN;
+        proxy_buffering on;
+
+        proxy_cache ${DOMAIN}_static_cache;
+        proxy_cache_key "$scheme$request_method$host$request_uri";
+        proxy_ignore_headers Cache-Control Expires Set-Cookie;
+        proxy_hide_header Set-Cookie;
+
+        proxy_cache_valid 200 365d;
+        proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+        proxy_cache_lock on;
+
+        expires 365d;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        add_header X-Cache-Status $upstream_cache_status;
+    }
+
+    # Next.js Image Optimization Cache
+    location ~* ^/_next/image {
+        proxy_pass http://$DOMAIN;
+
+        proxy_ignore_headers Cache-Control Expires Set-Cookie;
+        proxy_hide_header Set-Cookie;
+
+        proxy_cache ${DOMAIN}_image_cache;
+        proxy_cache_valid 200 301 302 24h;
+        proxy_cache_valid 404 1m;
+
+        proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+        proxy_cache_lock on;
+        proxy_cache_lock_timeout 15s;
+
+        add_header X-Cache-Status $upstream_cache_status;
+        tcp_nodelay on;
+        keepalive_timeout 65s;
+    }
+
+    # WebSocket / HMR support
+    location ~* ^/(_next/webpack-hmr|websocket) {
+        proxy_pass http://$DOMAIN;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_read_timeout 720s;
+        proxy_send_timeout 720s;
+    }
+
+    # Application Root Proxy
+    location / {
+        proxy_pass http://$DOMAIN;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_cache_bypass $http_upgrade;
+
+        proxy_buffers 16 64k;
+        proxy_buffer_size 128k;
+        proxy_busy_buffers_size 256k;
+    }
+}
