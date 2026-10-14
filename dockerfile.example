@@ -26,8 +26,10 @@ COPY app/${APP_NAME} ./
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN npm run build
-RUN npm run build:scripts
+RUN npm run build && npm run --if-present build:scripts
+
+# Ensure optional artifacts exist for the runner stage
+RUN mkdir -p /usr/src/app/dist /usr/src/app/public && touch /usr/src/app/appwrite-schema.json
 
 # Prune devDependencies
 RUN npm prune --omit=dev
